@@ -48,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
         try {
             Usuario usuario = Usuario.autenticar(username, password, usuarioRepository);
             Toast.makeText(this, "Bienvenido " + usuario.getUser(), Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(this, OptionsActivity.class);
+            Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
             finish();
 
