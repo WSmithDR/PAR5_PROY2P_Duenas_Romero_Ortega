@@ -1,6 +1,7 @@
 package models;
 
 import java.util.List;
+import java.util.Locale;
 
 public abstract class Comunicado {
     private int id;
@@ -66,6 +67,12 @@ public abstract class Comunicado {
         this.nombreArchivoImagen = nombreArchivoImagen;
     }
 
-
+    public String toCSV(){
+        return String.format(
+                Locale.US,
+                "%d;%s;%s;%s;%s;%s;%s",
+                id, tipo, area, titulo, audiencia, decripcion, nombreArchivoImagen
+        );
+    }
 
 }
