@@ -1,4 +1,4 @@
-package com.example.par5_proy2p_duenas_romero_ortega;
+package exceptions;
 
 public class CredecialesInvalidasException extends Exception {
     public CredecialesInvalidasException(String mensaje) {
