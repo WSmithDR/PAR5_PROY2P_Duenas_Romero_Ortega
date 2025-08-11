@@ -7,19 +7,58 @@
     android:layout_height="match_parent"
     tools:context=".MisComunicadosActivity">
 
-    <TextView
-        android:id="@+id/txtpruba"
-        android:layout_width="272dp"
-        android:layout_height="85dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="224dp"
-        android:layout_marginEnd="25dp"
-        android:text="Estamos trabajando en esta sección. Gracias por su comprensión."
-        android:textAlignment="center"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:layout_width="409dp"
+        android:layout_height="729dp"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp">
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="89dp"
+            android:layout_height="68dp"
+            app:srcCompat="@drawable/back_button" />
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/tablero_comunicados"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/ordenarPorTituloBtn"
+            android:layout_width="match_parent"
+            android:layout_height="85dp"
+            android:backgroundTint="#000000"
+            android:padding="12dp"
+            android:text="@string/order_titulo"
+            android:textColor="#FFFFFF" />
+
+        <ScrollView
+            android:id="@+id/misComunicadosTableLayout"
+            android:layout_width="match_parent"
+            android:layout_height="374dp">
+
+
+        </ScrollView>
+
+        <Button
+            android:id="@+id/ordenarPorTituloBtn2"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:backgroundTint="#000000"
+            android:padding="12dp"
+            android:text="@string/order_titulo"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/ordenarPorTituloBtn3"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:backgroundTint="#000000"
+            android:padding="12dp"
+            android:text="@string/cancelar"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
