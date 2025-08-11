@@ -8,7 +8,7 @@
     android:padding="24dp"
     android:gravity="center"
     android:background="@android:color/white"
-    tools:context=".Login">
+    tools:context=".LoginActivity">
 
 
     <TextView
@@ -30,7 +30,13 @@
         android:background="@android:drawable/edit_text"
         android:hint="Usuario"
         android:inputType="textPersonName"
-        android:padding="12dp" />
+        android:padding="12dp"
+        android:paddingStart="12dp"
+        android:paddingLeft="12dp"
+        android:paddingTop="12dp"
+        android:paddingEnd="12dp"
+        android:paddingRight="12dp"
+        android:paddingBottom="12dp" />
 
 
     <EditText
