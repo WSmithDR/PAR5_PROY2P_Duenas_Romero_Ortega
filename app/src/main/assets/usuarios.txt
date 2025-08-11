@@ -1,0 +1,10 @@
+0001,juanperez,1234juan
+0002,mariasoto,abc123
+0003,carlossanchez,pass2025
+0004,abrarome,abraham15
+0005,rafael_rios,riosRafa1
+0006,luciasalazar,lucia123
+0007,javierlopez,lopezJav7
+0008,veronicam,vero2025
+0009,miguelh,miguelH09
+0010,sofia_martinez,sofiapass
