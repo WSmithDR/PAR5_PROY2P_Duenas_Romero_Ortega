@@ -2,5 +2,8 @@
     <string name="app_name">PAR5_PROY2P_Duenas_Romero_Ortega</string>
     <string name="tablero_comunicados">Tablero de Comunicados</string>
     <string name="order_titulo">Ordenar por Título</string>
+    <string name="order_fecha">Ordenar por Fecha</string>
+    <string name="guardar_lista">Guardar lista</string>
     <string name="cancelar">Cancelar</string>
+    <string name="back_button_content_description">Volver</string>
 </resources>
