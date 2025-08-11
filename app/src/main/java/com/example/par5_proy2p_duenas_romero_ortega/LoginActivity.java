@@ -9,7 +9,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 
-import Dominio.Usuario;
+import Models.Usuario;
 import Exceptions.CredecialesInvalidasException;
 import Persistencia.UsuarioRepositorio;
 

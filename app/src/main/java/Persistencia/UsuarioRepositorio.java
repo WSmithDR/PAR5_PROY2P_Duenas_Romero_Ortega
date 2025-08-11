@@ -1,8 +1,7 @@
 package Persistencia;
 
 import android.content.Context;
-import Dominio.Usuario;
-import Persistencia.ManejadorArchivo;
+import Models.Usuario;
 
 
 import java.util.ArrayList;

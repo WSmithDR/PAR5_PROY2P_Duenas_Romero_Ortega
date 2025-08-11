@@ -1,4 +1,4 @@
-package Dominio;
+package Models;
 
 import Exceptions.CredecialesInvalidasException;
 import Persistencia.UsuarioRepositorio;
