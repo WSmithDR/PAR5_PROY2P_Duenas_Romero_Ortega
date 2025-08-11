@@ -1,6 +1,7 @@
 package com.example.par5_proy2p_duenas_romero_ortega;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -48,10 +49,6 @@ public class Login extends AppCompatActivity {
                     }
                 } catch (CredecialesInvalidasException e) {
                     Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
-                } catch (IOException e) {
-                    // error técnico al leer archivo
-                    Toast.makeText(this, "Problemas técnicos. Estamos resolviendo", Toast.LENGTH_LONG).show();
-                    e.printStackTrace();
                 }
             });
 
@@ -59,29 +56,34 @@ public class Login extends AppCompatActivity {
         });
     }
 
-    private boolean validarCredenciales(String username, String password) throws IOException {
-        // usuarios.txt en assets: formato "username,password\n"
-        InputStream is = getAssets().open("usuarios.txt");
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(is))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(",");
-                if (parts.length >= 2) {
-                    String id = parts[0].trim();
-                    String u = parts[1].trim();
-                    String p = parts[2].trim();
-                    if (u.equals(username) && p.equals(password)) {
-                        reader.close();
-                        return true;
-                    }
+    private boolean validarCredenciales(String username, String password) {
+        username=username.trim();
+        password=password.trim();
+        try (InputStream is = getAssets().open("usuarios.txt")){
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+        String line;
+        while ((line = reader.readLine()) != null) {
+            String[] parts = line.split(",");
+            if (parts.length >= 3) {
+                String id = parts[0].trim();
+                String u = parts[1].trim();
+                String p = parts[2].trim();
+                if (u.equals(username) && p.equals(password)) {
+                    return true;
                 }
             }
-        } catch (IOException e2) {
-                e2.printStackTrace();
-            }
-            return false;
         }
+    } catch(IOException e2){
+            Toast.makeText(this, "Problemas técnicos. Estamos resolviendo", Toast.LENGTH_LONG).show();
+        e2.printStackTrace();
     }
+        return false;
+    }
+}
+
+
+
+
 
 
 
