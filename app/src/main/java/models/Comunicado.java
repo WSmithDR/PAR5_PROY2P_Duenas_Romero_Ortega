@@ -1,9 +1,10 @@
 package models;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Locale;
 
-public abstract class Comunicado {
+public abstract class Comunicado implements Serializable {
     private int id;
     private String tipo;
     private String area;
