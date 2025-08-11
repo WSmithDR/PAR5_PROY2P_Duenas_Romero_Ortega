@@ -13,7 +13,7 @@ public abstract class Comunicado implements Serializable {
     private String area;
     private String titulo;
     private List<String> audiencia;
-    private String decripcion;
+    private String descripcion;
     private String nombreArchivoImagen;
     private String fecha;
 
@@ -56,11 +56,11 @@ public abstract class Comunicado implements Serializable {
     }
 
     public String getDecripcion() {
-        return decripcion;
+        return descripcion;
     }
 
     public void setDecripcion(String decripcion) {
-        this.decripcion = decripcion;
+        this.descripcion = decripcion;
     }
 
     public String getNombreArchivoImagen() {
@@ -93,13 +93,14 @@ public abstract class Comunicado implements Serializable {
         this.area = area;
         this.titulo = titulo;
         this.audiencia = audiencia;
-        this.decripcion = decripcion;
+        this.descripcion = decripcion;
         this.nombreArchivoImagen = nombreArchivoImagen;
         this.fecha = fecha;
 
     }
 
     public String toCSV(){
+        String audienciaStr = String.join(";", this.audiencia);
         return String.format(
                 Locale.US,
                 "%d,%s,%s,%s,%s,%s,%s,%s",
@@ -107,8 +108,8 @@ public abstract class Comunicado implements Serializable {
                 tipo,
                 area,
                 titulo,
-                audiencia,
-                decripcion,
+                audienciaStr,
+                descripcion,
                 nombreArchivoImagen,
                 fecha
         );
