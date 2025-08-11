@@ -1,6 +1,7 @@
 package Models;
 
 import java.util.List;
+import java.util.Locale;
 
 public class Evento extends Comunicado {
     private String lugar;
@@ -27,5 +28,23 @@ public class Evento extends Comunicado {
                 fecha
         );
         this.lugar = lugar;
+    }
+
+    public String getLugar() {
+        return lugar;
+    }
+
+    public void setLugar(String lugar) {
+        this.lugar = lugar;
+    }
+
+    @Override
+    public String toCSV(){
+        return String.format(
+                Locale.US,
+                "%s,%s",
+                super.toCSV(),
+                this.lugar
+        );
     }
 }

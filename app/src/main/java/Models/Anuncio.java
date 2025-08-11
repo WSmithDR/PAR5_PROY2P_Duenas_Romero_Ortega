@@ -45,7 +45,7 @@ public class Anuncio extends Comunicado {
                 Locale.US,
                 "%s,%s",
                 super.toCSV(),
-                nivelUrgencia
+                this,nivelUrgencia
         );
     }
 }
