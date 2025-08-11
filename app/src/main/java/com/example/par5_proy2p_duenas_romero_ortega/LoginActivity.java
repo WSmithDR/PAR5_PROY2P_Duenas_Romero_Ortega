@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import Models.Usuario;
 import Exceptions.CredecialesInvalidasException;
+import Persistencia.ComunicadoRepositorio;
+import Persistencia.ManejadorArchivo;
 import Persistencia.UsuarioRepositorio;
 
 public class LoginActivity extends AppCompatActivity {

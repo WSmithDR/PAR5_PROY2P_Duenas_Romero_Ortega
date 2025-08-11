@@ -20,7 +20,7 @@ public class UsuarioRepositorio {
     //Carga usuarios desde el archivo assets/usuarios.txt y los guarda en memoria.
 
     public List<Usuario> cargarUsuariosAssets(Context context) {
-        List<String> lineas = ManejadorArchivo.leerArchivo(context, usuariotxt);
+        List<String> lineas = ManejadorArchivo.leerArchivoDeAssets(context, usuariotxt);
         usuariosCache.clear();
         for (String linea : lineas) {
             String[] parts = linea.split(",");
