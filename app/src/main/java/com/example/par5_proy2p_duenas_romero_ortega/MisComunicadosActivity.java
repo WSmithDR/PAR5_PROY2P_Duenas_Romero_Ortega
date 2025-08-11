@@ -1,6 +1,8 @@
 package com.example.par5_proy2p_duenas_romero_ortega;
 
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.TableLayout;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +11,10 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class MisComunicadosActivity extends AppCompatActivity {
+    private TableLayout tablaMisComunicados;
+    private Button btnOrdernarTitulo;
+    private Button btnGuardarLista;
+    private Button btnVolver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,4 +27,8 @@ public class MisComunicadosActivity extends AppCompatActivity {
             return insets;
         });
     }
+
+    public void ordenarPorTitulo(){}
+
+    public void guardarListaSerializada(){}
 }
