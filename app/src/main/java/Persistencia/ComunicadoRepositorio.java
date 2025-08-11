@@ -1,7 +1,7 @@
 package Persistencia;
 
 import android.content.Context;
-
+import java.io.File; // Required for file existence check
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -13,10 +13,11 @@ import Models.Comunicado;
 import Models.Evento;
 
 public class ComunicadoRepositorio {
+    private ComunicadoRepositorio(){}
     private static List<Comunicado> comunicados = new ArrayList<>();
     private static final String comunicadostxt = "comunicados.txt";
 
-    public static List<Comunicado> cargarDesdeAssets(Context context) {
+    public static List<Comunicado> cargarComunicados(Context context) {
         List<String> lineas = ManejadorArchivo.leerArchivo(context, comunicadostxt);
         comunicados.clear();
         if (lineas.isEmpty()) {
@@ -88,5 +89,23 @@ public class ComunicadoRepositorio {
             }
         }
         return comunicados;
+    }
+
+    public static void guardarComunicado(Context context, Comunicado nuevoComunicado) {
+        comunicados.add(nuevoComunicado);
+
+        String csvLinea = nuevoComunicado.toCSV();
+        String stringParaEscribir = csvLinea;
+
+        try {
+            File file = context.getFileStreamPath(comunicadostxt);
+            if (file != null && file.exists() && file.length() > 0) {
+                stringParaEscribir = "\n" + csvLinea;
+            }
+        } catch (Exception e) {
+            System.err.println("Error checking file '" + comunicadostxt + "' before append: " + e.getMessage());
+        }
+
+        ManejadorArchivo.escribirArchivo(context, comunicadostxt, stringParaEscribir);
     }
 }
