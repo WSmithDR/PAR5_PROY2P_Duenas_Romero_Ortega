@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PAR5_PROY2P_Duenas_Romero_Ortega">
         <activity
-            android:name=".OptionsActivity"
+            android:name=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".LoginActivity"
