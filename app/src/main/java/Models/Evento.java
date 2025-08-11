@@ -4,7 +4,6 @@ import java.util.List;
 
 public class Evento extends Comunicado {
     private String lugar;
-    private String fecha;
 
     public Evento(
             int id,
@@ -14,8 +13,8 @@ public class Evento extends Comunicado {
             List<String> audiencia,
             String decripcion,
             String nombreArchivoImagen,
-            String lugar,
-            String fecha
+            String fecha,
+            String lugar
     ) {
         super(
                 id,
@@ -24,9 +23,9 @@ public class Evento extends Comunicado {
                 titulo,
                 audiencia,
                 decripcion,
-                nombreArchivoImagen
+                nombreArchivoImagen,
+                fecha
         );
         this.lugar = lugar;
-        this.fecha = fecha;
     }
 }

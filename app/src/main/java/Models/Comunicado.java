@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Locale;
 
 public abstract class Comunicado implements Serializable {
+
     private int id;
     private String tipo;
     private String area;
@@ -12,7 +13,7 @@ public abstract class Comunicado implements Serializable {
     private List<String> audiencia;
     private String decripcion;
     private String nombreArchivoImagen;
-
+    private String fecha;
 
 
     public int getId() {
@@ -68,6 +69,13 @@ public abstract class Comunicado implements Serializable {
         this.nombreArchivoImagen = nombreArchivoImagen;
     }
 
+    public String getFecha() {
+        return fecha;
+    }
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
     public Comunicado(
             int id,
             String tipo,
@@ -75,7 +83,8 @@ public abstract class Comunicado implements Serializable {
             String titulo,
             List<String> audiencia,
             String decripcion,
-            String nombreArchivoImagen
+            String nombreArchivoImagen,
+            String fecha
     ) {
         this.id = id;
         this.tipo = tipo;
@@ -84,13 +93,22 @@ public abstract class Comunicado implements Serializable {
         this.audiencia = audiencia;
         this.decripcion = decripcion;
         this.nombreArchivoImagen = nombreArchivoImagen;
+        this.fecha = fecha;
+
     }
 
     public String toCSV(){
         return String.format(
                 Locale.US,
-                "%d;%s;%s;%s;%s;%s;%s",
-                id, tipo, area, titulo, audiencia, decripcion, nombreArchivoImagen
+                "%d,%s,%s,%s,%s,%s,%s,%s",
+                id,
+                tipo,
+                area,
+                titulo,
+                audiencia,
+                decripcion,
+                nombreArchivoImagen,
+                fecha
         );
     }
 

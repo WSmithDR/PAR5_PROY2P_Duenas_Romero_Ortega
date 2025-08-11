@@ -1,6 +1,7 @@
 package Models;
 
 import java.util.List;
+import java.util.Locale;
 
 import Enums.NivelUrgencia;
 
@@ -15,9 +16,19 @@ public class Anuncio extends Comunicado {
             List<String> audiencia,
             String decripcion,
             String nombreArchivoImagen,
+            String fecha,
             NivelUrgencia nivelUrgencia
     ) {
-        super(id, tipo, area, titulo, audiencia, decripcion, nombreArchivoImagen);
+        super(
+                id,
+                tipo,
+                area,
+                titulo,
+                audiencia,
+                decripcion,
+                nombreArchivoImagen,
+                fecha
+        );
         this.nivelUrgencia = nivelUrgencia;
     }
 
@@ -26,5 +37,15 @@ public class Anuncio extends Comunicado {
     }
     public void setNivelUrgencia(NivelUrgencia nivelUrgencia) {
         this.nivelUrgencia = nivelUrgencia;
+    }
+
+    @Override
+    public String toCSV(){
+        return String.format(
+                Locale.US,
+                "%s,%s",
+                super.toCSV(),
+                nivelUrgencia
+        );
     }
 }
