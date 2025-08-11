@@ -58,26 +58,31 @@ public class Login extends AppCompatActivity {
             return insets;
         });
     }
-        private boolean validarCredenciales(String username, String password) throws IOException {
-            // usuarios.txt en assets: formato "username,password\n"
-            InputStream is = getAssets().open("usuarios.txt");
-            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+
+    private boolean validarCredenciales(String username, String password) throws IOException {
+        // usuarios.txt en assets: formato "username,password\n"
+        InputStream is = getAssets().open("usuarios.txt");
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(is))) {
             String line;
-            while ((line = br.readLine()) != null) {
+            while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(",");
                 if (parts.length >= 2) {
-                    String u = parts[0].trim();
-                    String p = parts[1].trim();
+                    String id = parts[0].trim();
+                    String u = parts[1].trim();
+                    String p = parts[2].trim();
                     if (u.equals(username) && p.equals(password)) {
-                        br.close();
+                        reader.close();
                         return true;
                     }
                 }
             }
-            br.close();
+        } catch (IOException e2) {
+                e2.printStackTrace();
+            }
             return false;
         }
     }
+
 
 
 
