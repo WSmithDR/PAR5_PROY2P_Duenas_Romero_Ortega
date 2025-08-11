@@ -26,7 +26,7 @@ public class ManejadorArchivo {
         } catch (Exception e) {
             System.err.println("Error al leer el archivo [Exception]: " + e.getMessage());
         }
-                return lineas;
+        return lineas;
     };
 
     public static void escribirArchivo(Context context, String nombre, String contenido) {

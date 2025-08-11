@@ -4,10 +4,12 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Locale;
 
+import Enums.TipoComunicado;
+
 public abstract class Comunicado implements Serializable {
 
     private int id;
-    private String tipo;
+    private TipoComunicado tipo;
     private String area;
     private String titulo;
     private List<String> audiencia;
@@ -24,11 +26,11 @@ public abstract class Comunicado implements Serializable {
         this.id = id;
     }
 
-    public String getTipo() {
+    public TipoComunicado getTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(TipoComunicado tipo) {
         this.tipo = tipo;
     }
     public String getArea() {
@@ -78,7 +80,7 @@ public abstract class Comunicado implements Serializable {
 
     public Comunicado(
             int id,
-            String tipo,
+            TipoComunicado tipo,
             String area,
             String titulo,
             List<String> audiencia,

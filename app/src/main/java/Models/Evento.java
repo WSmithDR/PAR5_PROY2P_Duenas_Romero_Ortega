@@ -3,12 +3,13 @@ package Models;
 import java.util.List;
 import java.util.Locale;
 
+import Enums.TipoComunicado;
+
 public class Evento extends Comunicado {
     private String lugar;
 
     public Evento(
             int id,
-            String tipo,
             String area,
             String titulo,
             List<String> audiencia,
@@ -19,7 +20,7 @@ public class Evento extends Comunicado {
     ) {
         super(
                 id,
-                tipo,
+                TipoComunicado.EVENTO,
                 area,
                 titulo,
                 audiencia,

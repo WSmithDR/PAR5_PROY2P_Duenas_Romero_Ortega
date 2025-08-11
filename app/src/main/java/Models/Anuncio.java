@@ -4,13 +4,13 @@ import java.util.List;
 import java.util.Locale;
 
 import Enums.NivelUrgencia;
+import Enums.TipoComunicado;
 
 public class Anuncio extends Comunicado {
     private NivelUrgencia nivelUrgencia;
 
     public Anuncio(
             int id,
-            String tipo,
             String area,
             String titulo,
             List<String> audiencia,
@@ -21,7 +21,7 @@ public class Anuncio extends Comunicado {
     ) {
         super(
                 id,
-                tipo,
+                TipoComunicado.ANUNCIO,
                 area,
                 titulo,
                 audiencia,
