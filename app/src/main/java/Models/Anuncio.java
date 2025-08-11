@@ -1,4 +1,6 @@
 package Models;
 
-public class Anuncio {
+public class Anuncio extends Comunicado {
+    private NivelUrgencia nivelUrgencia;
+
 }
