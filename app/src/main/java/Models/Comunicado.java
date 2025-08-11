@@ -68,6 +68,24 @@ public abstract class Comunicado implements Serializable {
         this.nombreArchivoImagen = nombreArchivoImagen;
     }
 
+    public Comunicado(
+            int id,
+            String tipo,
+            String area,
+            String titulo,
+            List<String> audiencia,
+            String decripcion,
+            String nombreArchivoImagen
+    ) {
+        this.id = id;
+        this.tipo = tipo;
+        this.area = area;
+        this.titulo = titulo;
+        this.audiencia = audiencia;
+        this.decripcion = decripcion;
+        this.nombreArchivoImagen = nombreArchivoImagen;
+    }
+
     public String toCSV(){
         return String.format(
                 Locale.US,
