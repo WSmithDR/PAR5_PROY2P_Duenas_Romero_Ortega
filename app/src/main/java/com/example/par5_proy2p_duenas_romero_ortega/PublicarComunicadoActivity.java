@@ -69,7 +69,7 @@ public class PublicarComunicadoActivity extends AppCompatActivity {
         tvLugarLabel = findViewById(R.id.tvLugarLabel);
         tvFechaLabel = findViewById(R.id.tvFechaLabel);
 
-        comunicadoRepository = new ComunicadoRepositorio(this, "comunicados.txt", "comunicados_user.txt");
+        comunicadoRepository = new ComunicadoRepositorio(this, "comunicados_user.txt","comunicados.txt");
         comunicadoRepository.cargarComunicados(this);
 
         String[] areas = {"Académico","Administrativo","Cultural","General"};
@@ -187,7 +187,7 @@ public class PublicarComunicadoActivity extends AppCompatActivity {
         if (esEvento) {
             c = new Evento(id, area, titulo, audiencia, descripcion, imagenNombre, fechaSeleccionada,lugar);
         } else {
-            c = new Anuncio(id, area, titulo, audiencia, descripcion, imagenNombre,fechaSeleccionada, nivelPorDefecto);
+            c = new Anuncio(id, area, titulo, audiencia, descripcion, imagenNombre, nivelPorDefecto);
         }
 
 
@@ -211,8 +211,6 @@ public class PublicarComunicadoActivity extends AppCompatActivity {
         comunicadoRepository.guardarComunicado(this, c);
 
         Toast.makeText(this, "Comunicado publicado", Toast.LENGTH_LONG).show();
-
-        // opcional: limpiar campos
         limpiarCampos();
     }
 

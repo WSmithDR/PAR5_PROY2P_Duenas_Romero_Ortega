@@ -61,7 +61,6 @@ public class ComunicadoRepositorio {
                                 audiencia,
                                 decripcion,
                                 nombreArchivoImagen,
-                                fecha,
                                 nivelUrgencia
                         );
                         comunicados.add(anuncio);
