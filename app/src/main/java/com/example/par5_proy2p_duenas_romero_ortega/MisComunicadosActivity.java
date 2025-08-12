@@ -1,23 +1,27 @@
 package com.example.par5_proy2p_duenas_romero_ortega;
 
-import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface; // Importado para el estilo del encabezado
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TableLayout;
 import android.widget.TableRow;
-import android.widget.TextView; // Importar TextView
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import Models.Anuncio; // Importar Anuncio
 import Models.Comunicado;
+import Models.Evento;   // Importar Evento
+import Enums.NivelUrgencia; // Importar NivelUrgencia (ajustar si es necesario)
 import Persistencia.ComunicadoRepositorio;
+// import Persistencia.ComunicadoRepositorio; // Comentado para la prueba
 
 public class MisComunicadosActivity extends AppCompatActivity {
     private ImageButton btnVolver;
@@ -49,19 +53,37 @@ public class MisComunicadosActivity extends AppCompatActivity {
         );
 
         this.tablaMisComunicados = findViewById(R.id.misComunicadosTableLayout);
-        Context context = getApplicationContext();
-        for(Comunicado comunicado: ComunicadoRepositorio.cargarComunicados(context)){
+
+        TableRow headerRow = new TableRow(this);
+
+        TextView textViewHeaderTitulo = new TextView(this);
+        textViewHeaderTitulo.setText("Titulo");
+        textViewHeaderTitulo.setTypeface(null, Typeface.BOLD);
+        headerRow.addView(textViewHeaderTitulo);
+
+        TextView textViewHeaderFecha = new TextView(this);
+        textViewHeaderFecha.setText("Fecha");
+        textViewHeaderFecha.setTypeface(null, Typeface.BOLD);
+        TableRow.LayoutParams headerFechaParams = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
+        textViewHeaderFecha.setLayoutParams(headerFechaParams);
+        headerRow.addView(textViewHeaderFecha);
+
+        tablaMisComunicados.addView(headerRow);
+
+        for(Comunicado comunicado: ComunicadoRepositorio.cargarComunicados(this)){
             TableRow comunicadoRow = new TableRow(this);
 
-
             TextView textViewTitulo = new TextView(this);
-            textViewTitulo.setText(comunicado.getTitulo());
+            String titulo = comunicado.getTitulo() != null ? comunicado.getTitulo() : "Título N/A";
+            textViewTitulo.setText(titulo);
             comunicadoRow.addView(textViewTitulo);
 
 
             TextView textViewFecha = new TextView(this);
-            textViewFecha.setText(comunicado.getFecha());
-            comunicadoRow.addView(textViewFecha);
+            String fecha = comunicado.getFecha() != null ? comunicado.getFecha() : "Fecha N/A";
+            textViewFecha.setText(fecha);
+            textViewFecha.setLayoutParams(headerFechaParams); // Reutilizar o crear nuevos params
+            comunicadoRow.addView(textViewFecha); 
 
             tablaMisComunicados.addView(comunicadoRow);
         }
