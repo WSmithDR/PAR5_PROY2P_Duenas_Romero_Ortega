@@ -1,25 +1,188 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PublicarComunicadoActivity">
+    android:padding="16dp">
 
-    <TextView
-        android:id="@+id/textprueba"
-        android:layout_width="272dp"
-        android:layout_height="85dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="224dp"
-        android:layout_marginEnd="25dp"
-        android:text="Estamos trabajando en esta sección. Gracias por su comprensión."
-        android:textAlignment="center"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nuevo Comunicado"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="12dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tipo:"
+            android:textStyle="bold" />
+        <RadioGroup
+            android:id="@+id/rgTipo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="4dp">
+            <RadioButton
+                android:id="@+id/rbAnuncio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Anuncio" />
+            <RadioButton
+                android:id="@+id/rbEvento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Evento"
+                android:layout_marginStart="16dp"/>
+        </RadioGroup>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Área:"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp" />
+        <Spinner
+            android:id="@+id/spArea"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Audiencia:"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <CheckBox
+                android:id="@+id/cbEstudiantes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Estudiantes" />
+            <CheckBox
+                android:id="@+id/cbProfesores"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Profesores"
+                android:layout_marginStart="12dp" />
+            <CheckBox
+                android:id="@+id/cbAdministrativo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Administrativo"
+                android:layout_marginStart="12dp" />
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Título:"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp" />
+        <EditText
+            android:id="@+id/etTitulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ingrese título" />
+
+        <TextView
+            android:id="@+id/tvLugarLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Lugar:"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/etLugar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ingrese lugar" />
+
+
+        <TextView
+            android:id="@+id/tvFechaLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Fecha:"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnFecha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#000000"
+            android:text="Seleccionar fecha" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Descripción:"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp" />
+        <EditText
+            android:id="@+id/etDescripcion"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:gravity="top"
+            android:inputType="textMultiLine"
+            android:hint="Escriba aquí la descripción" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Arte (imagen):"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp" />
+        <Button
+            android:id="@+id/btnImagen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#000000"
+            android:text="Adjuntar imagen" />
+        <TextView
+            android:id="@+id/tvImagenNombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:layout_marginTop="4dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="16dp">
+            <Button
+                android:id="@+id/btnPublicar"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#000000"
+                android:text="Publicar" />
+            <Button
+                android:id="@+id/btnCancelar"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#000000"
+                android:text="Cancelar"
+                android:layout_marginStart="12dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

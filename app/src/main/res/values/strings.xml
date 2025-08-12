@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">PAR5_PROY2P_Duenas_Romero_Ortega</string>
+    <string name="trabajando_seccion">Estamos trabajando en esta sección. Gracias por su comprensión.</string>
+    <string name="Seleccionar_fecha">Seleccionar fecha</string>
 </resources>

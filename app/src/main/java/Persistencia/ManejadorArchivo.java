@@ -3,6 +3,7 @@ package Persistencia;
 import android.content.Context;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -66,10 +67,21 @@ public class ManejadorArchivo {
     public static void escribirBinario(Context context, String nombre, byte[] bytes) {
         try (FileOutputStream fos = context.openFileOutput(nombre, Context.MODE_PRIVATE)) {
             fos.write(bytes);
-        }catch(IOException e) {
+        } catch (IOException e) {
             System.err.println("Error al escribir el archivo binario [IOException]: " + e.getMessage());
         } catch (Exception e) {
             System.err.println("Error al escribir el archivo binario [Exception]: " + e.getMessage());
         }
     }
-}
+        public static byte[] readBytesFromInputStream(InputStream is) throws IOException {
+            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+            int nRead;
+            byte[] data = new byte[4096];
+            while ((nRead = is.read(data, 0, data.length)) != -1) {
+                buffer.write(data, 0, nRead);
+            }
+            buffer.flush();
+            return buffer.toByteArray();
+        }
+    }
+
