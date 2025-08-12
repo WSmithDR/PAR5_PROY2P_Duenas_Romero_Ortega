@@ -6,4 +6,10 @@
     </style>
 
     <style name="Theme.PAR5_PROY2P_Duenas_Romero_Ortega" parent="Base.Theme.PAR5_PROY2P_Duenas_Romero_Ortega" />
+
+    <!-- Style moved from colors.xml -->
+    <style name="Theme.TuApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorOnSecondary">@color/black</item>
+    </style>
 </resources>

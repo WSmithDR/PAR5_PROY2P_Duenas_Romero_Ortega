@@ -14,7 +14,7 @@
         android:layout_marginStart="25dp"
         android:layout_marginTop="224dp"
         android:layout_marginEnd="25dp"
-        android:text="Estamos trabajando en esta sección. Gracias por su comprensión."
+        android:text="@string/trabajando_seccion"
         android:textAlignment="center"
         android:textSize="24sp"
         android:textStyle="bold"

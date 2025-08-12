@@ -13,9 +13,15 @@ import Models.Comunicado;
 import Models.Evento;
 
 public class ComunicadoRepositorio {
-    private ComunicadoRepositorio(){}
-    private static List<Comunicado> comunicados = new ArrayList<>();
-    private static final String comunicadostxt = "comunicados.txt";
+    private String pathAssets;
+    private static List<Comunicado> comunicados ;
+    private static String comunicadostxt;
+
+    public ComunicadoRepositorio (Context context, String pathAssets, String comunicadostxt) {
+        this.pathAssets = pathAssets;
+        this.comunicadostxt = comunicadostxt;
+        this.comunicados = new ArrayList<>();
+    }
 
     public static List<Comunicado> cargarComunicados(Context context) {
         List<String> lineas = ManejadorArchivo.leerArchivo(context, comunicadostxt);
@@ -55,7 +61,6 @@ public class ComunicadoRepositorio {
                                 audiencia,
                                 decripcion,
                                 nombreArchivoImagen,
-                                fecha,
                                 nivelUrgencia
                         );
                         comunicados.add(anuncio);
@@ -107,5 +112,13 @@ public class ComunicadoRepositorio {
         }
 
         ManejadorArchivo.escribirArchivo(context, comunicadostxt, stringParaEscribir);
+    }
+
+    public int generarNuevoId() {
+        int max = 0;
+        for (Comunicado c : comunicados) {
+            if (c.getId() > max) max = c.getId();
+        }
+        return max + 1;
     }
 }
