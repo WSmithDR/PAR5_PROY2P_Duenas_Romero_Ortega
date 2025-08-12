@@ -7,7 +7,6 @@
     android:orientation="vertical"
     tools:context=".MisComunicadosActivity">
 
-    <!-- Barra superior con botón de retroceso y título -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,7 +31,6 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-    <!-- Sección de ordenamiento -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -60,7 +58,6 @@
             android:textColor="#000000" />
     </LinearLayout>
 
-    <!-- Lista de comunicados -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -68,15 +65,13 @@
         android:paddingHorizontal="16dp"
         android:paddingBottom="16dp">
 
-        <LinearLayout
+        <TableLayout
             android:id="@+id/misComunicadosTableLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <!-- Los elementos de la lista se agregarán dinámicamente aquí -->
-
-        </LinearLayout>
+            android:stretchColumns="*"
+            android:shrinkColumns="*"
+            android:padding="4dp"/>
     </ScrollView>
 
     <!-- Botones de acción en la parte inferior -->
