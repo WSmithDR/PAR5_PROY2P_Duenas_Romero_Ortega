@@ -25,7 +25,7 @@ public class ComunicadoRepositorio {
 
     public static List<Comunicado> cargarComunicados(Context context) {
         List<String> lineas = ManejadorArchivo.leerArchivo(context, comunicadostxt);
-        comunicados.clear();
+        //comunicados.clear();
         if (lineas.isEmpty()) {
             return comunicados;
         }else{

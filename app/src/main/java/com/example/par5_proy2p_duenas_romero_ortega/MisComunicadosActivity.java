@@ -21,6 +21,7 @@ import Models.Comunicado;
 import Models.Evento;   // Importar Evento
 import Enums.NivelUrgencia; // Importar NivelUrgencia (ajustar si es necesario)
 import Persistencia.ComunicadoRepositorio;
+import Utils.DatosDePruebaComunicados;
 // import Persistencia.ComunicadoRepositorio; // Comentado para la prueba
 
 public class MisComunicadosActivity extends AppCompatActivity {
@@ -70,7 +71,8 @@ public class MisComunicadosActivity extends AppCompatActivity {
 
         tablaMisComunicados.addView(headerRow);
 
-        for(Comunicado comunicado: ComunicadoRepositorio.cargarComunicados(this)){
+        //for(Comunicado comunicado: ComunicadoRepositorio.cargarComunicados(this)){
+        for(Comunicado comunicado: DatosDePruebaComunicados.obtenerListaDePrueba()){
             TableRow comunicadoRow = new TableRow(this);
 
             TextView textViewTitulo = new TextView(this);
