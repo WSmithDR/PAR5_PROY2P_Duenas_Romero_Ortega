@@ -30,11 +30,11 @@ public class MisComunicadosActivity extends AppCompatActivity {
     private TableLayout tablaMisComunicados;
     private Button btnGuardarLista;
     private List<Comunicado> listaComunicados;
+    private List<Comunicado> originalListaComunicados;
 
-    private boolean tituloAscending = true;
-    private boolean fechaAscending = true;
-    private boolean tituloOrdenado = false;
-    private boolean fechaOrdenado = false;
+    // 0: original, 1: ascending, 2: descending
+    private int tituloSortState = 0;
+    private int fechaSortState = 0;
 
     private static final String DATE_FORMAT_PATTERN = "dd/MM/yyyy";
     private static final SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT_PATTERN, Locale.getDefault());
@@ -62,7 +62,8 @@ public class MisComunicadosActivity extends AppCompatActivity {
         this.btnGuardarLista = findViewById(R.id.btnGuardarLista);
 
         
-        listaComunicados = new ArrayList<>(DatosDePruebaComunicados.obtenerListaDePrueba());
+        originalListaComunicados = new ArrayList<>(DatosDePruebaComunicados.obtenerListaDePrueba());
+        listaComunicados = new ArrayList<>(originalListaComunicados);
 
 
         renderizarTabla();
@@ -71,23 +72,16 @@ public class MisComunicadosActivity extends AppCompatActivity {
     }
 
     private void renderizarTabla() {
-        int childCount = tablaMisComunicados.getChildCount();
-        if (childCount > 1) {
-            tablaMisComunicados.removeViews(1, childCount - 1);
-        }
-
         tablaMisComunicados.removeAllViews();
         
         TableRow headerRow = new TableRow(this);
-        TableRow.LayoutParams headerParams = new TableRow.LayoutParams(
-                TableRow.LayoutParams.WRAP_CONTENT,
-                TableRow.LayoutParams.WRAP_CONTENT
-        );
 
         TextView textViewHeaderTitulo = new TextView(this);
         String tituloHeaderText = "Título";
-        if (tituloOrdenado) {
-            tituloHeaderText += tituloAscending ? " ↑" : " ↓"; // ↑ : ↓
+        if (tituloSortState == 1) {
+            tituloHeaderText += " ↑";
+        } else if (tituloSortState == 2) {
+            tituloHeaderText += " ↓";
         }
         textViewHeaderTitulo.setText(tituloHeaderText);
         textViewHeaderTitulo.setTypeface(null, Typeface.BOLD);
@@ -95,25 +89,25 @@ public class MisComunicadosActivity extends AppCompatActivity {
         textViewHeaderTitulo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tituloOrdenado) {
-                    tituloAscending = !tituloAscending;
+                fechaSortState = 0; 
+                tituloSortState = (tituloSortState + 1) % 3;
+
+                if (tituloSortState == 0) {
+                    listaComunicados = new ArrayList<>(originalListaComunicados);
                 } else {
-                    tituloAscending = true; 
-                }
-                tituloOrdenado = true;
-                fechaOrdenado = false;
-                Collections.sort(listaComunicados, new Comparator<Comunicado>() {
-                    @Override
-                    public int compare(Comunicado c1, Comunicado c2) {
-                        String titulo1 = c1.getTitulo() != null ? c1.getTitulo() : "";
-                        String titulo2 = c2.getTitulo() != null ? c2.getTitulo() : "";
-                        if (tituloAscending) {
-                            return titulo1.compareToIgnoreCase(titulo2);
-                        } else {
-                            return titulo2.compareToIgnoreCase(titulo1);
+                    Collections.sort(listaComunicados, new Comparator<Comunicado>() {
+                        @Override
+                        public int compare(Comunicado c1, Comunicado c2) {
+                            String titulo1 = c1.getTitulo() != null ? c1.getTitulo() : "";
+                            String titulo2 = c2.getTitulo() != null ? c2.getTitulo() : "";
+                            if (tituloSortState == 1) { 
+                                return titulo1.compareToIgnoreCase(titulo2);
+                            } else { 
+                                return titulo2.compareToIgnoreCase(titulo1);
+                            }
                         }
-                    }
-                });
+                    });
+                }
                 renderizarTabla();
             }
         });
@@ -121,8 +115,10 @@ public class MisComunicadosActivity extends AppCompatActivity {
 
         TextView textViewHeaderFecha = new TextView(this);
         String fechaHeaderText = "Fecha";
-        if (fechaOrdenado) {
-            fechaHeaderText += fechaAscending ? " ↑" : " ↓"; // ↑ : ↓
+        if (fechaSortState == 1) {
+            fechaHeaderText += " ↑";
+        } else if (fechaSortState == 2) {
+            fechaHeaderText += " ↓";
         }
         textViewHeaderFecha.setText(fechaHeaderText);
         textViewHeaderFecha.setTypeface(null, Typeface.BOLD);
@@ -130,56 +126,49 @@ public class MisComunicadosActivity extends AppCompatActivity {
         textViewHeaderFecha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (fechaOrdenado) {
-                    fechaAscending = !fechaAscending;
+                tituloSortState = 0; 
+                fechaSortState = (fechaSortState + 1) % 3;
+
+                if (fechaSortState == 0) {
+                    listaComunicados = new ArrayList<>(originalListaComunicados);
                 } else {
-                    fechaAscending = true;
+                    Collections.sort(listaComunicados, new Comparator<Comunicado>() {
+                        @Override
+                        public int compare(Comunicado c1, Comunicado c2) {
+                            Date date1 = null;
+                            Date date2 = null;
+
+                            String fechaStr1 = c1.getFecha();
+                            String fechaStr2 = c2.getFecha();
+
+                            if (fechaStr1 != null && !fechaStr1.isEmpty()) {
+                                try {
+                                    date1 = sdf.parse(fechaStr1);
+                                } catch (ParseException e) {
+                                    Log.e("MisComunicadosActivity", "Error parseando fecha: " + fechaStr1, e);
+                                }
+                            }
+
+                            if (fechaStr2 != null && !fechaStr2.isEmpty()) {
+                                try {
+                                    date2 = sdf.parse(fechaStr2);
+                                } catch (ParseException e) {
+                                    Log.e("MisComunicadosActivity", "Error parseando fecha: " + fechaStr2, e);
+                                }
+                            }
+
+                            if (date1 == null && date2 == null) return 0;
+                            if (date1 == null) return 1; 
+                            if (date2 == null) return -1;
+
+                            if (fechaSortState == 1) { 
+                                return date1.compareTo(date2);
+                            } else { 
+                                return date2.compareTo(date1);
+                            }
+                        }
+                    });
                 }
-                fechaOrdenado = true;
-                tituloOrdenado = false;
-                Collections.sort(listaComunicados, new Comparator<Comunicado>() {
-                    @Override
-                    public int compare(Comunicado c1, Comunicado c2) {
-                        Date date1 = null;
-                        Date date2 = null;
-
-                        String fechaStr1 = c1.getFecha();
-                        String fechaStr2 = c2.getFecha();
-
-                        if (fechaStr1 != null && !fechaStr1.isEmpty()) {
-                            try {
-                                date1 = sdf.parse(fechaStr1);
-                            } catch (ParseException e) {
-                                Log.e("MisComunicadosActivity", "Error parseando fecha: " + fechaStr1, e);
-                            }
-                        }
-
-                        if (fechaStr2 != null && !fechaStr2.isEmpty()) {
-                            try {
-                                date2 = sdf.parse(fechaStr2);
-                            } catch (ParseException e) {
-                                Log.e("MisComunicadosActivity", "Error parseando fecha: " + fechaStr2, e);
-                            }
-                        }
-
-                        if (date1 == null && date2 == null) {
-                            return 0;
-                        }
-                        
-                        if (date1 == null) {
-                            return fechaAscending ? 1 : -1; 
-                        }
-                        if (date2 == null) {
-                            return fechaAscending ? -1 : 1;
-                        }
-
-                        if (fechaAscending) {
-                            return date1.compareTo(date2);
-                        } else {
-                            return date2.compareTo(date1);
-                        }
-                    }
-                });
                 renderizarTabla();
             }
         });
@@ -187,11 +176,6 @@ public class MisComunicadosActivity extends AppCompatActivity {
 
         tablaMisComunicados.addView(headerRow); 
 
-
-        TableRow.LayoutParams cellParams = new TableRow.LayoutParams(
-                TableRow.LayoutParams.WRAP_CONTENT,
-                TableRow.LayoutParams.WRAP_CONTENT
-        );
 
         for(Comunicado comunicado: listaComunicados){
             TableRow comunicadoRow = new TableRow(this);
