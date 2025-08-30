@@ -33,6 +33,9 @@ public class MisComunicadosActivity extends AppCompatActivity {
     private Button btnGuardarLista;
     private List<Comunicado> listaComunicados;
 
+    private boolean tituloAscending = true;
+    private boolean fechaAscending = true;
+
     private static final String DATE_FORMAT_PATTERN = "dd/MM/yyyy";
     private static final SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT_PATTERN, Locale.getDefault());
 
@@ -75,12 +78,17 @@ public class MisComunicadosActivity extends AppCompatActivity {
             new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    tituloAscending = !tituloAscending;
                     Collections.sort(listaComunicados, new Comparator<Comunicado>() {
                         @Override
                         public int compare(Comunicado c1, Comunicado c2) {
                             String titulo1 = c1.getTitulo() != null ? c1.getTitulo() : "";
                             String titulo2 = c2.getTitulo() != null ? c2.getTitulo() : "";
-                            return titulo1.compareToIgnoreCase(titulo2);
+                            if (tituloAscending) {
+                                return titulo1.compareToIgnoreCase(titulo2);
+                            } else {
+                                return titulo2.compareToIgnoreCase(titulo1);
+                            }
                         }
                     });
                     renderizarTabla();
@@ -88,11 +96,12 @@ public class MisComunicadosActivity extends AppCompatActivity {
             }
         );
         
-        if (btnOrdenarFecha != null) { // Comprobación de nulidad
+        if (btnOrdenarFecha != null) { 
             btnOrdenarFecha.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        fechaAscending = !fechaAscending;
                         Collections.sort(listaComunicados, new Comparator<Comunicado>() {
                             @Override
                             public int compare(Comunicado c1, Comunicado c2) {
@@ -121,13 +130,19 @@ public class MisComunicadosActivity extends AppCompatActivity {
                                 if (date1 == null && date2 == null) {
                                     return 0;
                                 }
+                                
                                 if (date1 == null) {
-                                    return 1;
+                                    return fechaAscending ? 1 : -1;
                                 }
                                 if (date2 == null) {
-                                    return -1;
+                                    return fechaAscending ? -1 : 1;
                                 }
-                                return date1.compareTo(date2);
+
+                                if (fechaAscending) {
+                                    return date1.compareTo(date2);
+                                } else {
+                                    return date2.compareTo(date1);
+                                }
                             }
                         });
                         renderizarTabla();
@@ -145,38 +160,33 @@ public class MisComunicadosActivity extends AppCompatActivity {
             tablaMisComunicados.removeViews(1, childCount - 1);
         }
 
-        if (tablaMisComunicados.getChildCount() > 0) {
-            View header = tablaMisComunicados.getChildAt(0);
-             tablaMisComunicados.removeViewAt(0);
-        }
+        tablaMisComunicados.removeAllViews();
         
         TableRow headerRow = new TableRow(this);
         TableRow.LayoutParams headerParams = new TableRow.LayoutParams(
                 TableRow.LayoutParams.WRAP_CONTENT,
                 TableRow.LayoutParams.WRAP_CONTENT
         );
-        headerParams.setMargins(8, 8, 8, 8);
 
         TextView textViewHeaderTitulo = new TextView(this);
         textViewHeaderTitulo.setText("Título");
         textViewHeaderTitulo.setTypeface(null, Typeface.BOLD);
-        textViewHeaderTitulo.setPadding(8,8,8,8);
+        textViewHeaderTitulo.setPadding(16,8,16,8); 
         headerRow.addView(textViewHeaderTitulo);
 
         TextView textViewHeaderFecha = new TextView(this);
         textViewHeaderFecha.setText("Fecha");
         textViewHeaderFecha.setTypeface(null, Typeface.BOLD);
-        textViewHeaderFecha.setPadding(8,8,8,8);
+        textViewHeaderFecha.setPadding(16,8,16,8); 
         headerRow.addView(textViewHeaderFecha);
 
-        tablaMisComunicados.addView(headerRow, 0);
+        tablaMisComunicados.addView(headerRow); 
 
 
         TableRow.LayoutParams cellParams = new TableRow.LayoutParams(
                 TableRow.LayoutParams.WRAP_CONTENT,
                 TableRow.LayoutParams.WRAP_CONTENT
         );
-        cellParams.setMargins(8, 8, 8, 8);
 
         for(Comunicado comunicado: listaComunicados){
             TableRow comunicadoRow = new TableRow(this);
@@ -184,14 +194,14 @@ public class MisComunicadosActivity extends AppCompatActivity {
             TextView textViewTitulo = new TextView(this);
             String titulo = comunicado.getTitulo() != null ? comunicado.getTitulo() : "Título N/A";
             textViewTitulo.setText(titulo);
-            textViewTitulo.setPadding(8,8,8,8);
+            textViewTitulo.setPadding(16,8,16,8); 
             comunicadoRow.addView(textViewTitulo);
 
 
             TextView textViewFecha = new TextView(this);
             String fecha = comunicado.getFecha() != null ? comunicado.getFecha() : "Fecha N/A";
             textViewFecha.setText(fecha);
-            textViewFecha.setPadding(8,8,8,8);
+            textViewFecha.setPadding(16,8,16,8); 
             comunicadoRow.addView(textViewFecha);
 
             tablaMisComunicados.addView(comunicadoRow);
