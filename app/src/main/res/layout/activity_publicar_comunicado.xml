@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/scrollRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -41,18 +42,20 @@
             android:layout_marginTop="4dp"
             android:orientation="horizontal">
 
-            <RadioButton
+            <androidx.appcompat.widget.AppCompatRadioButton
                 android:id="@+id/rbAnuncio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Anuncio" />
+                android:text="Anuncio"
+                app:buttonTint="@color/radio_button_color"/>
 
-            <RadioButton
+            <androidx.appcompat.widget.AppCompatRadioButton
                 android:id="@+id/rbEvento"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="Evento" />
+                android:text="Evento"
+                app:buttonTint="@color/radio_button_color"/>
         </RadioGroup>
 
 
@@ -81,25 +84,28 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <CheckBox
+            <androidx.appcompat.widget.AppCompatCheckBox
                 android:id="@+id/cbEstudiantes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Estudiantes" />
+                android:text="Estudiantes"
+                app:buttonTint="@color/radio_button_color" />
 
-            <CheckBox
+            <androidx.appcompat.widget.AppCompatCheckBox
                 android:id="@+id/cbProfesores"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:text="Profesores" />
+                android:text="Profesores"
+                app:buttonTint="@color/radio_button_color" />
 
-            <CheckBox
+            <androidx.appcompat.widget.AppCompatCheckBox
                 android:id="@+id/cbAdministrativo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:text="Administrativo" />
+                android:text="Administrativo"
+                app:buttonTint="@color/radio_button_color" />
         </LinearLayout>
 
 
