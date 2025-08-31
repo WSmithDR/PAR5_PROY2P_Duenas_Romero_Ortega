@@ -13,7 +13,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nuevo Comunicado"
+            android:text="@string/nuevo_comunicado"
             android:textSize="20sp"
             android:textStyle="bold"
             android:layout_marginBottom="12dp"/>
@@ -21,7 +21,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tipo:"
+            android:text="@string/tipo"
             android:textStyle="bold" />
         <RadioGroup
             android:id="@+id/rgTipo"
@@ -33,12 +33,12 @@
                 android:id="@+id/rbAnuncio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Anuncio" />
+                android:text="@string/anuncio" />
             <RadioButton
                 android:id="@+id/rbEvento"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Evento"
+                android:text="@string/evento"
                 android:layout_marginStart="16dp"/>
         </RadioGroup>
 
@@ -46,7 +46,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Área:"
+            android:text="@string/area"
             android:textStyle="bold"
             android:layout_marginTop="8dp" />
         <Spinner
@@ -58,7 +58,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Audiencia:"
+            android:text="@string/audiencia"
             android:textStyle="bold"
             android:layout_marginTop="8dp" />
         <LinearLayout
@@ -69,18 +69,18 @@
                 android:id="@+id/cbEstudiantes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Estudiantes" />
+                android:text="@string/estudiantes" />
             <CheckBox
                 android:id="@+id/cbProfesores"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Profesores"
+                android:text="@string/profesores"
                 android:layout_marginStart="12dp" />
             <CheckBox
                 android:id="@+id/cbAdministrativo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Administrativo"
+                android:text="@string/administrativo"
                 android:layout_marginStart="12dp" />
         </LinearLayout>
 
@@ -88,7 +88,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Título:"
+            android:text="@string/titulo"
             android:textStyle="bold"
             android:layout_marginTop="8dp" />
         <EditText
@@ -102,7 +102,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Lugar:"
+            android:text="@string/lugar"
             android:textStyle="bold" />
 
         <EditText
@@ -117,7 +117,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Fecha:"
+            android:text="@string/fecha_label"
             android:textStyle="bold" />
 
         <Button
@@ -125,12 +125,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#000000"
-            android:text="Seleccionar fecha" />
+            android:text="@string/seleccionar_fecha" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Descripción:"
+            android:text="@string/descripcion"
             android:textStyle="bold"
             android:layout_marginTop="8dp" />
         <EditText
@@ -145,7 +145,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Arte (imagen):"
+            android:text="@string/arte_imagen"
             android:textStyle="bold"
             android:layout_marginTop="8dp" />
         <Button
@@ -153,7 +153,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#000000"
-            android:text="Adjuntar imagen" />
+            android:text="@string/adjuntar_imagen" />
         <TextView
             android:id="@+id/tvImagenNombre"
             android:layout_width="match_parent"
@@ -173,14 +173,14 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#000000"
-                android:text="Publicar" />
+                android:text="@string/publicar" />
             <Button
                 android:id="@+id/btnCancelar"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#000000"
-                android:text="Cancelar"
+                android:text="@string/cancelar"
                 android:layout_marginStart="12dp" />
         </LinearLayout>
 
