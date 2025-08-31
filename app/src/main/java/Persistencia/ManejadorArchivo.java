@@ -15,6 +15,7 @@ import java.util.List;
 
 public class ManejadorArchivo {
     private ManejadorArchivo(){}
+    
     public static List<String> leerArchivoDeAssets(Context context, String nombreArchivo) {
         List<String> lineas = new ArrayList<>();
         try (

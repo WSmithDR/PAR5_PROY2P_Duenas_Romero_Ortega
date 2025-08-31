@@ -14,6 +14,7 @@ import Enums.TipoComunicado;
 public abstract class Comunicado implements Serializable, Comparable<Comunicado> {
 
     private int id;
+    private String userId;
     private TipoComunicado tipo;
     private String area;
     private String titulo;
@@ -24,6 +25,7 @@ public abstract class Comunicado implements Serializable, Comparable<Comunicado>
 
     public Comunicado(
         int id,
+        String userId,
         TipoComunicado tipo,
         String area,
         String titulo,
@@ -33,6 +35,7 @@ public abstract class Comunicado implements Serializable, Comparable<Comunicado>
         String fecha
 ) {
     this.id = id;
+    this.userId = userId;
     this.tipo = tipo;
     this.area = area;
     this.titulo = titulo;
@@ -50,6 +53,22 @@ public abstract class Comunicado implements Serializable, Comparable<Comunicado>
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public TipoComunicado getTipo() {

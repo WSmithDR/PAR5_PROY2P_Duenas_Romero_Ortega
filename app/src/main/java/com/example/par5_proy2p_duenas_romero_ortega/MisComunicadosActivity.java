@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Locale;
 import Enums.OrdComunicado;
 import Models.Comunicado;
+import Models.Usuario;
 import Persistencia.PersistenciaOrdenamiento;
 import Utils.DatosDePruebaComunicados;
 
@@ -60,7 +61,7 @@ public class MisComunicadosActivity extends AppCompatActivity {
         this.contentTableLayout = findViewById(R.id.contentTableLayout);
         this.btnGuardarLista = findViewById(R.id.btnGuardarLista);
 
-        originalListaComunicados = new ArrayList<>(DatosDePruebaComunicados.obtenerListaDePrueba());
+        originalListaComunicados = new ArrayList<>(DatosDePruebaComunicados.obtenerListaDePrueba(Usuario.logged_user_id));
         listaComunicados = new ArrayList<>(originalListaComunicados);
 
         renderizarTabla();

@@ -5,10 +5,14 @@ import Persistencia.UsuarioRepositorio;
 
 
 public class Usuario {
+    private String id;
     private String user;
     private String contrasenia;
 
-    public Usuario(String user, String contrasenia) {
+    public static String logged_user_id;
+
+    public Usuario(String id, String user, String contrasenia) {
+        this.id = id;
         this.user = user;
         this.contrasenia = contrasenia;
     }
@@ -29,6 +33,14 @@ public class Usuario {
         this.contrasenia = contrasenia;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "Usuario{" +
@@ -37,8 +49,9 @@ public class Usuario {
                 '}';
     }
 
-    public static Usuario autenticar(String user, String pass, UsuarioRepositorio repo) throws CredecialesInvalidasException {
-        Usuario u = repo.buscarUsuario(user);
+
+    public static Usuario autenticar(String username, String pass) throws CredecialesInvalidasException {
+        Usuario u = UsuarioRepositorio.buscarUsuarioPorUsername(username);
         if (u == null) {
             throw new CredecialesInvalidasException("Usuario no encontrado");
         }

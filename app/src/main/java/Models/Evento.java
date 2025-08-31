@@ -10,6 +10,7 @@ public class Evento extends Comunicado {
 
     public Evento(
             int id,
+            String userId,
             String area,
             String titulo,
             List<String> audiencia,
@@ -20,6 +21,7 @@ public class Evento extends Comunicado {
     ) {
         super(
                 id,
+                userId,
                 TipoComunicado.EVENTO,
                 area,
                 titulo,

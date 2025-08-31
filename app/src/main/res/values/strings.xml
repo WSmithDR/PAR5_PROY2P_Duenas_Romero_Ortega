@@ -10,4 +10,6 @@
     <string name="Seleccionar_fecha">Seleccionar fecha</string>
     <string name="titulo">Título</string>
     <string name="fecha">Fecha</string>
+    <string name="username_error">Por favor ingrese usuario</string>
+    <string name="pass_error">Por favor ingrese contraseña</string>
 </resources>
