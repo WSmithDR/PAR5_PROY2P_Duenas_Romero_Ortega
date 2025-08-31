@@ -3,6 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/textoprueba"
+    android:background="@drawable/background"
+    android:orientation="vertical"
+    android:gravity="center"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
@@ -20,15 +23,16 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_verComunicados"
-            android:layout_width="246dp"
-            android:layout_height="66dp"
+            android:layout_width="245dp"
+            android:layout_height="70dp"
             android:layout_marginBottom="25dp"
             android:background="@drawable/caja_borde"
-            android:text="Ver Comunicados"
-            app:backgroundTint="@null"
             android:elevation="4dp"
             android:padding="12dp"
-            app:cornerRadius="16dp"/>
+            android:text="Ver Comunicados"
+            android:textSize="18dp"
+            app:backgroundTint="@null"
+            app:cornerRadius="16dp" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_publicarComunicados"
@@ -36,12 +40,13 @@
             android:layout_height="73dp"
             android:layout_marginBottom="25dp"
             android:background="@drawable/caja_borde"
-            app:cornerRadius="16dp"
             android:elevation="4dp"
             android:padding="12dp"
             android:text="Publicar Comunicados"
+            android:textSize="18dp"
             android:textStyle="bold"
             app:backgroundTint="@null"
+            app:cornerRadius="16dp"
             app:strokeColor="@null" />
 
         <com.google.android.material.button.MaterialButton
@@ -50,13 +55,14 @@
             android:layout_height="70dp"
             android:layout_marginBottom="25dp"
             android:background="@drawable/caja_borde"
-            app:cornerRadius="16dp"
             android:elevation="4dp"
             android:padding="12dp"
             android:text="Tablero Comunicados"
             android:textColor="#FFFCFC"
+            android:textSize="18dp"
             android:textStyle="bold"
-            app:backgroundTint="@null" />
+            app:backgroundTint="@null"
+            app:cornerRadius="16dp" />
 
     </RadioGroup>
 
@@ -65,13 +71,18 @@
         android:layout_width="194dp"
         android:layout_height="51dp"
         android:background="@drawable/caja_borde"
+        android:elevation="4dp"
+        android:padding="12dp"
         android:text="Cerrar Sesión"
+        android:textSize="18dp"
         app:backgroundTint="@null"
+        app:cornerRadius="16dp"
+        app:icon="@drawable/exit"
+        app:iconGravity="textStart"
+        app:iconPadding="8dp"
+        app:iconTint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_grupo"
-        android:elevation="4dp"
-        android:padding="12dp"
-        app:cornerRadius="16dp"/>
+        app:layout_constraintTop_toBottomOf="@+id/btn_grupo" />
 </androidx.constraintlayout.widget.ConstraintLayout>
