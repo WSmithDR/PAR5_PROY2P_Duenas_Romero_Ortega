@@ -50,22 +50,24 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
+        validarCredenciales(username, password);
+    }
+
+    private void validarCredenciales(String username, String password) {
         try {
-            Usuario usuario = Usuario.autenticar(username, password);
-            Toast.makeText(this, "Bienvenido " + usuario.getUser(), Toast.LENGTH_SHORT).show();
+            Usuario usuario = Usuario.autenticar(this, username, password);
+            String welcomeMessage = getString(R.string.bienvenido, usuario.getUser());
+            Toast.makeText(this, welcomeMessage, Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, MainActivity.class);
             Usuario.logged_user_id = usuario.getId();
             startActivity(intent);
             finish();
 
         } catch (CredecialesInvalidasException e) {
-            Toast.makeText(this, e.getMessage() , Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 }
-
-
-
 
 
 

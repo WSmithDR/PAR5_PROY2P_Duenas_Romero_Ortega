@@ -194,9 +194,9 @@ public class MisComunicadosActivity extends AppCompatActivity {
 
         if (ordenPrimario != null && ordenPrimario.estaActivo()) {
             if (ordenPrimario.criterio == OrdComunicado.TITULO) {
-                textoEncabezadoTitulo += ordenPrimario.esAscendente() ? " ↑" : " ↓";
+                textoEncabezadoTitulo += ordenPrimario.esAscendente() ? getString(R.string.ascendente) : getString(R.string.descendente);
             } else if (ordenPrimario.criterio == OrdComunicado.FECHA) {
-                textoEncabezadoFecha += ordenPrimario.esAscendente() ? " ↑" : " ↓";
+                textoEncabezadoFecha += ordenPrimario.esAscendente() ? getString(R.string.ascendente) : getString(R.string.descendente);
             }
         }
 
@@ -245,23 +245,17 @@ public class MisComunicadosActivity extends AppCompatActivity {
     }
 
     private void guardarListaComunicados() {
-        String timeStamp = new SimpleDateFormat("dd_MM_yyyy", Locale.getDefault()).format(new Date());
-        String fileName = "comunicados_" + timeStamp + ".dat";
-        
-        File file = new File(getFilesDir(), fileName);
-        
-        try (FileOutputStream fos = new FileOutputStream(file);
-             ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-            
+        try {
+            File file = new File(getFilesDir(), "comunicados_" + Usuario.logged_user_id + ".dat");
+            FileOutputStream fos = new FileOutputStream(file);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(listaComunicados);
-            
-            Toast.makeText(this, "Lista de comunicados guardada como: " + fileName, 
-                         Toast.LENGTH_LONG).show();
-            
-        }catch (Exception e) {
+            oos.close();
+            fos.close();
+            Toast.makeText(this, R.string.lista_guardada, Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
             e.printStackTrace();
-            Toast.makeText(this, "Error al guardar la lista de comunicados: " + e.getMessage(), 
-                         Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.error_guardar_lista, Toast.LENGTH_SHORT).show();
         }
     }
 

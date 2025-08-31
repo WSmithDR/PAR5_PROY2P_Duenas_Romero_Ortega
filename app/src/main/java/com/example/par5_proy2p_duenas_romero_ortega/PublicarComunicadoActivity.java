@@ -73,8 +73,8 @@ public class PublicarComunicadoActivity extends AppCompatActivity {
 
         ComunicadoRepositorio.cargarComunicados(this);
 
-        String[] areas = {"Académico","Administrativo","Cultural","General"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, areas);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.areas_comunicado, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spArea.setAdapter(adapter);
 
@@ -91,7 +91,7 @@ public class PublicarComunicadoActivity extends AppCompatActivity {
                 tvLugarLabel.setVisibility(View.GONE);
                 tvFechaLabel.setVisibility(View.GONE);
                 fechaSeleccionada = "";
-                btnFecha.setText("Seleccionar fecha");
+                btnFecha.setText(R.string.seleccionar_fecha);
             }
         });
 
@@ -122,7 +122,14 @@ public class PublicarComunicadoActivity extends AppCompatActivity {
             try {
                 publicar();
             } catch (DatosIncompletosException ex) {
-                Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+                String message = ex.getMessage();
+                int resId = getResources().getIdentifier(message, "string", getPackageName());
+                if (resId != 0) {
+                    message = getString(resId);
+                }
+                Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+            } catch (SecurityException ex) {
+                Toast.makeText(this, R.string.debe_iniciar_sesion, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -161,7 +168,7 @@ public class PublicarComunicadoActivity extends AppCompatActivity {
     private void publicar() throws DatosIncompletosException, SecurityException {
         // Verificar que el usuario esté autenticado
         if (Usuario.logged_user_id == null || Usuario.logged_user_id.isEmpty()) {
-            throw new SecurityException("Debe iniciar sesión para publicar un comunicado");
+            throw new SecurityException(getString(R.string.debe_iniciar_sesion));
         }
 
         boolean esEvento = (rgTipo.getCheckedRadioButtonId() == R.id.rbEvento);
@@ -176,12 +183,12 @@ public class PublicarComunicadoActivity extends AppCompatActivity {
         String descripcion = etDescripcion.getText().toString().trim();
         String lugar = etLugar.getText() != null ? etLugar.getText().toString().trim() : "";
         NivelUrgencia nivelPorDefecto = NivelUrgencia.MEDIA;
-        if (titulo.isEmpty()) throw new DatosIncompletosException("Título es obligatorio");
-        if (descripcion.isEmpty()) throw new DatosIncompletosException("Descripción es obligatoria");
-        if (audiencia.isEmpty()) throw new DatosIncompletosException("Seleccione al menos una audiencia");
+        if (titulo.isEmpty()) throw new DatosIncompletosException(getString(R.string.titulo_obligatorio));
+        if (descripcion.isEmpty()) throw new DatosIncompletosException(getString(R.string.descripcion_obligatoria));
+        if (audiencia.isEmpty()) throw new DatosIncompletosException(getString(R.string.seleccione_audiencia));
         if (esEvento) {
-            if (lugar.isEmpty()) throw new DatosIncompletosException("Lugar es obligatorio para eventos");
-            if (fechaSeleccionada.isEmpty()) throw new DatosIncompletosException("Seleccione la fecha del evento");
+            if (lugar.isEmpty()) throw new DatosIncompletosException(getString(R.string.lugar_obligatorio));
+            if (fechaSeleccionada.isEmpty()) throw new DatosIncompletosException(getString(R.string.seleccione_fecha));
         }
 
 
@@ -215,7 +222,7 @@ public class PublicarComunicadoActivity extends AppCompatActivity {
 
         ComunicadoRepositorio.guardarComunicado(this, c);
 
-        Toast.makeText(this, "Comunicado publicado", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, R.string.comunicado_publicado, Toast.LENGTH_SHORT).show();
         limpiarCampos();
     }
 
@@ -229,7 +236,7 @@ public class PublicarComunicadoActivity extends AppCompatActivity {
         etDescripcion.setText("");
         etLugar.setText("");
         fechaSeleccionada = "";
-        btnFecha.setText("Seleccionar fecha");
+        btnFecha.setText(getString(R.string.seleccionar_fecha));
         imagenUri = null;
         imagenNombre = "";
         tvImagenNombre.setText("");
