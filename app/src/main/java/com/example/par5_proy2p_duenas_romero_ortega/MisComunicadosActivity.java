@@ -3,6 +3,7 @@ package com.example.par5_proy2p_duenas_romero_ortega;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -21,6 +22,7 @@ import java.util.Locale;
 import Enums.OrdComunicado;
 import Models.Comunicado;
 import Models.Usuario;
+import Persistencia.ComunicadoRepositorio;
 import Persistencia.PersistenciaOrdenamiento;
 import Utils.DatosDePruebaComunicados;
 
@@ -61,7 +63,9 @@ public class MisComunicadosActivity extends AppCompatActivity {
         this.contentTableLayout = findViewById(R.id.contentTableLayout);
         this.btnGuardarLista = findViewById(R.id.btnGuardarLista);
 
-        originalListaComunicados = new ArrayList<>(DatosDePruebaComunicados.obtenerListaDePrueba(Usuario.logged_user_id));
+        //originalListaComunicados = new ArrayList<>(DatosDePruebaComunicados.obtenerListaDePrueba(Usuario.logged_user_id));
+        originalListaComunicados = ComunicadoRepositorio.cargarComunicados(this, Usuario.logged_user_id);
+        //Log.e("originalListaComunicados****************************: ",originalListaComunicados.toString());
         listaComunicados = new ArrayList<>(originalListaComunicados);
 
         renderizarTabla();
