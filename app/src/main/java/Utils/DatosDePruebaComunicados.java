@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.ConcurrentHashMap;
 
 import Enums.NivelUrgencia;
 import Models.Anuncio;
@@ -11,41 +12,144 @@ import Models.Evento;
 
 public class DatosDePruebaComunicados {
 
+    private static final Random rd = new Random();
+
+    private static String generarFechaAleatoria() {
+        int dia = 1 + rd.nextInt(28);
+        int mes = 1 + rd.nextInt(12);
+        return String.format("%02d/%02d/2025", dia, mes);
+    }
+
     public static List<Comunicado> obtenerListaDePrueba() {
         List<Comunicado> comunicadosDePrueba = new ArrayList<>();
-        Random random = new Random();
 
         String[] titulosBaseAnuncio = {"Aviso Importante", "Recordatorio", "Notificación Urgente", "Información General", "Actualización"};
         String[] titulosBaseEvento = {"Reunión Próxima", "Evento Especial", "Seminario Web", "Taller Práctico", "Celebración"};
         String[] areas = {"Rectorado", "Académico", "Bienestar Estudiantil", "Sistemas", "Biblioteca", "Deportes"};
         String[] lugares = {"Auditorio Principal", "Sala de Conferencias A", "Online", "Patio Central", "Laboratorio X"};
 
-        for (int i = 1; i <= 100; i++) {
-            int id = 100 + i; // IDs únicos para la prueba
-            String area = areas[random.nextInt(areas.length)];
-            String descripcion = "Esta es la descripción para el comunicado número " + i + ".";
-            String nombreArchivoImagen = null; // Sin imágenes para la prueba por ahora
-            String fecha = String.format("%02d/%02d/2025", random.nextInt(28) + 1, random.nextInt(12) + 1);
-            List<String> audiencia = new ArrayList<>(Arrays.asList("Todos", "Estudiantes")); // Audiencia de ejemplo
+        for (int grupo = 1; grupo <= 10; grupo++) {
+            String tituloGrupo = "Grupo " + (char)('A' + grupo - 1);
+            int numComunicadosEnGrupo = 2 + rd.nextInt(3);
 
-            if (i % 2 == 0) { // Alternar entre Anuncio y Evento
-                // Crear Anuncio
-                String titulo = titulosBaseAnuncio[random.nextInt(titulosBaseAnuncio.length)] + " #" + i;
-                NivelUrgencia urgencia;
-                int randUrgencia = random.nextInt(3);
-                if (randUrgencia == 0) urgencia = NivelUrgencia.ALTA;
-                else if (randUrgencia == 1) urgencia = NivelUrgencia.MEDIA;
-                else urgencia = NivelUrgencia.BAJA;
+            for (int i = 0; i < numComunicadosEnGrupo; i++) {
+                int id = 100 + (grupo * 10) + i;
+                String area = areas[rd.nextInt(areas.length)];
+                String fecha = generarFechaAleatoria();
 
-                Anuncio anuncio = new Anuncio(id, area, titulo, audiencia, descripcion, nombreArchivoImagen, urgencia);
+                if (grupo % 2 == 0) {
+                    String titulo = titulosBaseAnuncio[rd.nextInt(titulosBaseAnuncio.length)] + " - " + tituloGrupo;
+                    NivelUrgencia urgencia = NivelUrgencia.values()[rd.nextInt(NivelUrgencia.values().length)];
+
+                    Anuncio anuncio = new Anuncio(id, area, titulo,
+                            new ArrayList<>(Arrays.asList("Todos")),
+                            "Comunicado " + (i+1) + " de " + numComunicadosEnGrupo + " con mismo título",
+                            null, urgencia);
+                    anuncio.setFecha(fecha);
+                    comunicadosDePrueba.add(anuncio);
+                } else {
+                    String titulo = titulosBaseEvento[rd.nextInt(titulosBaseEvento.length)] + " - " + tituloGrupo;
+                    String lugar = lugares[rd.nextInt(lugares.length)];
+
+                    Evento evento = new Evento(id, area, titulo,
+                            new ArrayList<>(Arrays.asList("Todos")),
+                            "Evento " + (i+1) + " de " + numComunicadosEnGrupo + " con mismo título",
+                            null, fecha, lugar);
+                    comunicadosDePrueba.add(evento);
+                }
+            }
+        }
+
+        for (int i = 1; i <= 15; i++) {
+            String area = areas[rd.nextInt(areas.length)];
+            String titulo = (i % 2 == 0 ? "Aviso " : "Evento ") + "Pareja " + (i + 1) / 2;
+
+            String primeraFecha = generarFechaAleatoria();
+            if (i % 2 == 0) {
+                NivelUrgencia urgencia = NivelUrgencia.values()[rd.nextInt(NivelUrgencia.values().length)];
+                Anuncio anuncio = new Anuncio(200 + i, area, titulo,
+                        new ArrayList<>(Arrays.asList("Estudiantes")),
+                        "Primer comunicado de la pareja",
+                        null, urgencia);
+                anuncio.setFecha(primeraFecha);
                 comunicadosDePrueba.add(anuncio);
-
             } else {
-                // Crear Evento
-                String titulo = titulosBaseEvento[random.nextInt(titulosBaseEvento.length)] + " #" + i;
-                String lugar = lugares[random.nextInt(lugares.length)];
-                // Constructor de Evento: Evento(int id, String area, String titulo, List<String> audiencia, String descripcion, String nombreArchivoImagen, String fecha, String lugar)
-                Evento evento = new Evento(id, area, titulo, audiencia, descripcion, nombreArchivoImagen, fecha, lugar);
+                Evento evento = new Evento(200 + i, area, titulo,
+                        new ArrayList<>(Arrays.asList("Docentes")),
+                        "Primer evento de la pareja",
+                        null, primeraFecha, lugares[rd.nextInt(lugares.length)]);
+                comunicadosDePrueba.add(evento);
+            }
+
+            String segundaFecha = generarFechaAleatoria();
+            while (segundaFecha.equals(primeraFecha)) {
+                segundaFecha = generarFechaAleatoria();
+            }
+
+            if (i % 2 == 0) {
+                NivelUrgencia urgencia = NivelUrgencia.values()[rd.nextInt(NivelUrgencia.values().length)];
+                Anuncio anuncio = new Anuncio(300 + i, area, titulo,
+                        new ArrayList<>(Arrays.asList("Estudiantes")),
+                        "Segundo comunicado de la pareja",
+                        null, urgencia);
+                anuncio.setFecha(segundaFecha);
+                comunicadosDePrueba.add(anuncio);
+            } else {
+                Evento evento = new Evento(300 + i, area, titulo,
+                        new ArrayList<>(Arrays.asList("Docentes")),
+                        "Segundo evento de la pareja",
+                        null, segundaFecha, lugares[rd.nextInt(lugares.length)]);
+                comunicadosDePrueba.add(evento);
+            }
+        }
+
+        for (int grupoFecha = 1; grupoFecha <= 5; grupoFecha++) {
+            String fechaComun = generarFechaAleatoria();
+            int numComunicados = 3 + rd.nextInt(3);
+
+            for (int i = 1; i <= numComunicados; i++) {
+                int id = 500 + (grupoFecha * 10) + i;
+                String area = areas[rd.nextInt(areas.length)];
+                String titulo = "Misma Fecha " + grupoFecha + " - " +
+                        (i == 1 ? "Primero" : i == 2 ? "Segundo" : i == 3 ? "Tercero" : "Cuarto") + " Título";
+
+                if (rd.nextBoolean()) {
+                    NivelUrgencia urgencia = NivelUrgencia.values()[rd.nextInt(NivelUrgencia.values().length)];
+                    Anuncio anuncio = new Anuncio(id, area, titulo,
+                            new ArrayList<>(Arrays.asList("Personal")),
+                            "Comunicado con fecha " + fechaComun,
+                            null, urgencia);
+                    anuncio.setFecha(fechaComun);
+                    comunicadosDePrueba.add(anuncio);
+                } else {
+                    Evento evento = new Evento(id, area, titulo,
+                            new ArrayList<>(Arrays.asList("Personal")),
+                            "Evento con fecha " + fechaComun,
+                            null, fechaComun, lugares[rd.nextInt(lugares.length)]);
+                    comunicadosDePrueba.add(evento);
+                }
+            }
+        }
+
+        for (int i = 1; i <= 20; i++) {
+            int id = 400 + i;
+            String titulo = "Comunicado Individual " + i;
+            String area = areas[rd.nextInt(areas.length)];
+            String fecha = generarFechaAleatoria();
+
+            if (rd.nextBoolean()) {
+                NivelUrgencia urgencia = NivelUrgencia.values()[rd.nextInt(NivelUrgencia.values().length)];
+                Anuncio anuncio = new Anuncio(id, area, titulo,
+                        new ArrayList<>(Arrays.asList("Todos")),
+                        "Este es un comunicado individual de prueba",
+                        null, urgencia);
+                anuncio.setFecha(fecha);
+                comunicadosDePrueba.add(anuncio);
+            } else {
+                Evento evento = new Evento(id, area, titulo,
+                        new ArrayList<>(Arrays.asList("Todos")),
+                        "Este es un evento individual de prueba",
+                        null, fecha, lugares[rd.nextInt(lugares.length)]);
                 comunicadosDePrueba.add(evento);
             }
         }

@@ -110,18 +110,30 @@ public abstract class Comunicado implements Serializable, Comparable<Comunicado>
         return this.getTitulo().compareToIgnoreCase(otro.getTitulo());
     }
 
-    public int compareTo(Comunicado otro, OrdComunicado tipoOrdComunicado, boolean ascendente) {
-        int resultado = 0;
+    public int compareTo(Comunicado otro, OrdComunicado primaryCriteria, boolean primaryAscending, 
+                        OrdComunicado secondaryCriteria, boolean secondaryAscending) {
+        int primaryResult = compareByCriteria(otro, primaryCriteria, primaryAscending);
+
+        if (primaryResult == 0 && secondaryCriteria != null) {
+            return compareByCriteria(otro, secondaryCriteria, secondaryAscending);
+        }
         
-        if (tipoOrdComunicado == OrdComunicado.FECHA) {
-            resultado = compararPorFecha(otro);
+        return primaryResult;
+    }
+    
+    private int compareByCriteria(Comunicado otro, OrdComunicado criteria, boolean ascending) {
+        int result = 0;
+        
+        switch (criteria) {
+            case FECHA:
+                result = compararPorFecha(otro);
+                break;
+            case TITULO:
+                result = this.compareTo(otro);
+                break;
         }
-
-        if(tipoOrdComunicado == OrdComunicado.TITULO){
-            resultado = this.compareTo(otro);
-        }
-
-        return ascendente ? resultado : -resultado;
+        
+        return ascending ? result : -result;
     }
     
     private int compararPorFecha(Comunicado otro) {
@@ -162,6 +174,24 @@ public abstract class Comunicado implements Serializable, Comparable<Comunicado>
                 nombreArchivoImagen,
                 fecha
         );
+    }
+
+    public static class EstadoOrdenamiento {
+        public OrdComunicado criterio;
+        public int estado;
+        
+        public EstadoOrdenamiento(OrdComunicado criterio, int estado) {
+            this.criterio = criterio;
+            this.estado = estado;
+        }
+        
+        public boolean estaActivo() {
+            return estado > 0;
+        }
+        
+        public boolean esAscendente() {
+            return estado == 1;
+        }
     }
 
 }

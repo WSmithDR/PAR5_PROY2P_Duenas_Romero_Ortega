@@ -29,9 +29,9 @@ public class MisComunicadosActivity extends AppCompatActivity {
     private List<Comunicado> listaComunicados;
     private List<Comunicado> originalListaComunicados;
 
-    // 0: original, 1: ascending, 2: descending
-    private int tituloSortState = 0;
-    private int fechaSortState = 0;
+    private Comunicado.EstadoOrdenamiento ordenPrimario = null;
+    private Comunicado.EstadoOrdenamiento ordenSecundario = null;
+    private OrdComunicado criterioPrimario = null;
 
     private static final String DATE_FORMAT_PATTERN = "dd/MM/yyyy";
     private static final SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT_PATTERN, Locale.getDefault());
@@ -77,60 +77,92 @@ public class MisComunicadosActivity extends AppCompatActivity {
         headerTitulo = findViewById(R.id.headerTitulo);
         headerFecha = findViewById(R.id.headerFecha);
 
-        // Set up click listeners for sorting
-        headerTitulo.setOnClickListener(v -> {
-            fechaSortState = 0; 
-            tituloSortState = (tituloSortState + 1) % 3;
-            updateSorting();
-        });
-
-        headerFecha.setOnClickListener(v -> {
-            tituloSortState = 0;
-            fechaSortState = (fechaSortState + 1) % 3;
-            updateSorting();
-        });
+        headerTitulo.setOnClickListener(v -> actualizarCriterioOrdenamiento(OrdComunicado.TITULO));
+        headerFecha.setOnClickListener(v -> actualizarCriterioOrdenamiento(OrdComunicado.FECHA));
     }
 
-    private void updateSorting() {
-        if (tituloSortState > 0) {
+    private void actualizarCriterioOrdenamiento(OrdComunicado criterio) {
+        if (criterioPrimario != null) {
+            if (criterio == criterioPrimario) {
+                ordenPrimario.estado = (ordenPrimario.estado + 1) % 3;
+                
+                if (ordenPrimario.estado == 0) {
+                    ordenPrimario = null;
+                    criterioPrimario = null;
+                    if (ordenSecundario != null && ordenSecundario.estaActivo()) {
+                        ordenPrimario = ordenSecundario;
+                        criterioPrimario = ordenPrimario.criterio;
+                        ordenSecundario = null;
+                    }
+                }
+            } else {
+                if (ordenSecundario != null && ordenSecundario.criterio == criterio) {
+                    ordenSecundario.estado = (ordenSecundario.estado + 1) % 3;
+                    if (ordenSecundario.estado == 0) {
+                        ordenSecundario = null;
+                    }
+                } else {
+                    ordenSecundario = new Comunicado.EstadoOrdenamiento(criterio, 1);
+                }
+            }
+        } else {
+            ordenPrimario = new Comunicado.EstadoOrdenamiento(criterio, 1);
+            criterioPrimario = criterio;
+        }
+        
+        if (ordenPrimario != null && ordenPrimario.estaActivo()) {
             Collections.sort(listaComunicados, (c1, c2) -> 
-                c1.compareTo(c2, OrdComunicado.TITULO, tituloSortState == 1));
-        } else if (fechaSortState > 0) {
-            Collections.sort(listaComunicados, (c1, c2) -> 
-                c1.compareTo(c2, OrdComunicado.FECHA, fechaSortState == 1));
+                c1.compareTo(
+                    c2, 
+                    ordenPrimario.criterio, 
+                    ordenPrimario.esAscendente(),
+                    (ordenSecundario != null && ordenSecundario.estaActivo()) ? ordenSecundario.criterio : null,
+                    (ordenSecundario != null && ordenSecundario.estaActivo()) ? ordenSecundario.esAscendente() : true
+                )
+            );
         } else {
             listaComunicados = new ArrayList<>(originalListaComunicados);
         }
-        updateHeaderText();
+        
+        actualizarTextoEncabezado();
         renderizarTabla();
     }
 
-    private void updateHeaderText() {
-        String tituloText = "Título";
-        if (tituloSortState == 1) tituloText += " ↑";
-        else if (tituloSortState == 2) tituloText += " ↓";
-        headerTitulo.setText(tituloText);
-
-        String fechaText = "Fecha";
-        if (fechaSortState == 1) fechaText += " ↑";
-        else if (fechaSortState == 2) fechaText += " ↓";
-        headerFecha.setText(fechaText);
+    private void actualizarTextoEncabezado() {
+        String textoEncabezadoTitulo = getString(R.string.titulo);
+        String textoEncabezadoFecha = getString(R.string.fecha);
+        
+        if (ordenPrimario != null && ordenPrimario.estaActivo()) {
+            if (ordenPrimario.criterio == OrdComunicado.TITULO) {
+                textoEncabezadoTitulo += ordenPrimario.esAscendente() ? " ↑" : " ↓";
+            } else if (ordenPrimario.criterio == OrdComunicado.FECHA) {
+                textoEncabezadoFecha += ordenPrimario.esAscendente() ? " ↑" : " ↓";
+            }
+        }
+        
+        if (ordenSecundario != null && ordenSecundario.estaActivo()) {
+            if (ordenSecundario.criterio == OrdComunicado.TITULO) {
+                textoEncabezadoTitulo = "*" + textoEncabezadoTitulo + (ordenSecundario.esAscendente() ? "↑" : "↓");
+            } else if (ordenSecundario.criterio == OrdComunicado.FECHA) {
+                textoEncabezadoFecha = "*" + textoEncabezadoFecha + (ordenSecundario.esAscendente() ? "↑" : "↓");
+            }
+        }
+        
+        headerTitulo.setText(textoEncabezadoTitulo);
+        headerFecha.setText(textoEncabezadoFecha);
     }
 
     private void renderizarTabla() {
-        // Clear the content table
         contentTableLayout.removeAllViews();
         
-        // Initialize header if needed
         if (headerRow == null) {
             initHeader();
         }
 
-        // Add content rows to the scrollable table
+        
         for (Comunicado comunicado : listaComunicados) {
             TableRow row = new TableRow(this);
             
-            // Título cell
             TextView tituloView = new TextView(this);
             tituloView.setLayoutParams(new TableRow.LayoutParams(
                 0, 
@@ -141,7 +173,6 @@ public class MisComunicadosActivity extends AppCompatActivity {
             tituloView.setText(comunicado.getTitulo() != null ? comunicado.getTitulo() : "Título N/A");
             row.addView(tituloView);
             
-            // Fecha cell
             TextView fechaView = new TextView(this);
             fechaView.setLayoutParams(new TableRow.LayoutParams(
                 0, 
@@ -152,21 +183,7 @@ public class MisComunicadosActivity extends AppCompatActivity {
             fechaView.setText(comunicado.getFecha() != null ? comunicado.getFecha() : "Fecha N/A");
             row.addView(fechaView);
             
-            // Add row to table
             contentTableLayout.addView(row);
-            
-            // Add divider
-            View divider = new View(this);
-            TableRow dividerRow = new TableRow(this);
-            TableRow.LayoutParams params = new TableRow.LayoutParams(
-                TableRow.LayoutParams.MATCH_PARENT,
-                1
-            );
-            params.setMargins(16, 0, 16, 0);
-            divider.setLayoutParams(params);
-            divider.setBackgroundColor(getResources().getColor(android.R.color.darker_gray));
-            dividerRow.addView(divider);
-            contentTableLayout.addView(dividerRow);
         }
     }
 }
