@@ -5,6 +5,7 @@ import java.io.File; // Required for file existence check
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import Enums.NivelUrgencia;
 import Enums.TipoComunicado;
@@ -93,6 +94,13 @@ public final class ComunicadoRepositorio {
             }
         }
         return comunicados;
+    }
+
+    public static List<Comunicado> cargarComunicados(Context context, String userId) {
+        if(comunicados.isEmpty()) cargarComunicados(context);
+        return comunicados.stream()
+                .filter(c -> c.getUserId().equals(userId))
+                .collect(Collectors.toList());
     }
 
     public static void guardarComunicado(Context context, Comunicado nuevoComunicado) {

@@ -3,6 +3,7 @@ package com.example.par5_proy2p_duenas_romero_ortega;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -21,8 +22,16 @@ import java.util.Locale;
 import Enums.OrdComunicado;
 import Models.Comunicado;
 import Models.Usuario;
+import Persistencia.ComunicadoRepositorio;
 import Persistencia.PersistenciaOrdenamiento;
 import Utils.DatosDePruebaComunicados;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import android.widget.Toast;
 
 public class MisComunicadosActivity extends AppCompatActivity {
     private ImageButton btnVolver;
@@ -61,13 +70,15 @@ public class MisComunicadosActivity extends AppCompatActivity {
         this.contentTableLayout = findViewById(R.id.contentTableLayout);
         this.btnGuardarLista = findViewById(R.id.btnGuardarLista);
 
-        originalListaComunicados = new ArrayList<>(DatosDePruebaComunicados.obtenerListaDePrueba(Usuario.logged_user_id));
+        //originalListaComunicados = new ArrayList<>(DatosDePruebaComunicados.obtenerListaDePrueba(Usuario.logged_user_id));
+        originalListaComunicados = ComunicadoRepositorio.cargarComunicados(this, Usuario.logged_user_id);
+        //Log.e("originalListaComunicados****************************: ",originalListaComunicados.toString());
         listaComunicados = new ArrayList<>(originalListaComunicados);
 
         renderizarTabla();
 
+        btnGuardarLista.setOnClickListener(v -> guardarListaComunicados());
     }
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -84,6 +95,7 @@ public class MisComunicadosActivity extends AppCompatActivity {
         if (ordenPrimario != null) {
             PersistenciaOrdenamiento.guardarPreferenciasOrdenamiento(
                     this,
+                    Usuario.logged_user_id,
                     ordenPrimario.criterio,
                     ordenPrimario.estado,
                     ordenSecundario != null ? ordenSecundario.criterio : null,
@@ -92,7 +104,20 @@ public class MisComunicadosActivity extends AppCompatActivity {
     }
 
     private void cargarEstadoOrdenamiento() {
-        PersistenciaOrdenamiento.cargarPreferenciasOrdenamiento(this, this);
+        
+        PersistenciaOrdenamiento.cargarPreferenciasOrdenamiento(this, Usuario.logged_user_id, this);
+        
+        if (ordenPrimario != null && !listaComunicados.isEmpty()) {
+            Collections.sort(listaComunicados, (c1, c2) -> c1.compareTo(
+                    c2,
+                    ordenPrimario.criterio,
+                    ordenPrimario.esAscendente(),
+                    (ordenSecundario != null && ordenSecundario.estaActivo()) ? ordenSecundario.criterio : null,
+                    (ordenSecundario != null && ordenSecundario.estaActivo()) ? ordenSecundario.esAscendente() : true));
+            
+            actualizarTextoEncabezado();
+            renderizarTabla();
+        }
     }
 
     public void configurarOrdenamiento(OrdComunicado criterioPrimario, int estadoPrimario,
@@ -169,9 +194,9 @@ public class MisComunicadosActivity extends AppCompatActivity {
 
         if (ordenPrimario != null && ordenPrimario.estaActivo()) {
             if (ordenPrimario.criterio == OrdComunicado.TITULO) {
-                textoEncabezadoTitulo += ordenPrimario.esAscendente() ? " ↑" : " ↓";
+                textoEncabezadoTitulo += ordenPrimario.esAscendente() ? getString(R.string.ascendente) : getString(R.string.descendente);
             } else if (ordenPrimario.criterio == OrdComunicado.FECHA) {
-                textoEncabezadoFecha += ordenPrimario.esAscendente() ? " ↑" : " ↓";
+                textoEncabezadoFecha += ordenPrimario.esAscendente() ? getString(R.string.ascendente) : getString(R.string.descendente);
             }
         }
 
@@ -218,4 +243,20 @@ public class MisComunicadosActivity extends AppCompatActivity {
             contentTableLayout.addView(row);
         }
     }
+
+    private void guardarListaComunicados() {
+        try {
+            File file = new File(getFilesDir(), "comunicados_" + Usuario.logged_user_id + ".dat");
+            FileOutputStream fos = new FileOutputStream(file);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(listaComunicados);
+            oos.close();
+            fos.close();
+            Toast.makeText(this, R.string.lista_guardada, Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, R.string.error_guardar_lista, Toast.LENGTH_SHORT).show();
+        }
+    }
+
 }

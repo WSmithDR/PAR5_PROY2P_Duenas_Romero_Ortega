@@ -2,7 +2,8 @@ package Models;
 
 import Exceptions.CredecialesInvalidasException;
 import Persistencia.UsuarioRepositorio;
-
+import android.content.Context;
+import com.example.par5_proy2p_duenas_romero_ortega.R;
 
 public class Usuario {
     private String id;
@@ -50,13 +51,13 @@ public class Usuario {
     }
 
 
-    public static Usuario autenticar(String username, String pass) throws CredecialesInvalidasException {
+    public static Usuario autenticar(Context context, String username, String pass) throws CredecialesInvalidasException {
         Usuario u = UsuarioRepositorio.buscarUsuarioPorUsername(username);
         if (u == null) {
-            throw new CredecialesInvalidasException("Usuario no encontrado");
+            throw new CredecialesInvalidasException(context.getString(R.string.usuario_no_encontrado));
         }
         if (!u.getContrasenia().equals(pass)) {
-            throw new CredecialesInvalidasException("Contraseña incorrecta");
+            throw new CredecialesInvalidasException(context.getString(R.string.contrasena_incorrecta));
         }
         return u;
     }

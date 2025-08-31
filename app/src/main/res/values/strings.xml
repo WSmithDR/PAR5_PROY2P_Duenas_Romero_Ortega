@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">PAR5_PROY2P_Duenas_Romero_Ortega</string>
+
     <string name="tablero_comunicados">Tablero de Comunicados</string>
     <string name="order_titulo">Ordenar por Título</string>
     <string name="order_fecha">Ordenar por Fecha</string>
@@ -7,9 +8,64 @@
     <string name="cancelar">Cancelar</string>
     <string name="back_button_content_description">Volver</string>
     <string name="trabajando_seccion">Estamos trabajando en esta sección. Gracias por su comprensión.</string>
-    <string name="Seleccionar_fecha">Seleccionar fecha</string>
+    <string name="seleccionar_fecha">Seleccionar fecha</string>
     <string name="titulo">Título</string>
     <string name="fecha">Fecha</string>
     <string name="username_error">Por favor ingrese usuario</string>
     <string name="pass_error">Por favor ingrese contraseña</string>
+
+    <string name="login_title">Iniciar Sesión</string>
+    <string name="login_button">INICIAR SESIÓN</string>
+    <string name="username_placeholder">Nombre de Usuario</string>
+    <string name="password_placeholder">Contraseña</string>
+
+    <string name="ver_comunicados">Ver Comunicados</string>
+    <string name="publicar_comunicados">Publicar Comunicados</string>
+    <string name="tablero_comunicados_menu">Tablero Comunicados</string>
+
+    <string name="nuevo_comunicado">Nuevo Comunicado</string>
+    <string name="tipo">Tipo:</string>
+    <string name="anuncio">Anuncio</string>
+    <string name="evento">Evento</string>
+    <string name="area">Área:</string>
+    <string name="audiencia">Audiencia:</string>
+    <string name="estudiantes">Estudiantes</string>
+    <string name="profesores">Profesores</string>
+    <string name="administrativo">Administrativo</string>
+    <string name="lugar">Lugar:</string>
+    <string name="fecha_label">Fecha:</string>
+    <string name="descripcion">Descripción:</string>
+    <string name="arte_imagen">Arte (imagen):</string>
+    <string name="adjuntar_imagen">Adjuntar imagen</string>
+    <string name="publicar">Publicar</string>
+    <string name="no_imagen_seleccionada">No se ha seleccionado ninguna imagen</string>
+    <string name="seleccionar_imagen">Seleccionar imagen</string>
+    <string name="bienvenido">Bienvenido %1$s</string>
+    <string name="usuario">Usuario</string>
+    <string name="password">Contraseña</string>
+
+    <string name="debe_iniciar_sesion">Debe iniciar sesión para publicar un comunicado</string>
+    <string name="titulo_obligatorio">Título es obligatorio</string>
+    <string name="descripcion_obligatoria">Descripción es obligatoria</string>
+    <string name="seleccione_audiencia">Seleccione al menos una audiencia</string>
+    <string name="lugar_obligatorio">Lugar es obligatorio para eventos</string>
+    <string name="seleccione_fecha">Seleccione la fecha del evento</string>
+    <string name="comunicado_publicado">Comunicado publicado exitosamente</string>
+    <string name="error_publicar">Error al publicar el comunicado</string>
+    <string name="error_guardar_imagen">Error al guardar la imagen</string>
+    
+    <string-array name="areas_comunicado">
+        <item>Académico</item>
+        <item>Administrativo</item>
+        <item>Cultural</item>
+        <item>General</item>
+    </string-array>
+    
+    <string name="lista_guardada">Lista de comunicados guardada exitosamente</string>
+    <string name="error_guardar_lista">Error al guardar la lista de comunicados</string>
+    <string name="ascendente"> ↑</string>
+    <string name="descendente"> ↓</string>
+    
+    <string name="usuario_no_encontrado">Usuario no encontrado</string>
+    <string name="contrasena_incorrecta">Contraseña incorrecta</string>
 </resources>
