@@ -34,6 +34,7 @@ import java.util.List;
 public class PublicarComunicadoActivity extends AppCompatActivity {
 
     private static final int REQUEST_CODE_PICK_IMAGE = 1001;
+    private ImageButton btnVolver;
 
     private RadioGroup rgTipo;
     private RadioButton rbAnuncio, rbEvento;
@@ -71,6 +72,16 @@ public class PublicarComunicadoActivity extends AppCompatActivity {
         tvLugarLabel = findViewById(R.id.tvLugarLabel);
         tvFechaLabel = findViewById(R.id.tvFechaLabel);
 
+        this.btnVolver = findViewById(R.id.backButton);
+        btnVolver.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(PublicarComunicadoActivity.this, MainActivity.class);
+                        startActivity(intent);
+                    }
+                });
+
         ComunicadoRepositorio.cargarComunicados(this);
 
         String[] areas = {"Académico","Administrativo","Cultural","General"};
@@ -107,6 +118,7 @@ public class PublicarComunicadoActivity extends AppCompatActivity {
                         fechaSeleccionada = String.format("%02d/%02d/%04d", d, m+1, y);
                         btnFecha.setText(fechaSeleccionada);
                     }, year, month, day);
+            datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
             datePickerDialog.show();
         });
 
@@ -182,6 +194,7 @@ public class PublicarComunicadoActivity extends AppCompatActivity {
         if (esEvento) {
             if (lugar.isEmpty()) throw new DatosIncompletosException("Lugar es obligatorio para eventos");
             if (fechaSeleccionada.isEmpty()) throw new DatosIncompletosException("Seleccione la fecha del evento");
+
         }
 
 
@@ -219,6 +232,7 @@ public class PublicarComunicadoActivity extends AppCompatActivity {
         limpiarCampos();
     }
 
+    //Limpia todo lo rellenado anteriormente
     private void limpiarCampos() {
         rgTipo.check(R.id.rbAnuncio);
         spArea.setSelection(0);
