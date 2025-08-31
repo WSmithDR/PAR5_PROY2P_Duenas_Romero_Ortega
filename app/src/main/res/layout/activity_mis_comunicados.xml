@@ -30,24 +30,53 @@
             android:textSize="20sp"
             android:textStyle="bold" />
     </LinearLayout>
-
-    <ScrollView
+    <TableLayout
         android:layout_width="match_parent"
+        android:id="@+id/misComunicadosTableLayout"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:paddingHorizontal="16dp"
-        android:paddingBottom="16dp">
+        android:stretchColumns="*"
+        android:shrinkColumns="*">
+        
+        <TableRow
+            android:id="@+id/headerRow"
+            android:background="#f5f5f5"
+            android:paddingVertical="8dp">
 
-        <TableLayout
-            android:id="@+id/misComunicadosTableLayout"
+            <TextView
+                android:id="@+id/headerTitulo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:padding="16dp"
+                android:text="@string/titulo"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/headerFecha"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:padding="16dp"
+                android:text="@string/fecha"
+                android:textStyle="bold" />
+        </TableRow>
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:stretchColumns="*"
-            android:shrinkColumns="*"
-            android:padding="4dp"/>
-    </ScrollView>
-
-    <!-- Botones de acción en la parte inferior -->
+            android:layout_height="0dp"
+            android:layout_weight="1">
+            
+            <TableLayout
+                android:id="@+id/contentTableLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:stretchColumns="*"
+                android:shrinkColumns="*"/>
+                
+        </ScrollView>
+    </TableLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
