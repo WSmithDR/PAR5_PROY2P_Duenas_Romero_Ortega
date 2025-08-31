@@ -65,7 +65,7 @@
         <ScrollView
             android:id="@+id/sp_verCom"
             android:layout_width="match_parent"
-            android:layout_height="478dp">
+            android:layout_height="494dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -78,7 +78,7 @@
             android:layout_width="238dp"
             android:layout_height="54dp"
             android:backgroundTint="#000000"
-            android:text="Button"
+            android:text="Volver"
             android:textAlignment="center"
             app:cornerRadius="0dp" />
     </LinearLayout>
