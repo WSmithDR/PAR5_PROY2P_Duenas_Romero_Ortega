@@ -25,6 +25,13 @@ import Models.Usuario;
 import Persistencia.ComunicadoRepositorio;
 import Persistencia.PersistenciaOrdenamiento;
 import Utils.DatosDePruebaComunicados;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import android.widget.Toast;
 
 public class MisComunicadosActivity extends AppCompatActivity {
     private ImageButton btnVolver;
@@ -70,8 +77,8 @@ public class MisComunicadosActivity extends AppCompatActivity {
 
         renderizarTabla();
 
+        btnGuardarLista.setOnClickListener(v -> guardarListaComunicados());
     }
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -97,10 +104,9 @@ public class MisComunicadosActivity extends AppCompatActivity {
     }
 
     private void cargarEstadoOrdenamiento() {
-        // Cargar el estado guardado
+        
         PersistenciaOrdenamiento.cargarPreferenciasOrdenamiento(this, Usuario.logged_user_id, this);
         
-        // Si hay un ordenamiento activo, aplicarlo a la lista
         if (ordenPrimario != null && !listaComunicados.isEmpty()) {
             Collections.sort(listaComunicados, (c1, c2) -> c1.compareTo(
                     c2,
@@ -237,4 +243,26 @@ public class MisComunicadosActivity extends AppCompatActivity {
             contentTableLayout.addView(row);
         }
     }
+
+    private void guardarListaComunicados() {
+        String timeStamp = new SimpleDateFormat("dd_MM_yyyy", Locale.getDefault()).format(new Date());
+        String fileName = "comunicados_" + timeStamp + ".dat";
+        
+        File file = new File(getFilesDir(), fileName);
+        
+        try (FileOutputStream fos = new FileOutputStream(file);
+             ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+            
+            oos.writeObject(listaComunicados);
+            
+            Toast.makeText(this, "Lista de comunicados guardada como: " + fileName, 
+                         Toast.LENGTH_LONG).show();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Error al guardar la lista de comunicados: " + e.getMessage(), 
+                         Toast.LENGTH_LONG).show();
+        }
+    }
+
 }
