@@ -14,11 +14,14 @@ import java.util.Calendar;
 import android.provider.OpenableColumns;
 import android.view.View;
 import android.widget.*;
+
+import Enums.TipoComunicado;
 import Models.Anuncio;
 import Models.Comunicado;
 import Models.Evento;
 import Enums.NivelUrgencia;
 import Exceptions.DatosIncompletosException;
+import Models.Usuario;
 import Persistencia.ComunicadoRepositorio;
 import Persistencia.ManejadorArchivo;
 
@@ -44,7 +47,6 @@ public class PublicarComunicadoActivity extends AppCompatActivity {
     private Uri imagenUri = null;
     private String imagenNombre = "";
 
-    private ComunicadoRepositorio comunicadoRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,8 +71,7 @@ public class PublicarComunicadoActivity extends AppCompatActivity {
         tvLugarLabel = findViewById(R.id.tvLugarLabel);
         tvFechaLabel = findViewById(R.id.tvFechaLabel);
 
-        comunicadoRepository = new ComunicadoRepositorio(this, "comunicados_user.txt","comunicados.txt");
-        comunicadoRepository.cargarComunicados(this);
+        ComunicadoRepositorio.cargarComunicados(this);
 
         String[] areas = {"Académico","Administrativo","Cultural","General"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, areas);
@@ -157,9 +158,14 @@ public class PublicarComunicadoActivity extends AppCompatActivity {
         return result;
     }
 
-    private void publicar() throws DatosIncompletosException {
+    private void publicar() throws DatosIncompletosException, SecurityException {
+        // Verificar que el usuario esté autenticado
+        if (Usuario.logged_user_id == null || Usuario.logged_user_id.isEmpty()) {
+            throw new SecurityException("Debe iniciar sesión para publicar un comunicado");
+        }
+
         boolean esEvento = (rgTipo.getCheckedRadioButtonId() == R.id.rbEvento);
-        String tipo = esEvento ? "Evento" : "Anuncio";
+        TipoComunicado tipo = esEvento ? TipoComunicado.EVENTO : TipoComunicado.ANUNCIO;
         String area = spArea.getSelectedItem().toString();
         List<String> audiencia = new ArrayList<>();
         if (cbEstudiantes.isChecked()) audiencia.add("Estudiantes");
@@ -170,8 +176,6 @@ public class PublicarComunicadoActivity extends AppCompatActivity {
         String descripcion = etDescripcion.getText().toString().trim();
         String lugar = etLugar.getText() != null ? etLugar.getText().toString().trim() : "";
         NivelUrgencia nivelPorDefecto = NivelUrgencia.MEDIA;
-
-
         if (titulo.isEmpty()) throw new DatosIncompletosException("Título es obligatorio");
         if (descripcion.isEmpty()) throw new DatosIncompletosException("Descripción es obligatoria");
         if (audiencia.isEmpty()) throw new DatosIncompletosException("Seleccione al menos una audiencia");
@@ -181,13 +185,14 @@ public class PublicarComunicadoActivity extends AppCompatActivity {
         }
 
 
-        int id = comunicadoRepository.generarNuevoId();
+        int id = ComunicadoRepositorio.generarNuevoId(this);
+        String userId = Usuario.logged_user_id;
 
         Comunicado c;
-        if (esEvento) {
-            c = new Evento(id, area, titulo, audiencia, descripcion, imagenNombre, fechaSeleccionada,lugar);
+        if (tipo==TipoComunicado.EVENTO) {
+            c = new Evento(id, userId,area, titulo, audiencia, descripcion, imagenNombre, fechaSeleccionada,lugar);
         } else {
-            c = new Anuncio(id, area, titulo, audiencia, descripcion, imagenNombre, nivelPorDefecto);
+            c = new Anuncio(id,userId, area, titulo, audiencia, descripcion, imagenNombre, nivelPorDefecto);
         }
 
 
@@ -208,7 +213,7 @@ public class PublicarComunicadoActivity extends AppCompatActivity {
             }
         }
 
-        comunicadoRepository.guardarComunicado(this, c);
+        ComunicadoRepositorio.guardarComunicado(this, c);
 
         Toast.makeText(this, "Comunicado publicado", Toast.LENGTH_LONG).show();
         limpiarCampos();

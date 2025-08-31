@@ -28,3 +28,6 @@ google-services.json
 
 # Ignore all files in the directory named 'outputs'
 outputs/
+
+#diffs
+diffs.txt
