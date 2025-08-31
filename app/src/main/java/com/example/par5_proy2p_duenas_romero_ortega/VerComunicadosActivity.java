@@ -49,6 +49,7 @@ public class VerComunicadosActivity extends AppCompatActivity {
         selFecha = findViewById(R.id.txtFecha);
         btn_volverVerCom = findViewById(R.id.Btn_volverCom);
 
+        mostrarComunicadosFiltrados(comunicadosFiltrados());
 
 
         //Volver al activity anterior
@@ -70,6 +71,7 @@ public class VerComunicadosActivity extends AppCompatActivity {
                     (view, y, m, d) -> {
                         String fecha = String.format("%02d/%02d/%04d", d, m + 1, y);
                         selFecha.setText(fecha);
+                        mostrarComunicadosFiltrados(comunicadosFiltrados());
                     }, year, month, day);
             datePickerDialog.show();
         });
@@ -77,9 +79,9 @@ public class VerComunicadosActivity extends AppCompatActivity {
 
     //Acceder al archivo de comunicados
     private List<Comunicado> comunicadosFiltrados(){
-        comunicados = DatosDePruebaComunicados.obtenerListaDePrueba(Usuario.logged_user_id);
+        comunicados = ComunicadoRepositorio.cargarComunicados(this);
         listaFiltrada = new ArrayList<>();
-        if (selFecha.getText().toString().isEmpty()){
+        if (!selFecha.getText().toString().isEmpty()){
             for(Comunicado comunicado: comunicados) {
                 if (comunicado instanceof Evento) {
                     Evento evento = (Evento) comunicado;
@@ -105,16 +107,11 @@ public class VerComunicadosActivity extends AppCompatActivity {
             TextView titulo = new TextView(this);
             titulo.setText(comunicado.getTitulo());
 
-            ImageView imagen = new ImageView(this);
-            int idImagen = this.getResources().getIdentifier(comunicado.getNombreArchivoImagen(), "drawable", this.getPackageName());
-            imagen.setImageResource(idImagen);
-
             TextView descripcion = new TextView(this);
             descripcion.setText(comunicado.getDescripcion());
 
             contenedorCom.addView(comunicadoLayout);
             comunicadoLayout.addView(titulo);
-            comunicadoLayout.addView(imagen);
             comunicadoLayout.addView(descripcion);
         }
     }
