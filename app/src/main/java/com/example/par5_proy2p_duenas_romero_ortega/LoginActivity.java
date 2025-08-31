@@ -21,7 +21,6 @@ public class LoginActivity extends AppCompatActivity {
     private EditText password;
     private Button btnlogin;
 
-    private UsuarioRepositorio usuarioRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +31,7 @@ public class LoginActivity extends AppCompatActivity {
         password = findViewById(R.id.password);
         btnlogin = findViewById(R.id.btnlogin);
 
-        usuarioRepository = new UsuarioRepositorio("usuarios.txt");
-        usuarioRepository.cargarUsuariosAssets(this);
+        UsuarioRepositorio.cargarUsuariosAssets(this);
 
         btnlogin.setOnClickListener(v -> iniciarSesion());
     }
@@ -42,20 +40,26 @@ public class LoginActivity extends AppCompatActivity {
         String username = this.username.getText().toString().trim();
         String password = this.password.getText().toString().trim();
 
-        if (username.isEmpty() || password.isEmpty()) {
-            Toast.makeText(this, "Por favor ingrese usuario y contraseña", Toast.LENGTH_SHORT).show();
+        if (username.trim().isEmpty()) {
+            Toast.makeText(this, getString(R.string.username_error), Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (password.trim().isEmpty()) {
+            Toast.makeText(this, getString(R.string.pass_error), Toast.LENGTH_SHORT).show();
             return;
         }
 
         try {
-            Usuario usuario = Usuario.autenticar(username, password, usuarioRepository);
+            Usuario usuario = Usuario.autenticar(username, password);
             Toast.makeText(this, "Bienvenido " + usuario.getUser(), Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, MainActivity.class);
+            Usuario.logged_user_id = usuario.getId();
             startActivity(intent);
             finish();
 
         } catch (CredecialesInvalidasException e) {
-            Toast.makeText(this, "Usuario o contraseña son incorrectos: " , Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, e.getMessage() , Toast.LENGTH_SHORT).show();
         }
     }
 }

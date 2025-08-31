@@ -14,6 +14,7 @@ public class Anuncio extends Comunicado {
 
     public Anuncio(
             int id,
+            String userId,
             String area,
             String titulo,
             List<String> audiencia,
@@ -24,6 +25,7 @@ public class Anuncio extends Comunicado {
     ) {
         super(
                 id,
+                userId,
                 TipoComunicado.ANUNCIO,
                 area,
                 titulo,
