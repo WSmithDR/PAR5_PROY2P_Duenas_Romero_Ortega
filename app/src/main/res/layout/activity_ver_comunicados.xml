@@ -7,19 +7,79 @@
     android:layout_height="match_parent"
     tools:context=".VerComunicadosActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="272dp"
-        android:layout_height="85dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="224dp"
-        android:layout_marginEnd="25dp"
-        android:text="@string/trabajando_seccion"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        android:textStyle="bold"
+
+    <LinearLayout
+        android:id="@+id/verComunicados_layout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        android:orientation="vertical"
+        android:padding="25dp"
+        android:paddingStart="25dp"
+        android:paddingLeft="25dp"
+        android:paddingTop="25dp"
+        android:paddingEnd="25dp"
+        android:paddingRight="25dp"
+        android:paddingBottom="25dp"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/titulo_VerCom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ver Comunicados"
+            android:textAlignment="center"
+            android:textSize="34sp"
+            android:textStyle="bold" />
+
+        <View
+            android:id="@+id/LineaDivisora"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="#0B0909" />
+
+        <Button
+            android:id="@+id/Btn_selFecha"
+            android:layout_width="match_parent"
+            android:layout_height="51dp"
+            android:backgroundTint="#000000"
+            android:text="Seleccionar fecha"
+            app:cornerRadius="0dp" />
+
+        <TextView
+            android:id="@+id/txtFecha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ninguna fecha seleccionada"
+            android:textAlignment="center" />
+
+        <ScrollView
+            android:id="@+id/sp_verCom"
+            android:layout_width="match_parent"
+            android:layout_height="478dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+        </ScrollView>
+
+        <Button
+            android:id="@+id/Btn_volverCom"
+            android:layout_width="238dp"
+            android:layout_height="54dp"
+            android:backgroundTint="#000000"
+            android:text="Button"
+            android:textAlignment="center"
+            app:cornerRadius="0dp" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
