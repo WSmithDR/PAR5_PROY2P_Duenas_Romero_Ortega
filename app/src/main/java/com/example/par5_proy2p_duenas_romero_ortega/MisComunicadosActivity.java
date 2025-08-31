@@ -88,6 +88,7 @@ public class MisComunicadosActivity extends AppCompatActivity {
         if (ordenPrimario != null) {
             PersistenciaOrdenamiento.guardarPreferenciasOrdenamiento(
                     this,
+                    Usuario.logged_user_id,
                     ordenPrimario.criterio,
                     ordenPrimario.estado,
                     ordenSecundario != null ? ordenSecundario.criterio : null,
@@ -97,7 +98,7 @@ public class MisComunicadosActivity extends AppCompatActivity {
 
     private void cargarEstadoOrdenamiento() {
         // Cargar el estado guardado
-        PersistenciaOrdenamiento.cargarPreferenciasOrdenamiento(this, this);
+        PersistenciaOrdenamiento.cargarPreferenciasOrdenamiento(this, Usuario.logged_user_id, this);
         
         // Si hay un ordenamiento activo, aplicarlo a la lista
         if (ordenPrimario != null && !listaComunicados.isEmpty()) {
