@@ -63,8 +63,8 @@ public class MisComunicadosActivity extends AppCompatActivity {
         this.contentTableLayout = findViewById(R.id.contentTableLayout);
         this.btnGuardarLista = findViewById(R.id.btnGuardarLista);
 
-        originalListaComunicados = new ArrayList<>(DatosDePruebaComunicados.obtenerListaDePrueba(Usuario.logged_user_id));
-        //originalListaComunicados = ComunicadoRepositorio.cargarComunicados(this, Usuario.logged_user_id);
+        //originalListaComunicados = new ArrayList<>(DatosDePruebaComunicados.obtenerListaDePrueba(Usuario.logged_user_id));
+        originalListaComunicados = ComunicadoRepositorio.cargarComunicados(this, Usuario.logged_user_id);
         //Log.e("originalListaComunicados****************************: ",originalListaComunicados.toString());
         listaComunicados = new ArrayList<>(originalListaComunicados);
 
