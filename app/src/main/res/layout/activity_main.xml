@@ -20,26 +20,30 @@
 
         <Button
             android:id="@+id/btn_verComunicados"
-            android:layout_width="400dp"
-            android:layout_height="73dp"
-            android:layout_marginBottom="20dp"
-            android:backgroundTint="@color/black"
-            android:text="Ver Comunicados" />
+            android:layout_width="233dp"
+            android:layout_height="65dp"
+            android:layout_marginBottom="25dp"
+            android:background="@drawable/caja_borde"
+            android:text="Ver Comunicados"
+            app:backgroundTint="@null" />
 
         <Button
             android:id="@+id/btn_publicarComunicados"
-            android:layout_width="400dp"
-            android:layout_height="73dp"
-            android:layout_marginBottom="20dp"
-            android:backgroundTint="@color/black"
-            android:text="Publicar Comunicados" />
+            android:layout_width="233dp"
+            android:layout_height="65dp"
+            android:layout_marginBottom="25dp"
+            android:background="@drawable/caja_borde"
+            android:text="Publicar Comunicados"
+            app:backgroundTint="@null" />
 
         <Button
             android:id="@+id/btn_tablero"
-            android:layout_width="400dp"
-            android:layout_height="73dp"
-            android:backgroundTint="@color/black"
-            android:text="Tablero Comunicados" />
+            android:layout_width="233dp"
+            android:layout_height="65dp"
+            android:layout_marginBottom="25dp"
+            android:background="@drawable/caja_borde"
+            android:text="Tablero Comunicados"
+            app:backgroundTint="@null" />
 
     </RadioGroup>
 </androidx.constraintlayout.widget.ConstraintLayout>

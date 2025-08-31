@@ -1,13 +1,12 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+
     <style name="Base.Theme.PAR5_PROY2P_Duenas_Romero_Ortega" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+
     </style>
 
     <style name="Theme.PAR5_PROY2P_Duenas_Romero_Ortega" parent="Base.Theme.PAR5_PROY2P_Duenas_Romero_Ortega" />
 
-    <!-- Style moved from colors.xml -->
+
     <style name="Theme.TuApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorOnPrimary">@color/white</item>
         <item name="colorOnSecondary">@color/black</item>
