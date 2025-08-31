@@ -12,15 +12,11 @@ import Models.Anuncio;
 import Models.Comunicado;
 import Models.Evento;
 
-public class ComunicadoRepositorio {
-    private String pathAssets;
-    private static List<Comunicado> comunicados ;
-    private static String comunicadostxt;
-
-    public ComunicadoRepositorio (Context context, String pathAssets, String comunicadostxt) {
-        this.pathAssets = pathAssets;
-        this.comunicadostxt = comunicadostxt;
-        this.comunicados = new ArrayList<>();
+public final class ComunicadoRepositorio {
+    private static final List<Comunicado> comunicados = new ArrayList<>();
+    private static final String comunicadostxt = "comunicados.txt";
+    
+    private ComunicadoRepositorio() {
     }
 
     public static List<Comunicado> cargarComunicados(Context context) {
@@ -35,27 +31,29 @@ public class ComunicadoRepositorio {
                 }
                 String[] parts = linea.split(",");
                 try{
-                    if (parts.length < 8) {
+                    if (parts.length < 9) {
                         continue;
                     }
                     int id = Integer.parseInt(parts[0].trim());
-                    TipoComunicado tipoComunicado = TipoComunicado.valueOf(parts[1].trim());
-                    String area = parts[2].trim();
-                    String titulo = parts[3].trim();
-                    String[] audienciaArray = parts[4].trim().split(";");
+                    String userId = parts[1].trim();
+                    TipoComunicado tipoComunicado = TipoComunicado.valueOf(parts[2].trim());
+                    String area = parts[3].trim();
+                    String titulo = parts[4].trim();
+                    String[] audienciaArray = parts[5].trim().split(";");
                     List<String> audiencia = Arrays.asList(audienciaArray);
-                    String decripcion = parts[5].trim();
-                    String nombreArchivoImagen=parts[6].trim();
-                    String fecha=parts[7].trim();
+                    String decripcion = parts[6].trim();
+                    String nombreArchivoImagen=parts[7].trim();
+                    String fecha=parts[8].trim();
 
                     if(tipoComunicado.equals(TipoComunicado.ANUNCIO)){
-                        if (parts.length < 9) {
+                        if (parts.length < 10) {
                             System.out.println("Línea de ANUNCIO con formato incorrecto (campos insuficientes): " + linea);
                             continue;
                         }
                         NivelUrgencia nivelUrgencia = NivelUrgencia.valueOf(parts[8].trim());
                         Anuncio anuncio = new Anuncio(
                                 id,
+                                userId,
                                 area,
                                 titulo,
                                 audiencia,
@@ -65,13 +63,14 @@ public class ComunicadoRepositorio {
                         );
                         comunicados.add(anuncio);
                     }else if(tipoComunicado.equals(TipoComunicado.EVENTO)){
-                        if (parts.length < 9) {
+                        if (parts.length < 10) {
                             System.out.println("Línea de EVENTO con formato incorrecto (campos insuficientes): " + linea);
                             continue;
                         }
-                        String lugar = parts[8].trim();
+                        String lugar = parts[9].trim();
                         Evento evento = new Evento(
                                 id,
+                                userId,
                                 area,
                                 titulo,
                                 audiencia,
@@ -114,8 +113,9 @@ public class ComunicadoRepositorio {
         ManejadorArchivo.escribirArchivo(context, comunicadostxt, stringParaEscribir);
     }
 
-    public int generarNuevoId() {
+    public static int generarNuevoId(Context context) {
         int max = 0;
+        if(comunicados.isEmpty()) cargarComunicados(context);
         for (Comunicado c : comunicados) {
             if (c.getId() > max) max = c.getId();
         }

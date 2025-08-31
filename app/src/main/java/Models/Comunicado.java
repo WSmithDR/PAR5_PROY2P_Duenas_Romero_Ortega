@@ -1,14 +1,20 @@
 package Models;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import Enums.OrdComunicado;
+
 import Enums.TipoComunicado;
 
-public abstract class Comunicado implements Serializable {
+public abstract class Comunicado implements Serializable, Comparable<Comunicado> {
 
     private int id;
+    private String userId;
     private TipoComunicado tipo;
     private String area;
     private String titulo;
@@ -17,6 +23,29 @@ public abstract class Comunicado implements Serializable {
     private String nombreArchivoImagen;
     private String fecha;
 
+    public Comunicado(
+        int id,
+        String userId,
+        TipoComunicado tipo,
+        String area,
+        String titulo,
+        List<String> audiencia,
+        String decripcion,
+        String nombreArchivoImagen,
+        String fecha
+) {
+    this.id = id;
+    this.userId = userId;
+    this.tipo = tipo;
+    this.area = area;
+    this.titulo = titulo;
+    this.audiencia = audiencia;
+    this.descripcion = decripcion;
+    this.nombreArchivoImagen = nombreArchivoImagen;
+    this.fecha = fecha;
+
+}
+
 
     public int getId() {
         return id;
@@ -24,6 +53,22 @@ public abstract class Comunicado implements Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public TipoComunicado getTipo() {
@@ -78,26 +123,61 @@ public abstract class Comunicado implements Serializable {
         this.fecha = fecha;
     }
 
-    public Comunicado(
-            int id,
-            TipoComunicado tipo,
-            String area,
-            String titulo,
-            List<String> audiencia,
-            String decripcion,
-            String nombreArchivoImagen,
-            String fecha
-    ) {
-        this.id = id;
-        this.tipo = tipo;
-        this.area = area;
-        this.titulo = titulo;
-        this.audiencia = audiencia;
-        this.descripcion = decripcion;
-        this.nombreArchivoImagen = nombreArchivoImagen;
-        this.fecha = fecha;
 
+    @Override
+    public int compareTo(Comunicado otro) {
+        return this.getTitulo().compareToIgnoreCase(otro.getTitulo());
     }
+
+    public int compareTo(Comunicado otro, OrdComunicado primaryCriteria, boolean primaryAscending, 
+                        OrdComunicado secondaryCriteria, boolean secondaryAscending) {
+        int primaryResult = compareByCriteria(otro, primaryCriteria, primaryAscending);
+
+        if (primaryResult == 0 && secondaryCriteria != null) {
+            return compareByCriteria(otro, secondaryCriteria, secondaryAscending);
+        }
+        
+        return primaryResult;
+    }
+    
+    private int compareByCriteria(Comunicado otro, OrdComunicado criteria, boolean ascending) {
+        int result = 0;
+        
+        switch (criteria) {
+            case FECHA:
+                result = compararPorFecha(otro);
+                break;
+            case TITULO:
+                result = this.compareTo(otro);
+                break;
+        }
+        
+        return ascending ? result : -result;
+    }
+    
+    private int compararPorFecha(Comunicado otro) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        Date fecha1 = null;
+        Date fecha2 = null;
+
+        String fechaStr1 = this.getFecha();
+        String fechaStr2 = otro.getFecha();
+
+        try {
+            if (fechaStr1 != null && !fechaStr1.isEmpty()) {
+                fecha1 = sdf.parse(fechaStr1);
+            }
+            if (fechaStr2 != null && !fechaStr2.isEmpty()) {
+                fecha2 = sdf.parse(fechaStr2);
+            }
+        } catch (ParseException e) {
+            //
+        }
+
+        return fecha1.compareTo(fecha2);
+    }
+
+
 
     public String toCSV(){
         String audienciaStr = String.join(";", this.audiencia);
@@ -113,6 +193,24 @@ public abstract class Comunicado implements Serializable {
                 nombreArchivoImagen,
                 fecha
         );
+    }
+
+    public static class EstadoOrdenamiento {
+        public OrdComunicado criterio;
+        public int estado;
+        
+        public EstadoOrdenamiento(OrdComunicado criterio, int estado) {
+            this.criterio = criterio;
+            this.estado = estado;
+        }
+        
+        public boolean estaActivo() {
+            return estado > 0;
+        }
+        
+        public boolean esAscendente() {
+            return estado == 1;
+        }
     }
 
 }
