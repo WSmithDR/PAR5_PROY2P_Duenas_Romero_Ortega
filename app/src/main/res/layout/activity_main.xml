@@ -24,7 +24,7 @@
             android:layout_height="65dp"
             android:layout_marginBottom="25dp"
             android:background="@drawable/caja_borde"
-            android:text="Ver Comunicados"
+            android:text="@string/ver_comunicados"
             app:backgroundTint="@null" />
 
         <Button
@@ -33,7 +33,7 @@
             android:layout_height="65dp"
             android:layout_marginBottom="25dp"
             android:background="@drawable/caja_borde"
-            android:text="Publicar Comunicados"
+            android:text="@string/publicar_comunicados"
             app:backgroundTint="@null" />
 
         <Button
@@ -42,7 +42,7 @@
             android:layout_height="65dp"
             android:layout_marginBottom="25dp"
             android:background="@drawable/caja_borde"
-            android:text="Tablero Comunicados"
+            android:text="@string/tablero_comunicados_menu"
             app:backgroundTint="@null" />
 
     </RadioGroup>

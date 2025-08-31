@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">PAR5_PROY2P_Duenas_Romero_Ortega</string>
+
     <string name="tablero_comunicados">Tablero de Comunicados</string>
     <string name="order_titulo">Ordenar por Título</string>
     <string name="order_fecha">Ordenar por Fecha</string>
@@ -7,9 +8,37 @@
     <string name="cancelar">Cancelar</string>
     <string name="back_button_content_description">Volver</string>
     <string name="trabajando_seccion">Estamos trabajando en esta sección. Gracias por su comprensión.</string>
-    <string name="Seleccionar_fecha">Seleccionar fecha</string>
+    <string name="seleccionar_fecha">Seleccionar fecha</string>
     <string name="titulo">Título</string>
     <string name="fecha">Fecha</string>
     <string name="username_error">Por favor ingrese usuario</string>
     <string name="pass_error">Por favor ingrese contraseña</string>
+
+    <string name="login_title">Iniciar Sesión</string>
+    <string name="login_button">INICIAR SESIÓN</string>
+    <string name="username_placeholder">Nombre de Usuario</string>
+    <string name="password_placeholder">Contraseña</string>
+
+    <string name="ver_comunicados">Ver Comunicados</string>
+    <string name="publicar_comunicados">Publicar Comunicados</string>
+    <string name="tablero_comunicados_menu">Tablero Comunicados</string>
+
+    <string name="nuevo_comunicado">Nuevo Comunicado</string>
+    <string name="tipo">Tipo:</string>
+    <string name="anuncio">Anuncio</string>
+    <string name="evento">Evento</string>
+    <string name="area">Área:</string>
+    <string name="audiencia">Audiencia:</string>
+    <string name="estudiantes">Estudiantes</string>
+    <string name="profesores">Profesores</string>
+    <string name="administrativo">Administrativo</string>
+    <string name="lugar">Lugar:</string>
+    <string name="fecha_label">Fecha:</string>
+    <string name="descripcion">Descripción:</string>
+    <string name="arte_imagen">Arte (imagen):</string>
+    <string name="adjuntar_imagen">Adjuntar imagen</string>
+    <string name="publicar">Publicar</string>
+
+    <string name="no_imagen_seleccionada">No se ha seleccionado ninguna imagen</string>
+    <string name="seleccionar_imagen">Seleccionar imagen</string>
 </resources>

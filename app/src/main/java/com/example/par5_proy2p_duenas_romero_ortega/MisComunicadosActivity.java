@@ -258,7 +258,7 @@ public class MisComunicadosActivity extends AppCompatActivity {
             Toast.makeText(this, "Lista de comunicados guardada como: " + fileName, 
                          Toast.LENGTH_LONG).show();
             
-        } catch (Exception e) {
+        }catch (Exception e) {
             e.printStackTrace();
             Toast.makeText(this, "Error al guardar la lista de comunicados: " + e.getMessage(), 
                          Toast.LENGTH_LONG).show();
