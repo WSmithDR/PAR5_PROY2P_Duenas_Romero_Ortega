@@ -63,8 +63,8 @@ public class MisComunicadosActivity extends AppCompatActivity {
         this.contentTableLayout = findViewById(R.id.contentTableLayout);
         this.btnGuardarLista = findViewById(R.id.btnGuardarLista);
 
-        //originalListaComunicados = new ArrayList<>(DatosDePruebaComunicados.obtenerListaDePrueba(Usuario.logged_user_id));
-        originalListaComunicados = ComunicadoRepositorio.cargarComunicados(this, Usuario.logged_user_id);
+        originalListaComunicados = new ArrayList<>(DatosDePruebaComunicados.obtenerListaDePrueba(Usuario.logged_user_id));
+        //originalListaComunicados = ComunicadoRepositorio.cargarComunicados(this, Usuario.logged_user_id);
         //Log.e("originalListaComunicados****************************: ",originalListaComunicados.toString());
         listaComunicados = new ArrayList<>(originalListaComunicados);
 
@@ -96,7 +96,21 @@ public class MisComunicadosActivity extends AppCompatActivity {
     }
 
     private void cargarEstadoOrdenamiento() {
+        // Cargar el estado guardado
         PersistenciaOrdenamiento.cargarPreferenciasOrdenamiento(this, this);
+        
+        // Si hay un ordenamiento activo, aplicarlo a la lista
+        if (ordenPrimario != null && !listaComunicados.isEmpty()) {
+            Collections.sort(listaComunicados, (c1, c2) -> c1.compareTo(
+                    c2,
+                    ordenPrimario.criterio,
+                    ordenPrimario.esAscendente(),
+                    (ordenSecundario != null && ordenSecundario.estaActivo()) ? ordenSecundario.criterio : null,
+                    (ordenSecundario != null && ordenSecundario.estaActivo()) ? ordenSecundario.esAscendente() : true));
+            
+            actualizarTextoEncabezado();
+            renderizarTabla();
+        }
     }
 
     public void configurarOrdenamiento(OrdComunicado criterioPrimario, int estadoPrimario,
