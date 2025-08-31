@@ -3,7 +3,6 @@ package com.example.par5_proy2p_duenas_romero_ortega;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -14,14 +13,12 @@ import android.widget.TextView;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import Enums.OrdComunicado;
 import Models.Comunicado;
 import Utils.DatosDePruebaComunicados;
 
@@ -95,18 +92,8 @@ public class MisComunicadosActivity extends AppCompatActivity {
                 if (tituloSortState == 0) {
                     listaComunicados = new ArrayList<>(originalListaComunicados);
                 } else {
-                    Collections.sort(listaComunicados, new Comparator<Comunicado>() {
-                        @Override
-                        public int compare(Comunicado c1, Comunicado c2) {
-                            String titulo1 = c1.getTitulo() != null ? c1.getTitulo() : "";
-                            String titulo2 = c2.getTitulo() != null ? c2.getTitulo() : "";
-                            if (tituloSortState == 1) { 
-                                return titulo1.compareToIgnoreCase(titulo2);
-                            } else { 
-                                return titulo2.compareToIgnoreCase(titulo1);
-                            }
-                        }
-                    });
+                        Collections.sort(listaComunicados, (c1, c2) -> 
+                        c1.compareTo(c2, OrdComunicado.TITULO, tituloSortState == 1));
                 }
                 renderizarTabla();
             }
@@ -132,42 +119,8 @@ public class MisComunicadosActivity extends AppCompatActivity {
                 if (fechaSortState == 0) {
                     listaComunicados = new ArrayList<>(originalListaComunicados);
                 } else {
-                    Collections.sort(listaComunicados, new Comparator<Comunicado>() {
-                        @Override
-                        public int compare(Comunicado c1, Comunicado c2) {
-                            Date date1 = null;
-                            Date date2 = null;
-
-                            String fechaStr1 = c1.getFecha();
-                            String fechaStr2 = c2.getFecha();
-
-                            if (fechaStr1 != null && !fechaStr1.isEmpty()) {
-                                try {
-                                    date1 = sdf.parse(fechaStr1);
-                                } catch (ParseException e) {
-                                    Log.e("MisComunicadosActivity", "Error parseando fecha: " + fechaStr1, e);
-                                }
-                            }
-
-                            if (fechaStr2 != null && !fechaStr2.isEmpty()) {
-                                try {
-                                    date2 = sdf.parse(fechaStr2);
-                                } catch (ParseException e) {
-                                    Log.e("MisComunicadosActivity", "Error parseando fecha: " + fechaStr2, e);
-                                }
-                            }
-
-                            if (date1 == null && date2 == null) return 0;
-                            if (date1 == null) return 1; 
-                            if (date2 == null) return -1;
-
-                            if (fechaSortState == 1) { 
-                                return date1.compareTo(date2);
-                            } else { 
-                                return date2.compareTo(date1);
-                            }
-                        }
-                    });
+                    Collections.sort(listaComunicados, (c1, c2) -> 
+                        c1.compareTo(c2, OrdComunicado.FECHA, fechaSortState == 1));
                 }
                 renderizarTabla();
             }

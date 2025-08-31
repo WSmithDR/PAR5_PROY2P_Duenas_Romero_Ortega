@@ -1,12 +1,17 @@
 package Models;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import Enums.OrdComunicado;
+
 import Enums.TipoComunicado;
 
-public abstract class Comunicado implements Serializable {
+public abstract class Comunicado implements Serializable, Comparable<Comunicado> {
 
     private int id;
     private TipoComunicado tipo;
@@ -16,6 +21,27 @@ public abstract class Comunicado implements Serializable {
     private String descripcion;
     private String nombreArchivoImagen;
     private String fecha;
+
+    public Comunicado(
+        int id,
+        TipoComunicado tipo,
+        String area,
+        String titulo,
+        List<String> audiencia,
+        String decripcion,
+        String nombreArchivoImagen,
+        String fecha
+) {
+    this.id = id;
+    this.tipo = tipo;
+    this.area = area;
+    this.titulo = titulo;
+    this.audiencia = audiencia;
+    this.descripcion = decripcion;
+    this.nombreArchivoImagen = nombreArchivoImagen;
+    this.fecha = fecha;
+
+}
 
 
     public int getId() {
@@ -78,26 +104,49 @@ public abstract class Comunicado implements Serializable {
         this.fecha = fecha;
     }
 
-    public Comunicado(
-            int id,
-            TipoComunicado tipo,
-            String area,
-            String titulo,
-            List<String> audiencia,
-            String decripcion,
-            String nombreArchivoImagen,
-            String fecha
-    ) {
-        this.id = id;
-        this.tipo = tipo;
-        this.area = area;
-        this.titulo = titulo;
-        this.audiencia = audiencia;
-        this.descripcion = decripcion;
-        this.nombreArchivoImagen = nombreArchivoImagen;
-        this.fecha = fecha;
 
+    @Override
+    public int compareTo(Comunicado otro) {
+        return this.getTitulo().compareToIgnoreCase(otro.getTitulo());
     }
+
+    public int compareTo(Comunicado otro, OrdComunicado tipoOrdComunicado, boolean ascendente) {
+        int resultado = 0;
+        
+        if (tipoOrdComunicado == OrdComunicado.FECHA) {
+            resultado = compararPorFecha(otro);
+        }
+
+        if(tipoOrdComunicado == OrdComunicado.TITULO){
+            resultado = this.compareTo(otro);
+        }
+
+        return ascendente ? resultado : -resultado;
+    }
+    
+    private int compararPorFecha(Comunicado otro) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        Date fecha1 = null;
+        Date fecha2 = null;
+
+        String fechaStr1 = this.getFecha();
+        String fechaStr2 = otro.getFecha();
+
+        try {
+            if (fechaStr1 != null && !fechaStr1.isEmpty()) {
+                fecha1 = sdf.parse(fechaStr1);
+            }
+            if (fechaStr2 != null && !fechaStr2.isEmpty()) {
+                fecha2 = sdf.parse(fechaStr2);
+            }
+        } catch (ParseException e) {
+            //
+        }
+
+        return fecha1.compareTo(fecha2);
+    }
+
+
 
     public String toCSV(){
         String audienciaStr = String.join(";", this.audiencia);
