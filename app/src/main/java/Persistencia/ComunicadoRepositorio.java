@@ -96,8 +96,8 @@ public final class ComunicadoRepositorio {
     }
 
     public static List<Comunicado> cargarComunicados(Context context, String userId) {
-        List<Comunicado> todosComunicados = cargarComunicados(context);
-        return todosComunicados.stream()
+        if(comunicados.isEmpty()) cargarComunicados(context);
+        return comunicados.stream()
                 .filter(c -> c.getUserId().equals(userId))
                 .collect(Collectors.toList());
     }
