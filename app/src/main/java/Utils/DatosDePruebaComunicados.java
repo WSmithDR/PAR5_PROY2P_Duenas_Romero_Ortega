@@ -6,6 +6,7 @@ import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 
 import Enums.NivelUrgencia;
+import Enums.TipoAudiencia;
 import Models.Anuncio;
 import Models.Comunicado;
 import Models.Evento;
@@ -48,7 +49,11 @@ public class DatosDePruebaComunicados {
 
                     String userId = userIds.get(rd.nextInt(userIds.size()));
                     Anuncio anuncio = new Anuncio(id, userId, area, titulo,
-                            new ArrayList<>(Arrays.asList("Todos")),
+                            new ArrayList<>(Arrays.asList(
+                                TipoAudiencia.ESTUDIANTES,
+                                TipoAudiencia.PROFESORES,
+                                TipoAudiencia.ADMINISTRATIVO
+                            )),
                             "Comunicado " + (i+1) + " de " + numComunicadosEnGrupo + " con mismo título",
                             null, urgencia);
                     anuncio.setFecha(fecha);
@@ -59,7 +64,11 @@ public class DatosDePruebaComunicados {
 
                     String userId = userIds.get(rd.nextInt(userIds.size()));
                     Evento evento = new Evento(id, userId, area, titulo,
-                            new ArrayList<>(Arrays.asList("Todos")),
+                            new ArrayList<>(Arrays.asList(
+                                TipoAudiencia.ESTUDIANTES,
+                                TipoAudiencia.PROFESORES,
+                                TipoAudiencia.ADMINISTRATIVO
+                            )),
                             "Evento " + (i+1) + " de " + numComunicadosEnGrupo + " con mismo título",
                             null, fecha, lugar);
                     comunicadosDePrueba.add(evento);
@@ -76,7 +85,7 @@ public class DatosDePruebaComunicados {
                 NivelUrgencia urgencia = NivelUrgencia.values()[rd.nextInt(NivelUrgencia.values().length)];
                 String userId = userIds.get(rd.nextInt(userIds.size()));
                 Anuncio anuncio = new Anuncio(200 + i, userId, area, titulo,
-                        new ArrayList<>(Arrays.asList("Estudiantes")),
+                        new ArrayList<>(Arrays.asList(TipoAudiencia.ESTUDIANTES)),
                         "Primer comunicado de la pareja",
                         null, urgencia);
                 anuncio.setFecha(primeraFecha);
@@ -84,7 +93,7 @@ public class DatosDePruebaComunicados {
             } else {
                 String userId = userIds.get(rd.nextInt(userIds.size()));
                 Evento evento = new Evento(200 + i, userId, area, titulo,
-                        new ArrayList<>(Arrays.asList("Docentes")),
+                        new ArrayList<>(Arrays.asList(TipoAudiencia.PROFESORES)),
                         "Primer evento de la pareja",
                         null, primeraFecha, lugares[rd.nextInt(lugares.length)]);
                 comunicadosDePrueba.add(evento);
@@ -99,7 +108,7 @@ public class DatosDePruebaComunicados {
                 NivelUrgencia urgencia = NivelUrgencia.values()[rd.nextInt(NivelUrgencia.values().length)];
                 String userId = userIds.get(rd.nextInt(userIds.size()));
                 Anuncio anuncio = new Anuncio(300 + i, userId, area, titulo,
-                        new ArrayList<>(Arrays.asList("Estudiantes")),
+                        new ArrayList<>(Arrays.asList(TipoAudiencia.ADMINISTRATIVO)),
                         "Segundo comunicado de la pareja",
                         null, urgencia);
                 anuncio.setFecha(segundaFecha);
@@ -107,7 +116,7 @@ public class DatosDePruebaComunicados {
             } else {
                 String userId = userIds.get(rd.nextInt(userIds.size()));
                 Evento evento = new Evento(300 + i, userId, area, titulo,
-                        new ArrayList<>(Arrays.asList("Docentes")),
+                        new ArrayList<>(Arrays.asList(TipoAudiencia.PROFESORES)),
                         "Segundo evento de la pareja",
                         null, segundaFecha, lugares[rd.nextInt(lugares.length)]);
                 comunicadosDePrueba.add(evento);
@@ -128,7 +137,7 @@ public class DatosDePruebaComunicados {
                     NivelUrgencia urgencia = NivelUrgencia.values()[rd.nextInt(NivelUrgencia.values().length)];
                     String userId = userIds.get(rd.nextInt(userIds.size()));
                     Anuncio anuncio = new Anuncio(id, userId, area, titulo,
-                            new ArrayList<>(Arrays.asList("Personal")),
+                            new ArrayList<>(Arrays.asList(TipoAudiencia.ADMINISTRATIVO)),
                             "Comunicado con fecha " + fechaComun,
                             null, urgencia);
                     anuncio.setFecha(fechaComun);
@@ -136,7 +145,7 @@ public class DatosDePruebaComunicados {
                 } else {
                     String userId = userIds.get(rd.nextInt(userIds.size()));
                     Evento evento = new Evento(id, userId, area, titulo,
-                            new ArrayList<>(Arrays.asList("Personal")),
+                            new ArrayList<>(Arrays.asList(TipoAudiencia.ADMINISTRATIVO)),
                             "Evento con fecha " + fechaComun,
                             null, fechaComun, lugares[rd.nextInt(lugares.length)]);
                     comunicadosDePrueba.add(evento);
@@ -154,7 +163,11 @@ public class DatosDePruebaComunicados {
                 NivelUrgencia urgencia = NivelUrgencia.values()[rd.nextInt(NivelUrgencia.values().length)];
                 String userId = userIds.get(rd.nextInt(userIds.size()));
                 Anuncio anuncio = new Anuncio(id, userId, area, titulo,
-                        new ArrayList<>(Arrays.asList("Todos")),
+                        new ArrayList<>(Arrays.asList(
+                            TipoAudiencia.ESTUDIANTES,
+                            TipoAudiencia.PROFESORES,
+                            TipoAudiencia.ADMINISTRATIVO
+                        )),
                         "Este es un comunicado individual de prueba",
                         null, urgencia);
                 anuncio.setFecha(fecha);
@@ -162,7 +175,11 @@ public class DatosDePruebaComunicados {
             } else {
                 String userId = userIds.get(rd.nextInt(userIds.size()));
                 Evento evento = new Evento(id, userId, area, titulo,
-                        new ArrayList<>(Arrays.asList("Todos")),
+                        new ArrayList<>(Arrays.asList(
+                            TipoAudiencia.ESTUDIANTES,
+                            TipoAudiencia.PROFESORES,
+                            TipoAudiencia.ADMINISTRATIVO
+                        )),
                         "Este es un evento individual de prueba",
                         null, fecha, lugares[rd.nextInt(lugares.length)]);
                 comunicadosDePrueba.add(evento);

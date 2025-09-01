@@ -13,9 +13,8 @@ import java.util.Calendar;
 
 import android.provider.OpenableColumns;
 import android.view.View;
-import android.widget.*;
-
 import Enums.TipoComunicado;
+import Enums.TipoAudiencia;
 import Models.Anuncio;
 import Models.Comunicado;
 import Models.Evento;
@@ -179,10 +178,10 @@ public class PublicarComunicadoActivity extends AppCompatActivity {
         boolean esEvento = (rgTipo.getCheckedRadioButtonId() == R.id.rbEvento);
         TipoComunicado tipo = esEvento ? TipoComunicado.EVENTO : TipoComunicado.ANUNCIO;
         String area = spArea.getSelectedItem().toString();
-        List<String> audiencia = new ArrayList<>();
-        if (cbEstudiantes.isChecked()) audiencia.add("Estudiantes");
-        if (cbProfesores.isChecked()) audiencia.add("Profesores");
-        if (cbAdministrativo.isChecked()) audiencia.add("Administrativo");
+        List<TipoAudiencia> audiencia = new ArrayList<>();
+        if (cbEstudiantes.isChecked()) audiencia.add(TipoAudiencia.ESTUDIANTES);
+        if (cbProfesores.isChecked()) audiencia.add(TipoAudiencia.PROFESORES);
+        if (cbAdministrativo.isChecked()) audiencia.add(TipoAudiencia.ADMINISTRATIVO);
 
         String titulo = etTitulo.getText().toString().trim();
         String descripcion = etDescripcion.getText().toString().trim();
@@ -202,7 +201,7 @@ public class PublicarComunicadoActivity extends AppCompatActivity {
         String userId = Usuario.logged_user_id;
 
         Comunicado c;
-        if (tipo==TipoComunicado.EVENTO) {
+        if (TipoComunicado.EVENTO.equals(tipo)) {
             c = new Evento(id, userId,area, titulo, audiencia, descripcion, imagenNombre, fechaSeleccionada,lugar);
         } else {
             c = new Anuncio(id,userId, area, titulo, audiencia, descripcion, imagenNombre, nivelPorDefecto);
@@ -236,9 +235,15 @@ public class PublicarComunicadoActivity extends AppCompatActivity {
     private void limpiarCampos() {
         rgTipo.check(R.id.rbAnuncio);
         spArea.setSelection(0);
-        cbEstudiantes.setChecked(false);
-        cbProfesores.setChecked(false);
-        cbAdministrativo.setChecked(false);
+        
+        for (TipoAudiencia audiencia : TipoAudiencia.values()) {
+            int viewId = getResources().getIdentifier("cb" + audiencia.name().charAt(0) + audiencia.name().substring(1).toLowerCase(), 
+                "id", getPackageName());
+            CheckBox checkBox = findViewById(viewId);
+            if (checkBox != null) {
+                checkBox.setChecked(false);
+            }
+        }
         etTitulo.setText("");
         etDescripcion.setText("");
         etLugar.setText("");
