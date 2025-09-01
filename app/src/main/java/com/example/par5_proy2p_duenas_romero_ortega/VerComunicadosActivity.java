@@ -2,8 +2,6 @@ package com.example.par5_proy2p_duenas_romero_ortega;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -20,10 +18,6 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -130,6 +124,7 @@ public class VerComunicadosActivity extends AppCompatActivity {
             imagen.setScaleType(ImageView.ScaleType.CENTER_CROP);
             Uri uriImagen = obtenerImagenUri(comunicado.getNombreArchivoImagen());
             imagen.setImageURI(uriImagen);
+            imagen.setAdjustViewBounds(true);
 
             // Descripción
             TextView descripcion = new TextView(this);
