@@ -101,7 +101,7 @@ public class PublicarComunicadoActivity extends AppCompatActivity {
                 tvLugarLabel.setVisibility(View.GONE);
                 tvFechaLabel.setVisibility(View.GONE);
                 fechaSeleccionada = "";
-                btnFecha.setText("Seleccionar fecha");
+                btnFecha.setText(R.string.seleccionar_fecha);
             }
         });
 
@@ -172,7 +172,7 @@ public class PublicarComunicadoActivity extends AppCompatActivity {
     private void publicar() throws DatosIncompletosException, SecurityException {
         // Verificar que el usuario esté autenticado
         if (Usuario.logged_user_id == null || Usuario.logged_user_id.isEmpty()) {
-            throw new SecurityException("Debe iniciar sesión para publicar un comunicado");
+            throw new SecurityException(getString(R.string.debe_iniciar_sesion));
         }
 
         boolean esEvento = (rgTipo.getCheckedRadioButtonId() == R.id.rbEvento);
@@ -187,12 +187,12 @@ public class PublicarComunicadoActivity extends AppCompatActivity {
         String descripcion = etDescripcion.getText().toString().trim();
         String lugar = etLugar.getText() != null ? etLugar.getText().toString().trim() : "";
         NivelUrgencia nivelPorDefecto = NivelUrgencia.MEDIA;
-        if (titulo.isEmpty()) throw new DatosIncompletosException("Título es obligatorio");
-        if (descripcion.isEmpty()) throw new DatosIncompletosException("Descripción es obligatoria");
-        if (audiencia.isEmpty()) throw new DatosIncompletosException("Seleccione al menos una audiencia");
+        if (titulo.isEmpty()) throw new DatosIncompletosException(getString(R.string.titulo_obligatorio));
+        if (descripcion.isEmpty()) throw new DatosIncompletosException(getString(R.string.descripcion_obligatoria));
+        if (audiencia.isEmpty()) throw new DatosIncompletosException(getString(R.string.seleccione_audiencia));
         if (esEvento) {
-            if (lugar.isEmpty()) throw new DatosIncompletosException("Lugar es obligatorio para eventos");
-            if (fechaSeleccionada.isEmpty()) throw new DatosIncompletosException("Seleccione la fecha del evento");
+            if (lugar.isEmpty()) throw new DatosIncompletosException(getString(R.string.lugar_obligatorio));
+            if (fechaSeleccionada.isEmpty()) throw new DatosIncompletosException(getString(R.string.seleccione_fecha));
 
         }
 
@@ -248,7 +248,7 @@ public class PublicarComunicadoActivity extends AppCompatActivity {
         etDescripcion.setText("");
         etLugar.setText("");
         fechaSeleccionada = "";
-        btnFecha.setText("Seleccionar fecha");
+        btnFecha.setText(R.string.seleccionar_fecha);
         imagenUri = null;
         imagenNombre = "";
         tvImagenNombre.setText("");
