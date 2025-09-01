@@ -22,6 +22,7 @@ import java.util.List;
 import Models.Comunicado;
 import Models.Evento;
 import Models.Usuario;
+import Persistencia.ComunicadoRepositorio;
 import Utils.DatosDePruebaComunicados;
 
 public class VerComunicadosActivity extends AppCompatActivity {
@@ -79,7 +80,7 @@ public class VerComunicadosActivity extends AppCompatActivity {
 
     //Acceder al archivo de comunicados
     private List<Comunicado> comunicadosFiltrados(){
-        comunicados = DatosDePruebaComunicados.obtenerListaDePrueba(Usuario.logged_user_id);
+        comunicados = ComunicadoRepositorio.cargarComunicados(this, Usuario.logged_user_id);
         String fechaSel = selFecha.getText().toString();
         listaFiltrada = new ArrayList<>();
         if(fechaSel == null || fechaSel.isEmpty()){
