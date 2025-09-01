@@ -120,7 +120,7 @@
             android:id="@+id/etTitulo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Ingrese título" />
+            android:hint="@string/titulo_comunicado_hint" />
 
         <TextView
             android:id="@+id/tvLugarLabel"
@@ -134,7 +134,7 @@
             android:id="@+id/etLugar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Ingrese lugar" />
+            android:hint="@string/lugar_comunicado_hint" />
 
 
         <TextView
@@ -164,7 +164,7 @@
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:gravity="top"
-            android:hint="Escriba aquí la descripción"
+            android:hint="@string/descripcion_comunicado_hint"
             android:inputType="textMultiLine" />
 
 

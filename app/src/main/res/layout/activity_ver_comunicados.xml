@@ -34,7 +34,7 @@
             android:id="@+id/titulo_VerCom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Ver Comunicados"
+            android:text="@string/ver_comunicados"
             android:textAlignment="center"
             android:textSize="34sp"
             android:textStyle="bold" />
@@ -52,14 +52,14 @@
             android:layout_width="match_parent"
             android:layout_height="51dp"
             android:backgroundTint="#000000"
-            android:text="Seleccionar fecha"
+            android:text="@string/seleccionar_fecha"
             app:cornerRadius="0dp" />
 
         <TextView
             android:id="@+id/txtFecha"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Ninguna fecha seleccionada"
+            android:text="@string/no_fecha_seleccionada"
             android:textAlignment="center" />
 
         <ScrollView
@@ -79,7 +79,7 @@
             android:layout_width="238dp"
             android:layout_height="54dp"
             android:backgroundTint="#000000"
-            android:text="Volver"
+            android:text="@string/back_button_content_description"
             android:textAlignment="center"
             app:cornerRadius="0dp" />
     </LinearLayout>
