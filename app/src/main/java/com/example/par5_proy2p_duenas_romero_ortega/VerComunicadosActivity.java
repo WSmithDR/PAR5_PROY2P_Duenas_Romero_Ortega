@@ -77,6 +77,7 @@ public class VerComunicadosActivity extends AppCompatActivity {
                         selFecha.setText(fecha);
                         mostrarComunicadosFiltrados(comunicadosFiltrados());
                     }, year, month, day);
+            datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
             datePickerDialog.show();
         });
     }
