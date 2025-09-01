@@ -2,11 +2,10 @@ package com.example.par5_proy2p_duenas_romero_ortega;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -23,7 +22,6 @@ import java.util.List;
 import Models.Comunicado;
 import Models.Evento;
 import Models.Usuario;
-import Persistencia.ComunicadoRepositorio;
 import Utils.DatosDePruebaComunicados;
 
 public class VerComunicadosActivity extends AppCompatActivity {
@@ -48,6 +46,8 @@ public class VerComunicadosActivity extends AppCompatActivity {
         btn_selFecha = findViewById(R.id.Btn_selFecha);
         selFecha = findViewById(R.id.txtFecha);
         btn_volverVerCom = findViewById(R.id.Btn_volverCom);
+
+        selFecha.setText("");
 
         mostrarComunicadosFiltrados(comunicadosFiltrados());
 
@@ -79,40 +79,66 @@ public class VerComunicadosActivity extends AppCompatActivity {
 
     //Acceder al archivo de comunicados
     private List<Comunicado> comunicadosFiltrados(){
-        comunicados = ComunicadoRepositorio.cargarComunicados(this);
+        comunicados = DatosDePruebaComunicados.obtenerListaDePrueba(Usuario.logged_user_id);
+        String fechaSel = selFecha.getText().toString();
         listaFiltrada = new ArrayList<>();
-        if (!selFecha.getText().toString().isEmpty()){
-            for(Comunicado comunicado: comunicados) {
+        if(fechaSel == null || fechaSel.isEmpty()){
+            listaFiltrada.addAll(comunicados);
+        }else {
+            for (Comunicado comunicado : comunicados) {
                 if (comunicado instanceof Evento) {
                     Evento evento = (Evento) comunicado;
-                    if (evento.getFecha() != null && evento.getFecha().equals(selFecha.getText().toString())) {
-                        this.listaFiltrada.add(evento);
+                    if (evento.getFecha() != null && evento.getFecha().equals(fechaSel)) {
+                        listaFiltrada.add(evento);
                     }
                 }
             }
-        }else{
-            this.listaFiltrada.addAll(comunicados);
         }
-        return this.listaFiltrada;
+        return listaFiltrada;
     }
 
     //Mostrar comunicados filtrados
-    private void mostrarComunicadosFiltrados(List<Comunicado> comunicadosF){
+    private void mostrarComunicadosFiltrados(List<Comunicado> comunicadosF) {
         LinearLayout contenedorCom = findViewById(R.id.layout_Com);
         contenedorCom.removeAllViews();
-        for(Comunicado comunicado: comunicadosF){
+
+        for (Comunicado comunicado : comunicadosF) {
+            // Layout de cada comunicado
             LinearLayout comunicadoLayout = new LinearLayout(this);
             comunicadoLayout.setOrientation(LinearLayout.VERTICAL);
+            comunicadoLayout.setPadding(10, 10, 10, 10);
 
+            // Título
             TextView titulo = new TextView(this);
             titulo.setText(comunicado.getTitulo());
+            titulo.setTextSize(18);
+            titulo.setPadding(0, 0, 0, 8);
+            titulo.setGravity(Gravity.CENTER);
 
+            // Descripción
             TextView descripcion = new TextView(this);
             descripcion.setText(comunicado.getDescripcion());
+            descripcion.setTextSize(14);
 
-            contenedorCom.addView(comunicadoLayout);
             comunicadoLayout.addView(titulo);
             comunicadoLayout.addView(descripcion);
+
+            //Si es un evento, mostrar la fecha
+            if (comunicado instanceof Evento) {
+                Evento evento = (Evento) comunicado;
+
+                TextView fecha = new TextView(this);
+                fecha.setText("Fecha: " + evento.getFecha());
+                fecha.setTextSize(12);
+                fecha.setPadding(0, 8, 0, 0);
+
+                comunicadoLayout.addView(fecha);
+            }
+
+            // Agregar al contenedor principal
+            contenedorCom.addView(comunicadoLayout);
+
         }
     }
+
 }
