@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="tablero_comunicados">Notice Board</string>
+    <string name="order_titulo">Sort by Title</string>
+    <string name="order_fecha">Sort by Date</string>
+    <string name="guardar_lista">Save list</string>
+    <string name="cancelar">Cancel</string>
+    <string name="back_button_content_description">Back</string>
+    <string name="trabajando_seccion">We are working on this section. Thank you for your understanding.</string>
+    <string name="seleccionar_fecha">Select date</string>
+    <string name="titulo">Title</string>
+    <string name="fecha">Date</string>
+    <string name="username_error">Please enter username</string>
+    <string name="pass_error">Please enter password</string>
+
+    <string name="login_title">Login</string>
+    <string name="login_button">LOGIN</string>
+    <string name="username_placeholder">Username</string>
+    <string name="password_placeholder">Password</string>
+
+    <string name="ver_comunicados">View Notices</string>
+    <string name="publicar_comunicados">Post a Notice</string>
+    <string name="tablero_comunicados_menu">Notices</string>
+
+    <string name="nuevo_comunicado">New Notice</string>
+    <string name="tipo">Type:</string>
+    <string name="anuncio">Announcement</string>
+    <string name="evento">Event</string>
+    <string name="area">Area:</string>
+    <string name="audiencia">Audience:</string>
+    <string name="estudiantes">Students</string>
+    <string name="profesores">Teachers</string>
+    <string name="administrativo">Administrative</string>
+    <string name="lugar">Location:</string>
+    <string name="fecha_label">Date:</string>
+    <string name="descripcion">Description:</string>
+    <string name="arte_imagen">Artwork (image):</string>
+    <string name="adjuntar_imagen">Attach image</string>
+    <string name="publicar">Publish</string>
+    <string name="no_imagen_seleccionada">No image selected</string>
+    <string name="seleccionar_imagen">Select image</string>
+    <string name="bienvenido">Welcome %1$s</string>
+    <string name="usuario">User</string>
+    <string name="password">Password</string>
+
+    <string name="debe_iniciar_sesion">You must log in to publish an announcement</string>
+    <string name="titulo_obligatorio">Title is required</string>
+    <string name="descripcion_obligatoria">Description is required</string>
+    <string name="seleccione_audiencia">Select at least one audience</string>
+    <string name="lugar_obligatorio">Location is required for events</string>
+    <string name="seleccione_fecha">Select the event date</string>
+    <string name="comunicado_publicado">Announcement published successfully</string>
+    <string name="error_publicar">Error publishing announcement</string>
+    <string name="error_guardar_imagen">Error saving image</string>
+
+    <string-array name="areas_comunicado">
+        <item>Academic</item>
+        <item>Administrative</item>
+        <item>Cultural</item>
+        <item>General</item>
+    </string-array>
+
+    <string name="lista_guardada">List of announcements saved successfully</string>
+    <string name="error_guardar_lista">Error saving list of announcements</string>
+
+    <string name="usuario_no_encontrado">User not found</string>
+    <string name="contrasena_incorrecta">Incorrect password</string>
+</resources>
+

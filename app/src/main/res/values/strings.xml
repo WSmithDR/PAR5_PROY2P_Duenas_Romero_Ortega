@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PAR5_PROY2P_Duenas_Romero_Ortega</string>
+    <string name="app_name" translatable="false">PAR5_PROY2P_Duenas_Romero_Ortega</string>
 
     <string name="tablero_comunicados">Tablero de Comunicados</string>
     <string name="order_titulo">Ordenar por Título</string>
@@ -63,8 +63,8 @@
     
     <string name="lista_guardada">Lista de comunicados guardada exitosamente</string>
     <string name="error_guardar_lista">Error al guardar la lista de comunicados</string>
-    <string name="ascendente"> ↑</string>
-    <string name="descendente"> ↓</string>
+    <string name="ascendente" translatable="false"> ↑</string>
+    <string name="descendente" translatable="false"> ↓</string>
     
     <string name="usuario_no_encontrado">Usuario no encontrado</string>
     <string name="contrasena_incorrecta">Contraseña incorrecta</string>
