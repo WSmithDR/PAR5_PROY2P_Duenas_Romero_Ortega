@@ -211,7 +211,7 @@
                 android:layout_marginStart="12dp"
                 android:layout_weight="1"
                 android:backgroundTint="#000000"
-                android:text="Cancelar" />
+                android:text="@string/cancelar" />
         </LinearLayout>
 
     </LinearLayout>
