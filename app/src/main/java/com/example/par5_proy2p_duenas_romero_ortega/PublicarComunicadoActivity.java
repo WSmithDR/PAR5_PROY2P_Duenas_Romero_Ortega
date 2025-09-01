@@ -83,8 +83,8 @@ public class PublicarComunicadoActivity extends AppCompatActivity {
 
         ComunicadoRepositorio.cargarComunicados(this);
 
-        String[] areas = {"Académico","Administrativo","Cultural","General"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, areas);
+        ArrayAdapter<CharSequence> adapter= ArrayAdapter.createFromResource(this, R.array.areas_comunicado,
+                android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spArea.setAdapter(adapter);
 
@@ -227,7 +227,7 @@ public class PublicarComunicadoActivity extends AppCompatActivity {
 
         ComunicadoRepositorio.guardarComunicado(this, c);
 
-        Toast.makeText(this, "Comunicado publicado", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, R.string.comunicado_publicado, Toast.LENGTH_LONG).show();
         limpiarCampos();
     }
 
@@ -248,7 +248,7 @@ public class PublicarComunicadoActivity extends AppCompatActivity {
         etDescripcion.setText("");
         etLugar.setText("");
         fechaSeleccionada = "";
-        btnFecha.setText(R.string.seleccionar_fecha);
+        btnFecha.setText(getString(R.string.seleccionar_fecha));
         imagenUri = null;
         imagenNombre = "";
         tvImagenNombre.setText("");
