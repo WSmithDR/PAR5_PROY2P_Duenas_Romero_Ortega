@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="25dp"
-            android:text="Nuevo Comunicado"
+            android:text="@string/nuevo_comunicado"
             android:textAlignment="center"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -46,7 +46,7 @@
                 android:id="@+id/rbAnuncio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Anuncio"
+                android:text="@string/anuncio"
                 app:buttonTint="@color/radio_button_color"/>
 
             <androidx.appcompat.widget.AppCompatRadioButton
@@ -54,7 +54,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="Evento"
+                android:text="@string/evento"
                 app:buttonTint="@color/radio_button_color"/>
         </RadioGroup>
 
@@ -63,7 +63,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Área:"
+            android:text="@string/area"
             android:textStyle="bold" />
 
         <Spinner
@@ -76,7 +76,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Audiencia:"
+            android:text="@string/audiencia"
             android:textStyle="bold" />
 
         <LinearLayout
@@ -88,7 +88,7 @@
                 android:id="@+id/cbEstudiantes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Estudiantes"
+                android:text="@string/estudiantes"
                 app:buttonTint="@color/radio_button_color" />
 
             <androidx.appcompat.widget.AppCompatCheckBox
@@ -96,7 +96,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:text="Profesores"
+                android:text="@string/profesores"
                 app:buttonTint="@color/radio_button_color" />
 
             <androidx.appcompat.widget.AppCompatCheckBox
@@ -104,7 +104,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:text="Administrativo"
+                android:text="@string/administrativo"
                 app:buttonTint="@color/radio_button_color" />
         </LinearLayout>
 
@@ -113,7 +113,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Título:"
+            android:text="@string/titulo"
             android:textStyle="bold" />
 
         <EditText
@@ -127,7 +127,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Lugar:"
+            android:text="@string/lugar"
             android:textStyle="bold" />
 
         <EditText
@@ -142,7 +142,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Fecha:"
+            android:text="@string/fecha"
             android:textStyle="bold" />
 
         <Button
@@ -150,13 +150,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#000000"
-            android:text="Seleccionar fecha" />
+            android:text="@string/seleccionar_fecha" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Descripción:"
+            android:text="@string/descripcion"
             android:textStyle="bold" />
 
         <EditText
@@ -172,7 +172,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Arte (imagen):"
+            android:text="@string/arte_imagen"
             android:textStyle="bold" />
 
         <Button
@@ -180,7 +180,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#000000"
-            android:text="Adjuntar imagen" />
+            android:text="@string/adjuntar_imagen" />
 
         <TextView
             android:id="@+id/tvImagenNombre"
@@ -202,7 +202,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:backgroundTint="#000000"
-                android:text="Publicar" />
+                android:text="@string/publicar" />
 
             <Button
                 android:id="@+id/btnCancelar"
