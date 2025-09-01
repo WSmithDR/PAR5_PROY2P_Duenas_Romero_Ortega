@@ -1,14 +1,18 @@
 package Models;
 
+import android.util.Log;
+
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 import Enums.OrdComunicado;
 
+import Enums.TipoAudiencia;
 import Enums.TipoComunicado;
 
 public abstract class Comunicado implements Serializable, Comparable<Comunicado> {
@@ -18,7 +22,7 @@ public abstract class Comunicado implements Serializable, Comparable<Comunicado>
     private TipoComunicado tipo;
     private String area;
     private String titulo;
-    private List<String> audiencia;
+    private List<TipoAudiencia> audiencia;
     private String descripcion;
     private String nombreArchivoImagen;
     private String fecha;
@@ -29,7 +33,7 @@ public abstract class Comunicado implements Serializable, Comparable<Comunicado>
         TipoComunicado tipo,
         String area,
         String titulo,
-        List<String> audiencia,
+        List<TipoAudiencia> audiencia,
         String decripcion,
         String nombreArchivoImagen,
         String fecha
@@ -92,11 +96,11 @@ public abstract class Comunicado implements Serializable, Comparable<Comunicado>
         this.titulo = titulo;
     }
 
-    public List<String> getAudiencia() {
+    public List<TipoAudiencia> getAudiencia() {
         return audiencia;
     }
 
-    public void setAudiencia(List<String> audiencia) {
+    public void setAudiencia(List<TipoAudiencia> audiencia) {
         this.audiencia = audiencia;
     }
 
@@ -179,20 +183,45 @@ public abstract class Comunicado implements Serializable, Comparable<Comunicado>
 
 
 
-    public String toCSV(){
-        String audienciaStr = String.join(";", this.audiencia);
-        return String.format(
-                Locale.US,
-                "%d,%s,%s,%s,%s,%s,%s,%s",
-                id,
-                tipo,
-                area,
-                titulo,
-                audienciaStr,
-                descripcion,
-                nombreArchivoImagen,
-                fecha
-        );
+    // Using the same separator as in ComunicadoRepositorio for consistency
+    public String toFileFormat(String separator) {
+        String audienciaStr;
+        if (this.audiencia != null && !this.audiencia.isEmpty()) {
+            audienciaStr = this.audiencia.stream()
+                    .map(TipoAudiencia::name)
+                    .collect(Collectors.joining(";"));
+        } else {
+            audienciaStr = "";
+        }
+        StringBuilder formatBuilder = new StringBuilder();
+        formatBuilder.append("%d").append(separator)
+                .append("%s").append(separator)
+                .append("%s").append(separator)
+                .append("%s").append(separator)
+                .append("%s").append(separator)
+                .append("%s").append(separator) // For audienciaStr
+                .append("%s").append(separator)
+                .append("%s").append(separator)
+                .append("%s");
+
+        try {
+            return String.format(
+                    Locale.US,
+                    formatBuilder.toString(),
+                    id,
+                    userId != null ? userId : "",
+                    tipo != null ? tipo.name() : "ANUNCIO",
+                    area != null ? area : "",
+                    titulo != null ? titulo : "",
+                    audienciaStr,
+                    descripcion != null ? descripcion : "",
+                    nombreArchivoImagen != null ? nombreArchivoImagen : "",
+                    fecha != null ? fecha : ""
+            );
+        } catch (Exception e) {
+            Log.e("Comunicado", "Error al formatear el comunicado: " + e.getMessage());
+            throw e;
+        }
     }
 
     public static class EstadoOrdenamiento {
