@@ -43,6 +43,7 @@
     <string name="bienvenido">Bienvenido %1$s</string>
     <string name="usuario">Usuario</string>
     <string name="password">Contraseña</string>
+    <string name="cerrar_sesion">Cerrar Sesión</string>"
 
     <string name="debe_iniciar_sesion">Debe iniciar sesión para publicar un comunicado</string>
     <string name="titulo_obligatorio">Título es obligatorio</string>
@@ -53,7 +54,11 @@
     <string name="comunicado_publicado">Comunicado publicado exitosamente</string>
     <string name="error_publicar">Error al publicar el comunicado</string>
     <string name="error_guardar_imagen">Error al guardar la imagen</string>
-    
+    <string name="no_fecha_seleccionada">Ninguna fecha seleccionada</string>
+    <string name="titulo_comunicado_hint">Ingrese el título del comunicado</string>
+    <string name="descripcion_comunicado_hint">Ingrese la descripción del comunicado</string>
+    <string name="lugar_comunicado_hint">Ingrese el lugar del comunicado</string>
+
     <string-array name="areas_comunicado">
         <item>Académico</item>
         <item>Administrativo</item>
