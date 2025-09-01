@@ -2,12 +2,15 @@ package com.example.par5_proy2p_duenas_romero_ortega;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +18,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -22,7 +26,7 @@ import java.util.List;
 import Models.Comunicado;
 import Models.Evento;
 import Models.Usuario;
-import Utils.DatosDePruebaComunicados;
+import Persistencia.ComunicadoRepositorio;
 
 public class VerComunicadosActivity extends AppCompatActivity {
     private Button btn_selFecha;
@@ -30,6 +34,7 @@ public class VerComunicadosActivity extends AppCompatActivity {
     private Button btn_volverVerCom;
     private List<Comunicado> comunicados;
     public ArrayList<Comunicado> listaFiltrada;
+    private Uri imagenUri;
 
 
     @Override
@@ -70,16 +75,23 @@ public class VerComunicadosActivity extends AppCompatActivity {
             DatePickerDialog datePickerDialog = new DatePickerDialog(this,
                     (view, y, m, d) -> {
                         String fecha = String.format("%02d/%02d/%04d", d, m + 1, y);
-                        selFecha.setText(fecha);
-                        mostrarComunicadosFiltrados(comunicadosFiltrados());
+
+                        //Verficar que hay un comunicado en esa fecha
+                        if (!hayComunicadosEnFecha(fecha, comunicados)) {
+                            Toast.makeText(VerComunicadosActivity.this, "No hay comunicados en esta fecha", Toast.LENGTH_SHORT).show();
+                        }else{
+                            selFecha.setText(fecha);
+                            mostrarComunicadosFiltrados(comunicadosFiltrados());
+                        }
                     }, year, month, day);
+            datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
             datePickerDialog.show();
         });
     }
 
     //Acceder al archivo de comunicados
     private List<Comunicado> comunicadosFiltrados(){
-        comunicados = DatosDePruebaComunicados.obtenerListaDePrueba(Usuario.logged_user_id);
+        comunicados = ComunicadoRepositorio.cargarComunicados(this, Usuario.logged_user_id);
         String fechaSel = selFecha.getText().toString();
         listaFiltrada = new ArrayList<>();
         if(fechaSel == null || fechaSel.isEmpty()){
@@ -115,12 +127,20 @@ public class VerComunicadosActivity extends AppCompatActivity {
             titulo.setPadding(0, 0, 0, 8);
             titulo.setGravity(Gravity.CENTER);
 
+            // Imagen
+            ImageView imagen = new ImageView(this);
+            imagen.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            Uri uriImagen = obtenerImagenUri(comunicado.getNombreArchivoImagen());
+            imagen.setImageURI(uriImagen);
+            imagen.setAdjustViewBounds(true);
+
             // Descripción
             TextView descripcion = new TextView(this);
             descripcion.setText(comunicado.getDescripcion());
             descripcion.setTextSize(14);
 
             comunicadoLayout.addView(titulo);
+            comunicadoLayout.addView(imagen);
             comunicadoLayout.addView(descripcion);
 
             //Si es un evento, mostrar la fecha
@@ -141,4 +161,20 @@ public class VerComunicadosActivity extends AppCompatActivity {
         }
     }
 
+    private Uri obtenerImagenUri(String nombreArchivo) {
+        File file = new File(getFilesDir(), nombreArchivo);
+        return Uri.fromFile(file);
+    }
+
+    private boolean hayComunicadosEnFecha(String fecha, List<Comunicado> comunicados) {
+        for (Comunicado comunicado : comunicados) {
+            if (comunicado instanceof Evento) {
+                Evento evento = (Evento) comunicado;
+                if (evento.getFecha() != null && evento.getFecha().equals(fecha)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }
