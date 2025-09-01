@@ -2,10 +2,14 @@ package com.example.par5_proy2p_duenas_romero_ortega;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -15,6 +19,11 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -23,7 +32,6 @@ import Models.Comunicado;
 import Models.Evento;
 import Models.Usuario;
 import Persistencia.ComunicadoRepositorio;
-import Utils.DatosDePruebaComunicados;
 
 public class VerComunicadosActivity extends AppCompatActivity {
     private Button btn_selFecha;
@@ -31,6 +39,7 @@ public class VerComunicadosActivity extends AppCompatActivity {
     private Button btn_volverVerCom;
     private List<Comunicado> comunicados;
     public ArrayList<Comunicado> listaFiltrada;
+    private Uri imagenUri;
 
 
     @Override
@@ -116,12 +125,19 @@ public class VerComunicadosActivity extends AppCompatActivity {
             titulo.setPadding(0, 0, 0, 8);
             titulo.setGravity(Gravity.CENTER);
 
+            // Imagen
+            ImageView imagen = new ImageView(this);
+            imagen.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            Uri uriImagen = obtenerImagenUri(comunicado.getNombreArchivoImagen());
+            imagen.setImageURI(uriImagen);
+
             // Descripción
             TextView descripcion = new TextView(this);
             descripcion.setText(comunicado.getDescripcion());
             descripcion.setTextSize(14);
 
             comunicadoLayout.addView(titulo);
+            comunicadoLayout.addView(imagen);
             comunicadoLayout.addView(descripcion);
 
             //Si es un evento, mostrar la fecha
@@ -141,5 +157,14 @@ public class VerComunicadosActivity extends AppCompatActivity {
 
         }
     }
+
+    private Uri obtenerImagenUri(String nombreArchivo) {
+        File file = new File(getFilesDir(), nombreArchivo);
+        return Uri.fromFile(file);
+    }
+
+
+
+
 
 }
