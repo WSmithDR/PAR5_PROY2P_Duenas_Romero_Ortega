@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -74,8 +75,14 @@ public class VerComunicadosActivity extends AppCompatActivity {
             DatePickerDialog datePickerDialog = new DatePickerDialog(this,
                     (view, y, m, d) -> {
                         String fecha = String.format("%02d/%02d/%04d", d, m + 1, y);
-                        selFecha.setText(fecha);
-                        mostrarComunicadosFiltrados(comunicadosFiltrados());
+
+                        //Verficar que hay un comunicado en esa fecha
+                        if (!hayComunicadosEnFecha(fecha, comunicados)) {
+                            Toast.makeText(VerComunicadosActivity.this, "No hay comunicados en esta fecha", Toast.LENGTH_SHORT).show();
+                        }else{
+                            selFecha.setText(fecha);
+                            mostrarComunicadosFiltrados(comunicadosFiltrados());
+                        }
                     }, year, month, day);
             datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
             datePickerDialog.show();
@@ -159,8 +166,15 @@ public class VerComunicadosActivity extends AppCompatActivity {
         return Uri.fromFile(file);
     }
 
-
-
-
-
+    private boolean hayComunicadosEnFecha(String fecha, List<Comunicado> comunicados) {
+        for (Comunicado comunicado : comunicados) {
+            if (comunicado instanceof Evento) {
+                Evento evento = (Evento) comunicado;
+                if (evento.getFecha() != null && evento.getFecha().equals(fecha)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }
