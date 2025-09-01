@@ -13,7 +13,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ManejadorArchivo {
+public final class ManejadorArchivo {
     private ManejadorArchivo(){}
     
     public static List<String> leerArchivoDeAssets(Context context, String nombreArchivo) {
