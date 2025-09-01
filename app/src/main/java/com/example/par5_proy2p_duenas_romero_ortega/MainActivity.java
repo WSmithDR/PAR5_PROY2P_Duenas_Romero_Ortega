@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private Button editBtn_ver;
     private Button editBtn_publicar;
     private Button editBtn_tablero;
+    private Button editBtn_cerrarSesion;
 
 
     @Override
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         editBtn_ver = findViewById(R.id.btn_verComunicados);
         editBtn_publicar = findViewById(R.id.btn_publicarComunicados);
         editBtn_tablero = findViewById(R.id.btn_tablero);
+        editBtn_cerrarSesion = findViewById(R.id.btn_cerrarSesion);
 
         editBtn_ver.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,5 +57,12 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, MisComunicadosActivity.class));
             }
         });
+        editBtn_cerrarSesion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+            }
+        });
+
     }
 }

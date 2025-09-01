@@ -33,6 +33,7 @@ import java.util.List;
 public class PublicarComunicadoActivity extends AppCompatActivity {
 
     private static final int REQUEST_CODE_PICK_IMAGE = 1001;
+    private ImageButton btnVolver;
 
     private RadioGroup rgTipo;
     private RadioButton rbAnuncio, rbEvento;
@@ -70,10 +71,20 @@ public class PublicarComunicadoActivity extends AppCompatActivity {
         tvLugarLabel = findViewById(R.id.tvLugarLabel);
         tvFechaLabel = findViewById(R.id.tvFechaLabel);
 
+        this.btnVolver = findViewById(R.id.backButton);
+        btnVolver.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(PublicarComunicadoActivity.this, MainActivity.class);
+                        startActivity(intent);
+                    }
+                });
+
         ComunicadoRepositorio.cargarComunicados(this);
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.areas_comunicado, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter= ArrayAdapter.createFromResource(this, R.array.areas_comunicado,
+                android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spArea.setAdapter(adapter);
 
@@ -106,6 +117,7 @@ public class PublicarComunicadoActivity extends AppCompatActivity {
                         fechaSeleccionada = String.format("%02d/%02d/%04d", d, m+1, y);
                         btnFecha.setText(fechaSeleccionada);
                     }, year, month, day);
+            datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
             datePickerDialog.show();
         });
 
@@ -121,14 +133,7 @@ public class PublicarComunicadoActivity extends AppCompatActivity {
             try {
                 publicar();
             } catch (DatosIncompletosException ex) {
-                String message = ex.getMessage();
-                int resId = getResources().getIdentifier(message, "string", getPackageName());
-                if (resId != 0) {
-                    message = getString(resId);
-                }
-                Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-            } catch (SecurityException ex) {
-                Toast.makeText(this, R.string.debe_iniciar_sesion, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -188,6 +193,7 @@ public class PublicarComunicadoActivity extends AppCompatActivity {
         if (esEvento) {
             if (lugar.isEmpty()) throw new DatosIncompletosException(getString(R.string.lugar_obligatorio));
             if (fechaSeleccionada.isEmpty()) throw new DatosIncompletosException(getString(R.string.seleccione_fecha));
+
         }
 
 
@@ -221,10 +227,11 @@ public class PublicarComunicadoActivity extends AppCompatActivity {
 
         ComunicadoRepositorio.guardarComunicado(this, c);
 
-        Toast.makeText(this, R.string.comunicado_publicado, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.comunicado_publicado, Toast.LENGTH_LONG).show();
         limpiarCampos();
     }
 
+    //Limpia todo lo rellenado anteriormente
     private void limpiarCampos() {
         rgTipo.check(R.id.rbAnuncio);
         spArea.setSelection(0);
