@@ -28,6 +28,7 @@
     <string name="anuncio">Anuncio</string>
     <string name="evento">Evento</string>
     <string name="area">Área:</string>
+    <string name="urgencia">Urgencia:</string>
     <string name="audiencia">Audiencia:</string>
     <string name="estudiantes">Estudiantes</string>
     <string name="profesores">Profesores</string>
@@ -64,6 +65,13 @@
         <item>Administrativo</item>
         <item>Cultural</item>
         <item>General</item>
+    </string-array>
+
+    <string-array name="nivel_urgencia">
+        <item>Bajo</item>
+        <item>Medio</item>
+        <item>Alta</item>
+
     </string-array>
     
     <string name="lista_guardada">Lista de comunicados guardada exitosamente</string>
