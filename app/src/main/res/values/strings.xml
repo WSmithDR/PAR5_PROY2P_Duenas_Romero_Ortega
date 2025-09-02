@@ -74,8 +74,8 @@
     <string name="usuario_no_encontrado">Usuario no encontrado</string>
     <string name="contrasena_incorrecta">Contraseña incorrecta</string>
     <string name="imagen_del_comunicado">Imagen del comunicado</string>
-    <string name="lugar_evento">Lugar del evento</string>
-    <string name="nivel_de_urgencia">Nivel de Urgencia</string>
+    <string name="lugar_evento">Lugar del evento: </string>
+    <string name="nivel_de_urgencia">Nivel de Urgencia: </string>
     <string name="label_area">Área: </string>
     <string name="label_fecha">Fecha: </string>
     <string name="label_tipo">Tipo: </string>

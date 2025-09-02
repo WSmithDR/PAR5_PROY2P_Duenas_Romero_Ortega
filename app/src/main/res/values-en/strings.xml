@@ -72,8 +72,8 @@
     <string name="usuario_no_encontrado">User not found</string>
     <string name="contrasena_incorrecta">Incorrect password</string>
     <string name="imagen_del_comunicado">Notice image</string>
-    <string name="lugar_evento">Event Place</string>
-    <string name="nivel_de_urgencia">Urgency Level</string>
+    <string name="lugar_evento">Event Place: </string>
+    <string name="nivel_de_urgencia">Urgency Level: </string>
     <string name="label_area">Area: </string>
     <string name="label_fecha">Date: </string>
     <string name="label_tipo">Type: </string>

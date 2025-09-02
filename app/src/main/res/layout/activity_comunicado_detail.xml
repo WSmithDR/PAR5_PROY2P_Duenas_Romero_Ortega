@@ -28,13 +28,13 @@
 
         <TextView
             android:id="@+id/comunicado_detail_title"
-            android:layout_width="wrap_content"
+            android:layout_width="339dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:textColor="?android:attr/textColorPrimary"
             android:textSize="20sp"
             android:textStyle="bold"
-            tools:text="Título del Comunicado"/>
+            tools:text="Título del Comunicado" />
     </LinearLayout>
 
     <ScrollView
@@ -160,10 +160,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textSize="16sp"
-                    tools:text="Auditorio Principal"/>
+                    tools:text="Babahoyo"/>
             </LinearLayout>
 
-            <!-- Nivel de Urgencia (Visible si es Anuncio) -->
             <LinearLayout
                 android:id="@+id/urgencia_container"
                 android:layout_width="match_parent"
@@ -205,7 +204,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:textSize="16sp"
-                tools:text="Descripción detallada del comunicado..."/>
+                tools:text="Descripción detallada del comunicado... "/>
 
         </LinearLayout>
     </ScrollView>

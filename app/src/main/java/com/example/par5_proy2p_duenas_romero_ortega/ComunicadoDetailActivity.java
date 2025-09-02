@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -36,9 +37,9 @@ public class ComunicadoDetailActivity extends AppCompatActivity {
     private TextView txtViewAudienciaComunicado;
     private ImageView imgViewComunicadoImage;
     private TextView txtViewDescripcionComunicado;
-    private TextView lblViewLugarEvento;
+    private LinearLayout containerLugarEvento;
     private TextView txtViewLugarEvento;
-    private TextView lblViewNivelUrgenciaAnuncio;
+    private LinearLayout containerNivelUrgenciaAnuncio;
     private TextView txtViewNivelUrgenciaAnuncio;
 
     private ImageButton btnVolver;
@@ -76,9 +77,9 @@ public class ComunicadoDetailActivity extends AppCompatActivity {
         txtViewAudienciaComunicado = findViewById(R.id.detail_audiencia);
         imgViewComunicadoImage = findViewById(R.id.detail_imagen);
         txtViewDescripcionComunicado = findViewById(R.id.detail_descripcion);
-        lblViewLugarEvento = findViewById(R.id.detail_lugar_label);
+        containerLugarEvento = findViewById(R.id.lugar_container);
         txtViewLugarEvento = findViewById(R.id.detail_lugar);
-        lblViewNivelUrgenciaAnuncio = findViewById(R.id.detail_urgencia_label);
+        containerNivelUrgenciaAnuncio = findViewById(R.id.urgencia_container);
         txtViewNivelUrgenciaAnuncio = findViewById(R.id.detail_urgencia);
 
 
@@ -128,11 +129,10 @@ public class ComunicadoDetailActivity extends AppCompatActivity {
             Evento evento = (Evento)comunicado;
             String lugar = evento.getLugar();
             Log.e("*********************Lugar: ", lugar);
-            lblViewLugarEvento.setVisibility(View.VISIBLE);
-            txtViewLugarEvento.setVisibility(View.VISIBLE);
+            containerLugarEvento.setVisibility(View.VISIBLE);
             txtViewLugarEvento.setText(lugar);
         }else{
-            lblViewLugarEvento.setVisibility(View.GONE);
+            containerLugarEvento.setVisibility(View.GONE);
             txtViewLugarEvento.setVisibility(View.GONE);
         }
 
@@ -140,11 +140,10 @@ public class ComunicadoDetailActivity extends AppCompatActivity {
             Anuncio anuncio = (Anuncio)comunicado;
             String nivelUrgencia = anuncio.getNivelUrgencia().name();
             Log.e("*********************NivelUrgencia: ", nivelUrgencia);
-            lblViewNivelUrgenciaAnuncio.setVisibility(View.VISIBLE);
-            txtViewNivelUrgenciaAnuncio.setVisibility(View.VISIBLE);
+            containerNivelUrgenciaAnuncio.setVisibility(View.VISIBLE);
             txtViewNivelUrgenciaAnuncio.setText(nivelUrgencia);
         }else{
-            lblViewNivelUrgenciaAnuncio.setVisibility(View.GONE);
+            containerNivelUrgenciaAnuncio.setVisibility(View.GONE);
             txtViewNivelUrgenciaAnuncio.setVisibility(View.GONE);
         }
 
