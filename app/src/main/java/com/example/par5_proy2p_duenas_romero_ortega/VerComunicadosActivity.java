@@ -40,6 +40,7 @@ public class VerComunicadosActivity extends AppCompatActivity implements VerComu
     public ArrayList<Comunicado> listaFiltrada;
     private Uri imagenUri;
 
+    private static final int MAX_DESC_PREVIEW_LENGTH = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -145,7 +146,13 @@ public class VerComunicadosActivity extends AppCompatActivity implements VerComu
 
             // Descripción
             TextView descripcion = new TextView(this);
-            descripcion.setText(comunicado.getDescripcion());
+            String descOriginal = comunicado.getDescripcion();
+            if(descOriginal != null && descOriginal.length() > MAX_DESC_PREVIEW_LENGTH){
+                String shortDesc = descOriginal.substring(0, MAX_DESC_PREVIEW_LENGTH)+"...";
+                descripcion.setText(shortDesc);
+            }else{
+                descripcion.setText(descOriginal);
+            }
             descripcion.setTextSize(25);
             descripcion.setTextColor(Color.BLACK);
 
@@ -158,7 +165,8 @@ public class VerComunicadosActivity extends AppCompatActivity implements VerComu
                 Evento evento = (Evento) comunicado;
 
                 TextView fecha = new TextView(this);
-                fecha.setText("Fecha: " + evento.getFecha());
+                String fomatedFecha = getString(R.string.fecha_label) + " " +evento.getFecha();
+                fecha.setText(fomatedFecha);
                 fecha.setTextSize(20);
                 fecha.setTextColor(Color.BLACK);
                 fecha.setPadding(0, 8, 0, 0);
