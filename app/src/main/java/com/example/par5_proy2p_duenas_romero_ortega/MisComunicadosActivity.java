@@ -230,6 +230,7 @@ public class MisComunicadosActivity extends AppCompatActivity {
             tituloView.setPadding(16, 16, 16, 16);
             tituloView.setText(comunicado.getTitulo() != null ? comunicado.getTitulo() : "Título N/A");
             row.addView(tituloView);
+            tituloView.setTextSize(20);
 
             TextView fechaView = new TextView(this);
             fechaView.setLayoutParams(new TableRow.LayoutParams(
@@ -238,6 +239,7 @@ public class MisComunicadosActivity extends AppCompatActivity {
                     1f));
             fechaView.setPadding(16, 16, 16, 16);
             fechaView.setText(comunicado.getFecha() != null ? comunicado.getFecha() : "Fecha N/A");
+            fechaView.setTextSize(20);
             row.addView(fechaView);
 
             contentTableLayout.addView(row);
