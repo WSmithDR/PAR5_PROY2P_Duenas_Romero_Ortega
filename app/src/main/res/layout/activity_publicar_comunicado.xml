@@ -4,7 +4,8 @@
     android:id="@+id/scrollRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@drawable/background2">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,8 +14,8 @@
 
         <ImageButton
             android:id="@+id/backButton"
-            android:layout_width="38dp"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
             android:background="?attr/listChoiceBackgroundIndicator"
             android:contentDescription="@string/back_button_content_description"
             android:src="?attr/homeAsUpIndicator" />
@@ -25,6 +26,7 @@
             android:layout_marginBottom="25dp"
             android:text="@string/nuevo_comunicado"
             android:textAlignment="center"
+            android:textColor="#040404"
             android:textSize="20sp"
             android:textStyle="bold"
             android:visibility="visible" />
