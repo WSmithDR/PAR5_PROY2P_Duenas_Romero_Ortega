@@ -65,6 +65,8 @@
         <item>Cultural</item>
         <item>General</item>
     </string-array>
+    <string name="no_specific_area">Área no especificada</string>
+    <string name="error_area_invalida">Por favor, seleccione un área válida.</string>
 
     <string name="lista_guardada">Lista de comunicados guardada exitosamente</string>
     <string name="error_guardar_lista">Error al guardar la lista de comunicados</string>

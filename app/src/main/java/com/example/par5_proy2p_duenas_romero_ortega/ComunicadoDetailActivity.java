@@ -19,6 +19,7 @@ import androidx.core.view.WindowInsetsCompat;
 import java.util.ArrayList;
 import java.util.List;
 
+import Enums.AreaComunicado;
 import Enums.TipoAudiencia;
 import Enums.TipoComunicado;
 import Models.Anuncio;
@@ -89,7 +90,30 @@ public class ComunicadoDetailActivity extends AppCompatActivity {
         Comunicado comunicado = ComunicadoRepositorio.getComunicadoByID(comunicadoID);
 
         txtViewTituloComunicado.setText(comunicado.getTitulo());
-        txtViewAreaComunicado.setText(comunicado.getArea());
+
+
+        String[] areasArray = getResources().getStringArray(R.array.areas_comunicado);
+        AreaComunicado areaComunicado = comunicado.getArea();
+        String areaSeleccionada;
+        switch (areaComunicado){
+            case ACADEMICO:
+                areaSeleccionada=areasArray[0];
+                break;
+            case ADMINISTRATIVO:
+                areaSeleccionada=areasArray[1];
+                break;
+            case CULTURAL:
+                areaSeleccionada=areasArray[2];
+                break;
+            case GENERAL:
+                areaSeleccionada=areasArray[3];
+                break;
+            default:
+                areaSeleccionada = getString(R.string.no_specific_area);
+                break;
+        }
+
+        txtViewAreaComunicado.setText(areaSeleccionada);
         txtViewFechaComunicado.setText(comunicado.getFecha());
 
         switch (comunicado.getTipo()){

@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
 
+import Enums.AreaComunicado;
 import Enums.OrdComunicado;
 
 import Enums.TipoAudiencia;
@@ -20,7 +21,7 @@ public abstract class Comunicado implements Serializable, Comparable<Comunicado>
     private int id;
     private String userId;
     private TipoComunicado tipo;
-    private String area;
+    private AreaComunicado area;
     private String titulo;
     private List<TipoAudiencia> audiencia;
     private String descripcion;
@@ -31,7 +32,7 @@ public abstract class Comunicado implements Serializable, Comparable<Comunicado>
         int id,
         String userId,
         TipoComunicado tipo,
-        String area,
+        AreaComunicado area,
         String titulo,
         List<TipoAudiencia> audiencia,
         String decripcion,
@@ -82,10 +83,12 @@ public abstract class Comunicado implements Serializable, Comparable<Comunicado>
     public void setTipo(TipoComunicado tipo) {
         this.tipo = tipo;
     }
-    public String getArea() {
+
+    public AreaComunicado getArea() {
         return area;
     }
-    public void setArea(String area) {
+    public void setArea(AreaComunicado area) {
+
         this.area = area;
     }
     public String getTitulo() {
@@ -199,7 +202,7 @@ public abstract class Comunicado implements Serializable, Comparable<Comunicado>
                 .append("%s").append(separator)
                 .append("%s").append(separator)
                 .append("%s").append(separator)
-                .append("%s").append(separator) // For audienciaStr
+                .append("%s").append(separator)
                 .append("%s").append(separator)
                 .append("%s").append(separator)
                 .append("%s");
@@ -209,14 +212,14 @@ public abstract class Comunicado implements Serializable, Comparable<Comunicado>
                     Locale.US,
                     formatBuilder.toString(),
                     id,
-                    userId != null ? userId : "",
-                    tipo != null ? tipo.name() : "ANUNCIO",
-                    area != null ? area : "",
-                    titulo != null ? titulo : "",
+                    userId,
+                    tipo.name(),
+                    area.name(),
+                    titulo,
                     audienciaStr,
-                    descripcion != null ? descripcion : "",
-                    nombreArchivoImagen != null ? nombreArchivoImagen : "",
-                    fecha != null ? fecha : ""
+                    descripcion,
+                    nombreArchivoImagen,
+                    fecha
             );
         } catch (Exception e) {
             Log.e("Comunicado", "Error al formatear el comunicado: " + e.getMessage());

@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import Enums.AreaComunicado;
 import Enums.NivelUrgencia;
 import Enums.TipoAudiencia;
 import Enums.TipoComunicado;
@@ -16,7 +17,7 @@ public final class Anuncio extends Comunicado {
     public Anuncio(
             int id,
             String userId,
-            String area,
+            AreaComunicado area,
             String titulo,
             List<TipoAudiencia> audiencia,
             String descripcion,

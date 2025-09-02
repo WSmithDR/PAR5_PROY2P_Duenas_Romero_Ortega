@@ -3,6 +3,7 @@ package Models;
 import java.util.List;
 import java.util.Locale;
 
+import Enums.AreaComunicado;
 import Enums.TipoAudiencia;
 import Enums.TipoComunicado;
 
@@ -12,7 +13,7 @@ public final class Evento extends Comunicado {
     public Evento(
             int id,
             String userId,
-            String area,
+            AreaComunicado area,
             String titulo,
             List<TipoAudiencia> audiencia,
             String decripcion,
