@@ -27,14 +27,15 @@
             android:text="@string/nuevo_comunicado"
             android:textAlignment="center"
             android:textColor="#040404"
-            android:textSize="20sp"
+            android:textSize="28sp"
             android:textStyle="bold"
             android:visibility="visible" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="43dp"
             android:layout_height="wrap_content"
             android:text="Tipo:"
+            android:textColor="#050505"
             android:textStyle="bold" />
 
         <RadioGroup
@@ -66,6 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/area"
+            android:textColor="#050505"
             android:textStyle="bold" />
 
         <Spinner
@@ -79,6 +81,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/audiencia"
+            android:textColor="#040404"
             android:textStyle="bold" />
 
         <LinearLayout
@@ -116,6 +119,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/titulo"
+            android:textColor="#050505"
             android:textStyle="bold" />
 
         <EditText
@@ -130,6 +134,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/lugar"
+            android:textColor="#040404"
             android:textStyle="bold" />
 
         <EditText
@@ -145,6 +150,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/fecha"
+            android:textColor="#020202"
             android:textStyle="bold" />
 
         <Button
@@ -159,6 +165,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/descripcion"
+            android:textColor="#090909"
             android:textStyle="bold" />
 
         <EditText
@@ -175,6 +182,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/arte_imagen"
+            android:textColor="#020202"
             android:textStyle="bold" />
 
         <Button
