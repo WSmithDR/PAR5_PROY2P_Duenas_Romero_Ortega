@@ -28,6 +28,7 @@
     <string name="anuncio">Announcement</string>
     <string name="evento">Event</string>
     <string name="area">Area:</string>
+    <string name="urgencia">Urgency:</string>
     <string name="audiencia">Audience:</string>
     <string name="estudiantes">Students</string>
     <string name="profesores">Teachers</string>
@@ -65,6 +66,13 @@
         <item>Cultural</item>
         <item>General</item>
     </string-array>
+
+    <string-array name="nivel_urgencia">
+    <item>Low</item>
+    <item>Middle</item>
+    <item>High</item>
+    </string-array>
+
 
     <string name="lista_guardada">List of announcements saved successfully</string>
     <string name="error_guardar_lista">Error saving list of announcements</string>

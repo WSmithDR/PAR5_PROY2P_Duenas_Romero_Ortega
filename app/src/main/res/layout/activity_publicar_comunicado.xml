@@ -18,7 +18,8 @@
             android:layout_height="35dp"
             android:background="?attr/listChoiceBackgroundIndicator"
             android:contentDescription="@string/back_button_content_description"
-            android:src="?attr/homeAsUpIndicator" />
+            android:src="?attr/homeAsUpIndicator"
+            app:tint="@color/iconColor" />
 
         <TextView
             android:layout_width="match_parent"
@@ -27,15 +28,17 @@
             android:text="@string/nuevo_comunicado"
             android:textAlignment="center"
             android:textColor="#040404"
-            android:textSize="20sp"
+            android:textSize="28sp"
             android:textStyle="bold"
             android:visibility="visible" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="43dp"
             android:layout_height="wrap_content"
-            android:text="Tipo:"
-            android:textStyle="bold" />
+            android:text="@string/tipo"
+            android:textStyle="bold"
+            android:textColor="#050505"
+            />
 
         <RadioGroup
             android:id="@+id/rgTipo"
@@ -49,7 +52,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/anuncio"
-                app:buttonTint="@color/radio_button_color"/>
+                app:buttonTint="@color/radio_button_color"
+                android:textColor="@color/texto"/>
 
             <androidx.appcompat.widget.AppCompatRadioButton
                 android:id="@+id/rbEvento"
@@ -57,7 +61,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:text="@string/evento"
-                app:buttonTint="@color/radio_button_color"/>
+                app:buttonTint="@color/radio_button_color"
+                android:textColor="@color/texto"/>
         </RadioGroup>
 
 
@@ -66,12 +71,30 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/area"
+            android:textColor="#050505"
             android:textStyle="bold" />
 
         <Spinner
             android:id="@+id/spArea"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            />
+
+        <TextView
+            android:id="@+id/LvlUrgencia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/urgencia"
+            android:textColor="#050505"
+            android:textStyle="bold"
+            android:visibility="visible" />
+
+        <Spinner
+            android:id="@+id/spUrgencia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
 
 
         <TextView
@@ -79,6 +102,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/audiencia"
+            android:textColor="#040404"
             android:textStyle="bold" />
 
         <LinearLayout
@@ -91,7 +115,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/estudiantes"
-                app:buttonTint="@color/radio_button_color" />
+                app:buttonTint="@color/radio_button_color"
+                android:textColor="@color/texto"
+                />
 
             <androidx.appcompat.widget.AppCompatCheckBox
                 android:id="@+id/cbProfesores"
@@ -99,7 +125,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:text="@string/profesores"
-                app:buttonTint="@color/radio_button_color" />
+                app:buttonTint="@color/radio_button_color"
+                android:textColor="@color/texto"/>
 
             <androidx.appcompat.widget.AppCompatCheckBox
                 android:id="@+id/cbAdministrativo"
@@ -107,7 +134,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:text="@string/administrativo"
-                app:buttonTint="@color/radio_button_color" />
+                app:buttonTint="@color/radio_button_color"
+                android:textColor="@color/texto"/>
         </LinearLayout>
 
 
@@ -116,13 +144,17 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/titulo"
+            android:textColor="#050505"
             android:textStyle="bold" />
 
         <EditText
             android:id="@+id/etTitulo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/titulo_comunicado_hint" />
+            android:hint="@string/titulo_comunicado_hint"
+            android:textColor="@color/texto"
+            android:textColorHint="@color/hintColor"
+            />
 
         <TextView
             android:id="@+id/tvLugarLabel"
@@ -130,13 +162,16 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/lugar"
+            android:textColor="#040404"
             android:textStyle="bold" />
 
         <EditText
             android:id="@+id/etLugar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/lugar_comunicado_hint" />
+            android:hint="@string/lugar_comunicado_hint"
+            android:textColorHint="@color/hintColor"
+            android:textColor="@color/texto"/>
 
 
         <TextView
@@ -145,6 +180,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/fecha"
+            android:textColor="#020202"
             android:textStyle="bold" />
 
         <Button
@@ -152,13 +188,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#000000"
-            android:text="@string/seleccionar_fecha" />
+            android:text="@string/seleccionar_fecha"
+            android:textColor="@color/textoGeneral"
+            />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/descripcion"
+            android:textColor="#090909"
             android:textStyle="bold" />
 
         <EditText
@@ -167,7 +206,9 @@
             android:layout_height="120dp"
             android:gravity="top"
             android:hint="@string/descripcion_comunicado_hint"
-            android:inputType="textMultiLine" />
+            android:inputType="textMultiLine"
+            android:textColor="@color/texto"
+            android:textColorHint="@color/hintColor"/>
 
 
         <TextView
@@ -175,6 +216,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/arte_imagen"
+            android:textColor="#020202"
             android:textStyle="bold" />
 
         <Button
@@ -182,7 +224,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#000000"
-            android:text="@string/adjuntar_imagen" />
+            android:text="@string/adjuntar_imagen"
+            android:textColor="@color/textoGeneral" />
 
         <TextView
             android:id="@+id/tvImagenNombre"
@@ -204,7 +247,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:backgroundTint="#000000"
-                android:text="@string/publicar" />
+                android:text="@string/publicar"
+                android:textColor="@color/textoGeneral"/>
 
             <Button
                 android:id="@+id/btnCancelar"
@@ -213,7 +257,8 @@
                 android:layout_marginStart="12dp"
                 android:layout_weight="1"
                 android:backgroundTint="#000000"
-                android:text="@string/cancelar" />
+                android:text="@string/cancelar"
+                android:textColor="@color/textoGeneral"/>
         </LinearLayout>
 
     </LinearLayout>

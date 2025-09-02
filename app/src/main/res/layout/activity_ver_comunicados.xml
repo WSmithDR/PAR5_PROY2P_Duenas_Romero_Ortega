@@ -17,7 +17,8 @@
         android:contentDescription="@string/back_button_content_description"
         android:src="?attr/homeAsUpIndicator"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/iconColor"/>
 
     <LinearLayout
         android:id="@+id/verComunicados_layout"
@@ -45,8 +46,8 @@
 
         <TextView
             android:id="@+id/titulo_VerCom"
-            android:layout_width="409dp"
-            android:layout_height="158dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:background="#00F6F4F4"
             android:drawableTop="@drawable/anuncio"
             android:text="@string/ver_comunicados"
@@ -66,12 +67,13 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/Btn_selFecha"
-            android:layout_width="362dp"
-            android:layout_height="56dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:background="@drawable/caja_borde"
             android:text="@string/seleccionar_fecha"
             app:backgroundTint="@null"
-            app:cornerRadius="0dp" />
+            app:cornerRadius="0dp"
+            android:textColor="@color/textoGeneral"/>
 
         <TextView
             android:id="@+id/txtFecha"
@@ -84,8 +86,8 @@
 
         <ScrollView
             android:id="@+id/sp_verCom"
-            android:layout_width="364dp"
-            android:layout_height="515dp">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:id="@+id/layout_Com"
