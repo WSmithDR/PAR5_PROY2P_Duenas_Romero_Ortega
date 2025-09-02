@@ -3,8 +3,8 @@ package com.example.par5_proy2p_duenas_romero_ortega;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,22 +19,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Enums.TipoAudiencia;
+import Enums.TipoComunicado;
+import Models.Anuncio;
 import Models.Comunicado;
+import Models.Evento;
 import Persistencia.ComunicadoRepositorio;
 import Utils.ImageUtils;
 
 public class ComunicadoDetailActivity extends AppCompatActivity {
 
     private int comunicadoID;
-    private TextView tituloComunicado;
-    private TextView areaComunicado;
-    private TextView fechaComunicado;
-    private TextView tipoComunicado;
-    private TextView audienciaComunicado;
-    private ImageView comunicadoImage;
-    private TextView descripcionComunicado;
-    private TextView lugarEvento;
-    private TextView nivelUrgenciaAnuncio;
+    private TextView txtViewTituloComunicado;
+    private TextView txtViewAreaComunicado;
+    private TextView txtViewFechaComunicado;
+    private TextView txtViewTipoComunicado;
+    private TextView txtViewAudienciaComunicado;
+    private ImageView imgViewComunicadoImage;
+    private TextView txtViewDescripcionComunicado;
+    private TextView lblViewLugarEvento;
+    private TextView txtViewLugarEvento;
+    private TextView lblViewNivelUrgenciaAnuncio;
+    private TextView txtViewNivelUrgenciaAnuncio;
 
     private ImageButton btnVolver;
 
@@ -64,15 +69,17 @@ public class ComunicadoDetailActivity extends AppCompatActivity {
                 this::volver
         );
 
-        tituloComunicado = findViewById(R.id.comunicado_detail_title);
-        areaComunicado = findViewById(R.id.detail_area);
-        fechaComunicado = findViewById(R.id.detail_fecha);
-        tipoComunicado = findViewById(R.id.detail_tipo);
-        audienciaComunicado = findViewById(R.id.detail_audiencia);
-        comunicadoImage = findViewById(R.id.detail_imagen);
-        descripcionComunicado = findViewById(R.id.detail_descripcion);
-        lugarEvento = findViewById(R.id.detail_lugar);
-        nivelUrgenciaAnuncio = findViewById(R.id.detail_urgencia);
+        txtViewTituloComunicado = findViewById(R.id.comunicado_detail_title);
+        txtViewAreaComunicado = findViewById(R.id.detail_area);
+        txtViewFechaComunicado = findViewById(R.id.detail_fecha);
+        txtViewTipoComunicado = findViewById(R.id.detail_tipo);
+        txtViewAudienciaComunicado = findViewById(R.id.detail_audiencia);
+        imgViewComunicadoImage = findViewById(R.id.detail_imagen);
+        txtViewDescripcionComunicado = findViewById(R.id.detail_descripcion);
+        lblViewLugarEvento = findViewById(R.id.detail_lugar_label);
+        txtViewLugarEvento = findViewById(R.id.detail_lugar);
+        lblViewNivelUrgenciaAnuncio = findViewById(R.id.detail_urgencia_label);
+        txtViewNivelUrgenciaAnuncio = findViewById(R.id.detail_urgencia);
 
 
 
@@ -80,10 +87,20 @@ public class ComunicadoDetailActivity extends AppCompatActivity {
 
         Comunicado comunicado = ComunicadoRepositorio.getComunicadoByID(comunicadoID);
 
-        tituloComunicado.setText(comunicado.getTitulo());
-        areaComunicado.setText(comunicado.getArea());
-        fechaComunicado.setText(comunicado.getFecha());
-        tipoComunicado.setText(comunicado.getTipo().toString());
+        txtViewTituloComunicado.setText(comunicado.getTitulo());
+        txtViewAreaComunicado.setText(comunicado.getArea());
+        txtViewFechaComunicado.setText(comunicado.getFecha());
+
+        switch (comunicado.getTipo()){
+            case ANUNCIO:
+                txtViewTipoComunicado.setText(getString(R.string.anuncio));
+                break;
+            case EVENTO:
+                txtViewTipoComunicado.setText(getString(R.string.evento));
+                break;
+            default:
+                return;
+        }
 
         List<String> audiencia = new ArrayList<>();
         for(TipoAudiencia tipoAudiencia: comunicado.getAudiencia()){
@@ -97,16 +114,40 @@ public class ComunicadoDetailActivity extends AppCompatActivity {
                 audiencia.add(getString(R.string.administrativo));
             }
         }
-        audienciaComunicado.setText(String.join(", ", audiencia));
-        //audienciaComunicado.setText(comunicado.getAudiencia());
-        descripcionComunicado.setText(comunicado.getDescripcion());
-        //lugarEvento.setText(comunicado.getLugar());
-        //nivelUrgenciaAnuncio.setText(comunicado.getUrgencia());
-        //comunicadoImage.setImageResource(comunicado.getNombreArchivoImagen());
-        //imagen.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        txtViewAudienciaComunicado.setText(String.join(", ", audiencia));
+        txtViewDescripcionComunicado.setText(comunicado.getDescripcion());
+
+
+
         Uri uriImagen = ImageUtils.obtenerImagenUri(this,comunicado.getNombreArchivoImagen());
-        comunicadoImage.setImageURI(uriImagen);
-        comunicadoImage.setAdjustViewBounds(true);
+        imgViewComunicadoImage.setImageURI(uriImagen);
+        imgViewComunicadoImage.setAdjustViewBounds(true);
+        imgViewComunicadoImage.setScaleType(ImageView.ScaleType.CENTER_CROP);
+
+        if (comunicado.getTipo() == TipoComunicado.EVENTO){
+            Evento evento = (Evento)comunicado;
+            String lugar = evento.getLugar();
+            Log.e("*********************Lugar: ", lugar);
+            lblViewLugarEvento.setVisibility(View.VISIBLE);
+            txtViewLugarEvento.setVisibility(View.VISIBLE);
+            txtViewLugarEvento.setText(lugar);
+        }else{
+            lblViewLugarEvento.setVisibility(View.GONE);
+            txtViewLugarEvento.setVisibility(View.GONE);
+        }
+
+        if (comunicado.getTipo() == TipoComunicado.ANUNCIO){
+            Anuncio anuncio = (Anuncio)comunicado;
+            String nivelUrgencia = anuncio.getNivelUrgencia().name();
+            Log.e("*********************NivelUrgencia: ", nivelUrgencia);
+            lblViewNivelUrgenciaAnuncio.setVisibility(View.VISIBLE);
+            txtViewNivelUrgenciaAnuncio.setVisibility(View.VISIBLE);
+            txtViewNivelUrgenciaAnuncio.setText(nivelUrgencia);
+        }else{
+            lblViewNivelUrgenciaAnuncio.setVisibility(View.GONE);
+            txtViewNivelUrgenciaAnuncio.setVisibility(View.GONE);
+        }
+
 
 
     }

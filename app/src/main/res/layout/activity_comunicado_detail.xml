@@ -85,25 +85,6 @@
                 android:layout_marginBottom="16dp"
                 android:textSize="16sp"
                 tools:text="Audiencia: Estudiantes, Profesores"/>
-
-            <ImageView
-                android:id="@+id/detail_imagen"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:adjustViewBounds="true"
-                android:scaleType="fitCenter"
-                tools:srcCompat="@drawable/anuncio"
-                android:contentDescription="@string/imagen_del_comunicado" />
-
-            <TextView
-                android:id="@+id/detail_descripcion"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:textSize="16sp"
-                tools:text="Descripción detallada del comunicado..."/>
-
             <TextView
                 android:id="@+id/detail_lugar_label"
                 android:layout_width="match_parent"
@@ -140,6 +121,23 @@
                 android:visibility="gone"
                 tools:visibility="visible"
                 tools:text="ALTA"/>
+            <ImageView
+                android:id="@+id/detail_imagen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                tools:srcCompat="@drawable/anuncio"
+                android:contentDescription="@string/imagen_del_comunicado" />
+
+            <TextView
+                android:id="@+id/detail_descripcion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:textSize="16sp"
+                tools:text="Descripción detallada del comunicado..."/>
 
         </LinearLayout>
     </ScrollView>
