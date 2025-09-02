@@ -25,13 +25,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import Interfaces.VerComunicadoDetails;
 import Models.Comunicado;
 import Models.Evento;
 import Models.Usuario;
 import Persistencia.ComunicadoRepositorio;
 import Utils.ImageUtils;
 
-public class VerComunicadosActivity extends AppCompatActivity {
+public class VerComunicadosActivity extends AppCompatActivity implements VerComunicadoDetails {
     private Button btn_selFecha;
     private TextView selFecha;
     private ImageButton btnVolver;
@@ -164,6 +165,8 @@ public class VerComunicadosActivity extends AppCompatActivity {
 
                 comunicadoLayout.addView(fecha);
             }
+
+            comunicadoLayout.setOnClickListener(v -> showComunicadoDetails(VerComunicadosActivity.this, comunicado));
 
             // Agregar el comunicado al contenedor
             contenedorCom.addView(comunicadoLayout);

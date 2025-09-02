@@ -68,7 +68,7 @@ public class ComunicadoDetailActivity extends AppCompatActivity {
 
         this.btnVolver = findViewById(R.id.comDetailBackButton);
         btnVolver.setOnClickListener(
-                this::volver
+                v->finish()
         );
 
         txtViewTituloComunicado = findViewById(R.id.comunicado_detail_title);
@@ -173,10 +173,5 @@ public class ComunicadoDetailActivity extends AppCompatActivity {
 
 
 
-    }
-
-    private  void volver(View view){
-        Intent intent = new Intent(this, MisComunicadosActivity.class);
-        startActivity(intent);
     }
 }
