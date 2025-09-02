@@ -84,9 +84,10 @@ public class PublicarComunicadoActivity extends AppCompatActivity {
         ComunicadoRepositorio.cargarComunicados(this);
 
         ArrayAdapter<CharSequence> adapter= ArrayAdapter.createFromResource(this, R.array.areas_comunicado,
-                android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                R.layout.spinner_item);
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         spArea.setAdapter(adapter);
+
 
 
         rgTipo.setOnCheckedChangeListener((group, checkedId) -> {
