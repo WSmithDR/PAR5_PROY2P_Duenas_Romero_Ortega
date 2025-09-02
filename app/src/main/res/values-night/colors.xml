@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="login_button_background">#FF373737</color> <!-- Gris oscuro para el fondo del botón en modo noche -->
-    <color name="login_button_text">#FFFFFFFF</color>     <!-- Texto blanco para el botón en modo noche -->
+    <color name="login_button_background">#FF373737</color>
+    <color name="login_button_text">#FFFFFFFF</color>
+    <color name="textoGeneral">#FFFFFF</color>
+
 </resources>

@@ -158,7 +158,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#000000"
-            android:text="@string/seleccionar_fecha" />
+            android:text="@string/seleccionar_fecha"
+            android:textColor="@color/textoGeneral"
+            />
 
         <TextView
             android:layout_width="wrap_content"
@@ -190,7 +192,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#000000"
-            android:text="@string/adjuntar_imagen" />
+            android:text="@string/adjuntar_imagen"
+            android:textColor="@color/textoGeneral"/>
 
         <TextView
             android:id="@+id/tvImagenNombre"
@@ -212,7 +215,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:backgroundTint="#000000"
-                android:text="@string/publicar" />
+                android:text="@string/publicar"
+                android:textColor="@color/textoGeneral"/>
 
             <Button
                 android:id="@+id/btnCancelar"
@@ -221,7 +225,8 @@
                 android:layout_marginStart="12dp"
                 android:layout_weight="1"
                 android:backgroundTint="#000000"
-                android:text="@string/cancelar" />
+                android:text="@string/cancelar"
+                android:textColor="@color/textoGeneral"/>
         </LinearLayout>
 
     </LinearLayout>
