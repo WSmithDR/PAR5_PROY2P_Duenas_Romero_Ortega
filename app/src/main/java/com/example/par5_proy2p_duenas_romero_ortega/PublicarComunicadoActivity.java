@@ -37,6 +37,7 @@ public class PublicarComunicadoActivity extends AppCompatActivity {
 
     private static final int REQUEST_CODE_PICK_IMAGE = 1001;
     private ImageButton btnVolver;
+    private Spinner spUrgencia;
 
     private RadioGroup rgTipo;
     private RadioButton rbAnuncio, rbEvento;
@@ -44,8 +45,7 @@ public class PublicarComunicadoActivity extends AppCompatActivity {
     private CheckBox cbEstudiantes, cbProfesores, cbAdministrativo;
     private EditText etTitulo, etLugar, etDescripcion;
     private Button btnFecha, btnImagen, btnPublicar, btnCancelar;
-    private TextView tvImagenNombre, tvLugarLabel, tvFechaLabel;
-
+    private TextView tvImagenNombre, tvLugarLabel, tvFechaLabel , LvlUrgencia ;
     private String fechaSeleccionada = "";
     private Uri imagenUri = null;
     private String imagenNombre = "";
@@ -73,6 +73,8 @@ public class PublicarComunicadoActivity extends AppCompatActivity {
         tvImagenNombre = findViewById(R.id.tvImagenNombre);
         tvLugarLabel = findViewById(R.id.tvLugarLabel);
         tvFechaLabel = findViewById(R.id.tvFechaLabel);
+        spUrgencia= findViewById(R.id.spUrgencia);
+        LvlUrgencia=findViewById(R.id.LvlUrgencia);
 
         this.btnVolver = findViewById(R.id.backButton);
         btnVolver.setOnClickListener(
@@ -87,9 +89,16 @@ public class PublicarComunicadoActivity extends AppCompatActivity {
         ComunicadoRepositorio.cargarComunicados(this);
 
         ArrayAdapter<CharSequence> adapter= ArrayAdapter.createFromResource(this, R.array.areas_comunicado,
-                android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                R.layout.spinner_item);
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         spArea.setAdapter(adapter);
+
+        ArrayAdapter<CharSequence> adapter1= ArrayAdapter.createFromResource(this, R.array.nivel_urgencia,
+                R.layout.spinner_item);
+        adapter1.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        spUrgencia.setAdapter(adapter1);
+
+
 
 
         rgTipo.setOnCheckedChangeListener((group, checkedId) -> {
@@ -98,6 +107,8 @@ public class PublicarComunicadoActivity extends AppCompatActivity {
                 btnFecha.setVisibility(View.VISIBLE);
                 tvLugarLabel.setVisibility(View.VISIBLE);
                 tvFechaLabel.setVisibility(View.VISIBLE);
+                spUrgencia.setVisibility(View.GONE);
+                LvlUrgencia.setVisibility(View.GONE);
             } else {
                 etLugar.setVisibility(View.GONE);
                 btnFecha.setVisibility(View.GONE);
@@ -105,6 +116,8 @@ public class PublicarComunicadoActivity extends AppCompatActivity {
                 tvFechaLabel.setVisibility(View.GONE);
                 fechaSeleccionada = "";
                 btnFecha.setText(R.string.seleccionar_fecha);
+                spUrgencia.setVisibility(View.VISIBLE);
+                LvlUrgencia.setVisibility(View.VISIBLE);
             }
         });
 

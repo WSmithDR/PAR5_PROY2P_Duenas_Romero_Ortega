@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <string name="app_name" >Espol News</string>
     <string name="tablero_comunicados">Notice Board</string>
     <string name="order_titulo">Sort by Title</string>
     <string name="order_fecha">Sort by Date</string>
@@ -28,6 +28,7 @@
     <string name="anuncio">Announcement</string>
     <string name="evento">Event</string>
     <string name="area">Area:</string>
+    <string name="urgencia">Urgency:</string>
     <string name="audiencia">Audience:</string>
     <string name="estudiantes">Students</string>
     <string name="profesores">Teachers</string>
@@ -67,6 +68,13 @@
     </string-array>
     <string name="no_specific_area">No specific area</string>
     <string name="error_area_invalida">Please select a valid area.</string>
+
+    <string-array name="nivel_urgencia">
+    <item>Low</item>
+    <item>Middle</item>
+    <item>High</item>
+    </string-array>
+
 
     <string name="lista_guardada">List of announcements saved successfully</string>
     <string name="error_guardar_lista">Error saving list of announcements</string>

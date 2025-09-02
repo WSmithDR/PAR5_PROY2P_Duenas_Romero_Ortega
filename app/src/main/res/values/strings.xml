@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">PAR5_PROY2P_Duenas_Romero_Ortega</string>
+    <string name="app_name" >Comunicados Espol</string>
 
     <string name="tablero_comunicados">Tablero de Comunicados</string>
     <string name="order_titulo">Ordenar por Título</string>
@@ -28,6 +28,7 @@
     <string name="anuncio">Anuncio</string>
     <string name="evento">Evento</string>
     <string name="area">Área:</string>
+    <string name="urgencia">Urgencia:</string>
     <string name="audiencia">Audiencia:</string>
     <string name="estudiantes">Estudiantes</string>
     <string name="profesores">Profesores</string>
@@ -65,6 +66,14 @@
         <item>Cultural</item>
         <item>General</item>
     </string-array>
+
+    <string-array name="nivel_urgencia">
+        <item>Bajo</item>
+        <item>Medio</item>
+        <item>Alta</item>
+
+    </string-array>
+
     <string name="no_specific_area">Área no especificada</string>
     <string name="error_area_invalida">Por favor, seleccione un área válida.</string>
 
@@ -82,4 +91,5 @@
     <string name="label_fecha">Fecha: </string>
     <string name="label_tipo">Tipo: </string>
     <string name="label_audiencia">Para: </string>
+
 </resources>
