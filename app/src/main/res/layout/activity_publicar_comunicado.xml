@@ -18,7 +18,8 @@
             android:layout_height="35dp"
             android:background="?attr/listChoiceBackgroundIndicator"
             android:contentDescription="@string/back_button_content_description"
-            android:src="?attr/homeAsUpIndicator" />
+            android:src="?attr/homeAsUpIndicator"
+            app:tint="@color/iconColor" />
 
         <TextView
             android:layout_width="match_parent"
@@ -34,9 +35,10 @@
         <TextView
             android:layout_width="43dp"
             android:layout_height="wrap_content"
-            android:text="Tipo:"
+            android:text="@string/tipo"
+            android:textStyle="bold"
             android:textColor="#050505"
-            android:textStyle="bold" />
+            />
 
         <RadioGroup
             android:id="@+id/rgTipo"
@@ -50,7 +52,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/anuncio"
-                app:buttonTint="@color/radio_button_color"/>
+                app:buttonTint="@color/radio_button_color"
+                android:textColor="@color/texto"/>
 
             <androidx.appcompat.widget.AppCompatRadioButton
                 android:id="@+id/rbEvento"
@@ -58,7 +61,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:text="@string/evento"
-                app:buttonTint="@color/radio_button_color"/>
+                app:buttonTint="@color/radio_button_color"
+                android:textColor="@color/texto"/>
         </RadioGroup>
 
 
@@ -94,7 +98,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/estudiantes"
-                app:buttonTint="@color/radio_button_color" />
+                app:buttonTint="@color/radio_button_color"
+                android:textColor="@color/texto"
+                />
 
             <androidx.appcompat.widget.AppCompatCheckBox
                 android:id="@+id/cbProfesores"
@@ -102,7 +108,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:text="@string/profesores"
-                app:buttonTint="@color/radio_button_color" />
+                app:buttonTint="@color/radio_button_color"
+                android:textColor="@color/texto"/>
 
             <androidx.appcompat.widget.AppCompatCheckBox
                 android:id="@+id/cbAdministrativo"
@@ -110,7 +117,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:text="@string/administrativo"
-                app:buttonTint="@color/radio_button_color" />
+                app:buttonTint="@color/radio_button_color"
+                android:textColor="@color/texto"/>
         </LinearLayout>
 
 
@@ -126,7 +134,10 @@
             android:id="@+id/etTitulo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/titulo_comunicado_hint" />
+            android:hint="@string/titulo_comunicado_hint"
+            android:textColor="@color/texto"
+            android:textColorHint="@color/hintColor"
+            />
 
         <TextView
             android:id="@+id/tvLugarLabel"
@@ -141,7 +152,9 @@
             android:id="@+id/etLugar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/lugar_comunicado_hint" />
+            android:hint="@string/lugar_comunicado_hint"
+            android:textColorHint="@color/hintColor"
+            android:textColor="@color/texto"/>
 
 
         <TextView
@@ -176,7 +189,9 @@
             android:layout_height="120dp"
             android:gravity="top"
             android:hint="@string/descripcion_comunicado_hint"
-            android:inputType="textMultiLine" />
+            android:inputType="textMultiLine"
+            android:textColor="@color/texto"
+            android:textColorHint="@color/hintColor"/>
 
 
         <TextView
@@ -193,7 +208,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="#000000"
             android:text="@string/adjuntar_imagen"
-            android:textColor="@color/textoGeneral"/>
+            android:textColor="@color/textoGeneral" />
 
         <TextView
             android:id="@+id/tvImagenNombre"

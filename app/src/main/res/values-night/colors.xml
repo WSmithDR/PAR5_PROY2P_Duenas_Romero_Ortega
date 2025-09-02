@@ -3,5 +3,10 @@
     <color name="login_button_background">#FF373737</color>
     <color name="login_button_text">#FFFFFFFF</color>
     <color name="textoGeneral">#FFFFFF</color>
+    <color name="texto">#000000</color>
+    <color name="hintColor">#808080</color>
+    <color name="iconColor">#000000</color>
+
+
 
 </resources>

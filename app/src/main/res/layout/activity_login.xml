@@ -41,7 +41,7 @@
             android:layout_marginBottom="32dp"
             android:text="@string/login_title"
             android:textAlignment="center"
-            android:textColor="?attr/colorOnSurface"
+            android:textColor="@color/texto"
             android:textSize="30sp"
             android:textStyle="bold" />
 
@@ -59,7 +59,9 @@
             android:paddingTop="12dp"
             android:paddingEnd="12dp"
             android:paddingRight="12dp"
-            android:paddingBottom="12dp" />
+            android:paddingBottom="12dp"
+            android:textColorHint="@color/hintColor"
+            android:textColor="@color/texto"/>
 
         <EditText
             android:id="@+id/password"
@@ -69,7 +71,9 @@
             android:background="@android:drawable/edit_text"
             android:hint="@string/password_placeholder"
             android:inputType="textPassword"
-            android:padding="12dp" />
+            android:padding="12dp"
+            android:textColorHint="@color/hintColor"
+            android:textColor="@color/texto"/>
 
         <Button
             android:id="@+id/btnlogin"
@@ -78,7 +82,7 @@
             android:backgroundTint="@color/login_button_background"
             android:padding="12dp"
             android:text="@string/login_button"
-            android:textColor="@color/login_button_text" />
+            android:textColor="@color/textoGeneral" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
