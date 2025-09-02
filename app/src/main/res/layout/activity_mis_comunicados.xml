@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="@drawable/background2"
     android:orientation="vertical"
     tools:context=".MisComunicadosActivity">
 
@@ -16,20 +16,22 @@
 
         <ImageButton
             android:id="@+id/backButton"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:background="?attr/listChoiceBackgroundIndicator"
+            android:layout_width="53dp"
+            android:layout_height="53dp"
+            android:background="#00000000"
             android:contentDescription="@string/back_button_content_description"
             android:src="?attr/homeAsUpIndicator" />
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="38dp"
             android:layout_marginStart="8dp"
             android:text="@string/tablero_comunicados"
+            android:textColor="#000000"
             android:textSize="20sp"
             android:textStyle="bold" />
     </LinearLayout>
+
     <TableLayout
         android:layout_width="match_parent"
         android:id="@+id/misComunicadosTableLayout"
@@ -37,10 +39,11 @@
         android:layout_weight="1"
         android:stretchColumns="*"
         android:shrinkColumns="*">
-        
+
         <TableRow
             android:id="@+id/headerRow"
-            android:background="#f5f5f5"
+            android:layout_height="86dp"
+            android:background="#FFA726"
             android:paddingVertical="8dp">
 
             <TextView
@@ -51,6 +54,7 @@
                 android:clickable="true"
                 android:padding="16dp"
                 android:text="@string/titulo"
+                android:textColor="#020202"
                 android:textStyle="bold" />
 
             <TextView
@@ -61,6 +65,7 @@
                 android:clickable="true"
                 android:padding="16dp"
                 android:text="@string/fecha"
+                android:textColor="#020202"
                 android:textStyle="bold" />
         </TableRow>
         <ScrollView
@@ -77,10 +82,11 @@
                 
         </ScrollView>
     </TableLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FFFFFF"
+        android:background="#FFA726"
         android:elevation="8dp"
         android:orientation="vertical"
         android:padding="16dp">
@@ -100,7 +106,7 @@
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#E0E0E0"
+            android:backgroundTint="#ffffff"
             android:text="@string/cancelar"
             android:textColor="#000000" />
     </LinearLayout>
