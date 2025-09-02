@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Comunicados Espol</string>
+    <string name="app_name" >Comunicados Espol</string>
 
     <string name="tablero_comunicados">Tablero de Comunicados</string>
     <string name="order_titulo">Ordenar por Título</string>
@@ -73,13 +73,23 @@
         <item>Alta</item>
 
     </string-array>
-    
+
+    <string name="no_specific_area">Área no especificada</string>
+    <string name="error_area_invalida">Por favor, seleccione un área válida.</string>
+
     <string name="lista_guardada">Lista de comunicados guardada exitosamente</string>
     <string name="error_guardar_lista">Error al guardar la lista de comunicados</string>
     <string name="ascendente" translatable="false"> ↑</string>
     <string name="descendente" translatable="false"> ↓</string>
-    
+
     <string name="usuario_no_encontrado">Usuario no encontrado</string>
     <string name="contrasena_incorrecta">Contraseña incorrecta</string>
+    <string name="imagen_del_comunicado">Imagen del comunicado</string>
+    <string name="lugar_evento">Lugar del evento: </string>
+    <string name="nivel_de_urgencia">Nivel de Urgencia: </string>
+    <string name="label_area">Área: </string>
+    <string name="label_fecha">Fecha: </string>
+    <string name="label_tipo">Tipo: </string>
+    <string name="label_audiencia">Para: </string>
 
 </resources>

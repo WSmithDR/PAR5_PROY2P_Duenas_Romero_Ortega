@@ -20,6 +20,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import Enums.OrdComunicado;
+import Interfaces.VerComunicadoDetails;
 import Models.Comunicado;
 import Models.Usuario;
 import Persistencia.ComunicadoRepositorio;
@@ -35,7 +36,7 @@ import android.widget.Toast;
 import android.graphics.Color;
 
 
-public class MisComunicadosActivity extends AppCompatActivity {
+public class MisComunicadosActivity extends AppCompatActivity implements VerComunicadoDetails {
     private ImageButton btnVolver;
     private TableLayout contentTableLayout;
     private Button btnGuardarLista;
@@ -242,15 +243,19 @@ public class MisComunicadosActivity extends AppCompatActivity {
                     TableRow.LayoutParams.WRAP_CONTENT,
                     1f));
             fechaView.setPadding(16, 16, 16, 16);
-            fechaView.setText(comunicado.getFecha() != null ? comunicado.getFecha() : "Fecha N/A");
+            fechaView.setText(comunicado.getFecha() != null ? comunicado.getFecha() : "N/A");
             fechaView.setTextSize(20);
             row.addView(fechaView);
             fechaView.setTextColor(Color.BLACK);
 
 
             contentTableLayout.addView(row);
+
+            row.setOnClickListener(v -> showComunicadoDetails(MisComunicadosActivity.this, comunicado));
         }
     }
+
+
 
     private void guardarListaComunicados() {
         try {

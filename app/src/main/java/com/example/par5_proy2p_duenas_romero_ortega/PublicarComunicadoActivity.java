@@ -13,6 +13,8 @@ import java.util.Calendar;
 
 import android.provider.OpenableColumns;
 import android.view.View;
+
+import Enums.AreaComunicado;
 import Enums.TipoComunicado;
 import Enums.TipoAudiencia;
 import Models.Anuncio;
@@ -29,6 +31,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class PublicarComunicadoActivity extends AppCompatActivity {
 
@@ -190,7 +193,17 @@ public class PublicarComunicadoActivity extends AppCompatActivity {
 
         boolean esEvento = (rgTipo.getCheckedRadioButtonId() == R.id.rbEvento);
         TipoComunicado tipo = esEvento ? TipoComunicado.EVENTO : TipoComunicado.ANUNCIO;
-        String area = spArea.getSelectedItem().toString();
+
+        int selectedPosition = spArea.getSelectedItemPosition();
+        AreaComunicado area;
+        AreaComunicado[] todasLasAreas = AreaComunicado.values();
+        if (selectedPosition >= 0 && selectedPosition < todasLasAreas.length) {
+            area = todasLasAreas[selectedPosition];
+        }
+        else {
+            throw new DatosIncompletosException(getString(R.string.error_area_invalida));
+        }
+
         List<TipoAudiencia> audiencia = new ArrayList<>();
         if (cbEstudiantes.isChecked()) audiencia.add(TipoAudiencia.ESTUDIANTES);
         if (cbProfesores.isChecked()) audiencia.add(TipoAudiencia.PROFESORES);

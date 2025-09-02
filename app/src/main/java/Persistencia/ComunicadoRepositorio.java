@@ -6,8 +6,10 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
+import Enums.AreaComunicado;
 import Enums.NivelUrgencia;
 import Enums.TipoAudiencia;
 import Enums.TipoComunicado;
@@ -58,7 +60,7 @@ public final class ComunicadoRepositorio {
                                 + ". Usando ANUNCIO como valor por defecto.");
                         continue;
                     }
-                    String area = parts[3].trim();
+                    AreaComunicado area = AreaComunicado.valueOf(parts[3].trim().toUpperCase(Locale.ROOT));
                     String titulo = parts[4].trim();
                     String[] audienciaArray = parts[5].trim().split(";");
                     List<TipoAudiencia> audiencia = new ArrayList<>();
@@ -140,6 +142,15 @@ public final class ComunicadoRepositorio {
         return comunicados.stream()
                 .filter(c -> c.getUserId().equals(userId))
                 .collect(Collectors.toList());
+    }
+
+    public static Comunicado getComunicadoByID(int id) {
+        for (Comunicado comunicado : comunicados) {
+            if (comunicado.getId() == id) {
+                return comunicado;
+            }
+        }
+        return null;
     }
 
     public static void guardarComunicado(Context context, Comunicado nuevoComunicado) {

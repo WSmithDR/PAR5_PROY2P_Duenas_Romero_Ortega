@@ -25,12 +25,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import Interfaces.VerComunicadoDetails;
 import Models.Comunicado;
 import Models.Evento;
 import Models.Usuario;
 import Persistencia.ComunicadoRepositorio;
+import Utils.ImageUtils;
 
-public class VerComunicadosActivity extends AppCompatActivity {
+public class VerComunicadosActivity extends AppCompatActivity implements VerComunicadoDetails {
     private Button btn_selFecha;
     private TextView selFecha;
     private ImageButton btnVolver;
@@ -38,6 +40,7 @@ public class VerComunicadosActivity extends AppCompatActivity {
     public ArrayList<Comunicado> listaFiltrada;
     private Uri imagenUri;
 
+    private static final int MAX_DESC_PREVIEW_LENGTH = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,13 +140,19 @@ public class VerComunicadosActivity extends AppCompatActivity {
             // Imagen
             ImageView imagen = new ImageView(this);
             imagen.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            Uri uriImagen = obtenerImagenUri(comunicado.getNombreArchivoImagen());
+            Uri uriImagen = ImageUtils.obtenerImagenUri(this,comunicado.getNombreArchivoImagen());
             imagen.setImageURI(uriImagen);
             imagen.setAdjustViewBounds(true);
 
             // Descripción
             TextView descripcion = new TextView(this);
-            descripcion.setText(comunicado.getDescripcion());
+            String descOriginal = comunicado.getDescripcion();
+            if(descOriginal != null && descOriginal.length() > MAX_DESC_PREVIEW_LENGTH){
+                String shortDesc = descOriginal.substring(0, MAX_DESC_PREVIEW_LENGTH)+"...";
+                descripcion.setText(shortDesc);
+            }else{
+                descripcion.setText(descOriginal);
+            }
             descripcion.setTextSize(25);
             descripcion.setTextColor(Color.BLACK);
 
@@ -156,13 +165,16 @@ public class VerComunicadosActivity extends AppCompatActivity {
                 Evento evento = (Evento) comunicado;
 
                 TextView fecha = new TextView(this);
-                fecha.setText("Fecha: " + evento.getFecha());
+                String fomatedFecha = getString(R.string.fecha_label) + " " +evento.getFecha();
+                fecha.setText(fomatedFecha);
                 fecha.setTextSize(20);
                 fecha.setTextColor(Color.BLACK);
                 fecha.setPadding(0, 8, 0, 0);
 
                 comunicadoLayout.addView(fecha);
             }
+
+            comunicadoLayout.setOnClickListener(v -> showComunicadoDetails(VerComunicadosActivity.this, comunicado));
 
             // Agregar el comunicado al contenedor
             contenedorCom.addView(comunicadoLayout);
@@ -182,10 +194,6 @@ public class VerComunicadosActivity extends AppCompatActivity {
     }
 
 
-    private Uri obtenerImagenUri(String nombreArchivo) {
-        File file = new File(getFilesDir(), nombreArchivo);
-        return Uri.fromFile(file);
-    }
 
     private boolean hayComunicadosEnFecha(String fecha, List<Comunicado> comunicados) {
         for (Comunicado comunicado : comunicados) {

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 
+import Enums.AreaComunicado;
 import Enums.NivelUrgencia;
 import Enums.TipoAudiencia;
 import Models.Anuncio;
@@ -31,7 +32,7 @@ public class DatosDePruebaComunicados {
 
         String[] titulosBaseAnuncio = {"Aviso Importante", "Recordatorio", "Notificación Urgente", "Información General", "Actualización"};
         String[] titulosBaseEvento = {"Reunión Próxima", "Evento Especial", "Seminario Web", "Taller Práctico", "Celebración"};
-        String[] areas = {"Rectorado", "Académico", "Bienestar Estudiantil", "Sistemas", "Biblioteca", "Deportes"};
+        AreaComunicado[] areas = AreaComunicado.values();
         String[] lugares = {"Auditorio Principal", "Sala de Conferencias A", "Online", "Patio Central", "Laboratorio X"};
 
         for (int grupo = 1; grupo <= 10; grupo++) {
@@ -40,7 +41,7 @@ public class DatosDePruebaComunicados {
 
             for (int i = 0; i < numComunicadosEnGrupo; i++) {
                 int id = 100 + (grupo * 10) + i;
-                String area = areas[rd.nextInt(areas.length)];
+                AreaComunicado area = areas[rd.nextInt(areas.length)];
                 String fecha = generarFechaAleatoria();
 
                 if (grupo % 2 == 0) {
@@ -77,7 +78,7 @@ public class DatosDePruebaComunicados {
         }
 
         for (int i = 1; i <= 15; i++) {
-            String area = areas[rd.nextInt(areas.length)];
+            AreaComunicado area = areas[rd.nextInt(areas.length)];
             String titulo = (i % 2 == 0 ? "Aviso " : "Evento ") + "Pareja " + (i + 1) / 2;
 
             String primeraFecha = generarFechaAleatoria();
@@ -129,7 +130,7 @@ public class DatosDePruebaComunicados {
 
             for (int i = 1; i <= numComunicados; i++) {
                 int id = 500 + (grupoFecha * 10) + i;
-                String area = areas[rd.nextInt(areas.length)];
+                AreaComunicado area = areas[rd.nextInt(areas.length)];
                 String titulo = "Misma Fecha " + grupoFecha + " - " +
                         (i == 1 ? "Primero" : i == 2 ? "Segundo" : i == 3 ? "Tercero" : "Cuarto") + " Título";
 
@@ -156,7 +157,7 @@ public class DatosDePruebaComunicados {
         for (int i = 1; i <= 20; i++) {
             int id = 400 + i;
             String titulo = "Comunicado Individual " + i;
-            String area = areas[rd.nextInt(areas.length)];
+            AreaComunicado area = areas[rd.nextInt(areas.length)];
             String fecha = generarFechaAleatoria();
 
             if (rd.nextBoolean()) {

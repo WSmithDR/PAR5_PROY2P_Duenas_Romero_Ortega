@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ComunicadoDetailActivity"
+    android:background="@drawable/background2"
+    >
+
+    <LinearLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageButton
+            android:id="@+id/comDetailBackButton"
+            android:layout_width="34dp"
+            android:layout_height="42dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/back_button_content_description"
+            android:src="?attr/homeAsUpIndicator" />
+
+        <TextView
+            android:id="@+id/comunicado_detail_title"
+            android:layout_width="339dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:text="Título del Comunicado" />
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/contentScrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/headerLayout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:id="@+id/scrollableContentLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_area"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:layout_marginEnd="8dp"/>
+                <TextView
+                    android:id="@+id/detail_area"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="16sp"
+                    tools:text="Administrativo"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_fecha"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:layout_marginEnd="8dp"/>
+                <TextView
+                    android:id="@+id/detail_fecha"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="16sp"
+                    tools:text="28/05/2024"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_tipo"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:layout_marginEnd="8dp"/>
+                <TextView
+                    android:id="@+id/detail_tipo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="16sp"
+                    tools:text="Evento"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="16dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_audiencia"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:layout_marginEnd="8dp"/>
+                <TextView
+                    android:id="@+id/detail_audiencia"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="16sp"
+                    tools:text="Estudiantes, Profesores"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lugar_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="16dp"
+                android:visibility="gone"
+                tools:visibility="visible">
+                <TextView
+                    android:id="@+id/detail_lugar_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lugar_evento"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:layout_marginEnd="8dp"/>
+                <TextView
+                    android:id="@+id/detail_lugar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="16sp"
+                    tools:text="Babahoyo"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/urgencia_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="16dp"
+                android:visibility="gone"
+                tools:visibility="visible">
+                <TextView
+                    android:id="@+id/detail_urgencia_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/nivel_de_urgencia"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:layout_marginEnd="8dp"/>
+                <TextView
+                    android:id="@+id/detail_urgencia"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="16sp"
+                    tools:text="ALTA"/>
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/detail_imagen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                tools:srcCompat="@drawable/anuncio"
+                android:contentDescription="@string/imagen_del_comunicado" />
+
+            <TextView
+                android:id="@+id/detail_descripcion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:textSize="16sp"
+                tools:text="Descripción detallada del comunicado... "/>
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

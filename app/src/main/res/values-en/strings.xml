@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <string name="app_name" >Espol News</string>
     <string name="tablero_comunicados">Notice Board</string>
     <string name="order_titulo">Sort by Title</string>
     <string name="order_fecha">Sort by Date</string>
@@ -66,6 +66,8 @@
         <item>Cultural</item>
         <item>General</item>
     </string-array>
+    <string name="no_specific_area">No specific area</string>
+    <string name="error_area_invalida">Please select a valid area.</string>
 
     <string-array name="nivel_urgencia">
     <item>Low</item>
@@ -79,5 +81,12 @@
 
     <string name="usuario_no_encontrado">User not found</string>
     <string name="contrasena_incorrecta">Incorrect password</string>
+    <string name="imagen_del_comunicado">Notice image</string>
+    <string name="lugar_evento">Event Place: </string>
+    <string name="nivel_de_urgencia">Urgency Level: </string>
+    <string name="label_area">Area: </string>
+    <string name="label_fecha">Date: </string>
+    <string name="label_tipo">Type: </string>
+    <string name="label_audiencia">For: </string>
 </resources>
 
