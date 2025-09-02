@@ -54,73 +54,141 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <TextView
-                android:id="@+id/detail_area"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:textSize="16sp"
-                tools:text="Área: Vicerrectorado"/>
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_area"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:layout_marginEnd="8dp"/>
+                <TextView
+                    android:id="@+id/detail_area"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="16sp"
+                    tools:text="Administrativo"/>
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/detail_fecha"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:textSize="16sp"
-                tools:text="Fecha: 28/05/2024"/>
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_fecha"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:layout_marginEnd="8dp"/>
+                <TextView
+                    android:id="@+id/detail_fecha"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="16sp"
+                    tools:text="28/05/2024"/>
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/detail_tipo"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:textSize="16sp"
-                tools:text="Tipo: Evento"/>
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_tipo"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:layout_marginEnd="8dp"/>
+                <TextView
+                    android:id="@+id/detail_tipo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="16sp"
+                    tools:text="Evento"/>
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/detail_audiencia"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="16dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_audiencia"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:layout_marginEnd="8dp"/>
+                <TextView
+                    android:id="@+id/detail_audiencia"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="16sp"
+                    tools:text="Estudiantes, Profesores"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lugar_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:layout_marginBottom="16dp"
-                android:textSize="16sp"
-                tools:text="Audiencia: Estudiantes, Profesores"/>
-            <TextView
-                android:id="@+id/detail_lugar_label"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
                 android:visibility="gone"
-                tools:visibility="visible"
-                android:text="@string/lugar_evento"/>
+                tools:visibility="visible">
+                <TextView
+                    android:id="@+id/detail_lugar_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lugar_evento"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:layout_marginEnd="8dp"/>
+                <TextView
+                    android:id="@+id/detail_lugar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="16sp"
+                    tools:text="Auditorio Principal"/>
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/detail_lugar"
+            <!-- Nivel de Urgencia (Visible si es Anuncio) -->
+            <LinearLayout
+                android:id="@+id/urgencia_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:layout_marginBottom="16dp"
-                android:textSize="16sp"
                 android:visibility="gone"
-                tools:visibility="visible"
-                tools:text="Auditorio Principal"/>
+                tools:visibility="visible">
+                <TextView
+                    android:id="@+id/detail_urgencia_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/nivel_de_urgencia"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:layout_marginEnd="8dp"/>
+                <TextView
+                    android:id="@+id/detail_urgencia"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="16sp"
+                    tools:text="ALTA"/>
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/detail_urgencia_label"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:visibility="gone"
-                tools:visibility="visible"
-                android:text="@string/nivel_de_urgencia"/>
-
-            <TextView
-                android:id="@+id/detail_urgencia"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:visibility="gone"
-                tools:visibility="visible"
-                tools:text="ALTA"/>
             <ImageView
                 android:id="@+id/detail_imagen"
                 android:layout_width="match_parent"
