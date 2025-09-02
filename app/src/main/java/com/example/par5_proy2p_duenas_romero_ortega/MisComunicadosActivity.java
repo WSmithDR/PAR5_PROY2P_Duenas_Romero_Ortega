@@ -32,6 +32,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import android.widget.Toast;
+import android.graphics.Color;
+
 
 public class MisComunicadosActivity extends AppCompatActivity {
     private ImageButton btnVolver;
@@ -231,6 +233,8 @@ public class MisComunicadosActivity extends AppCompatActivity {
             tituloView.setText(comunicado.getTitulo() != null ? comunicado.getTitulo() : "Título N/A");
             row.addView(tituloView);
             tituloView.setTextSize(20);
+            tituloView.setTextColor(Color.BLACK);
+
 
             TextView fechaView = new TextView(this);
             fechaView.setLayoutParams(new TableRow.LayoutParams(
@@ -241,6 +245,8 @@ public class MisComunicadosActivity extends AppCompatActivity {
             fechaView.setText(comunicado.getFecha() != null ? comunicado.getFecha() : "Fecha N/A");
             fechaView.setTextSize(20);
             row.addView(fechaView);
+            fechaView.setTextColor(Color.BLACK);
+
 
             contentTableLayout.addView(row);
         }

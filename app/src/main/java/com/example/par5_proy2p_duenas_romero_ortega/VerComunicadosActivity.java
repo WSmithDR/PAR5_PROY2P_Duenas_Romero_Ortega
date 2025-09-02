@@ -2,11 +2,13 @@ package com.example.par5_proy2p_duenas_romero_ortega;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -31,7 +33,7 @@ import Persistencia.ComunicadoRepositorio;
 public class VerComunicadosActivity extends AppCompatActivity {
     private Button btn_selFecha;
     private TextView selFecha;
-    private Button btn_volverVerCom;
+    private ImageButton btnVolver;
     private List<Comunicado> comunicados;
     public ArrayList<Comunicado> listaFiltrada;
     private Uri imagenUri;
@@ -50,7 +52,6 @@ public class VerComunicadosActivity extends AppCompatActivity {
 
         btn_selFecha = findViewById(R.id.Btn_selFecha);
         selFecha = findViewById(R.id.txtFecha);
-        btn_volverVerCom = findViewById(R.id.Btn_volverCom);
 
         selFecha.setText("");
 
@@ -58,12 +59,16 @@ public class VerComunicadosActivity extends AppCompatActivity {
 
 
         //Volver al activity anterior
-        btn_volverVerCom.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(VerComunicadosActivity.this, MainActivity.class));
-            }
-        });
+        this.btnVolver = findViewById(R.id.backButton);
+        btnVolver.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(VerComunicadosActivity.this, MainActivity.class);
+                        startActivity(intent);
+                    }
+                });
+
 
         //Seleccionar fecha
         btn_selFecha.setOnClickListener(v -> {
@@ -114,8 +119,9 @@ public class VerComunicadosActivity extends AppCompatActivity {
         LinearLayout contenedorCom = findViewById(R.id.layout_Com);
         contenedorCom.removeAllViews();
 
-        for (Comunicado comunicado : comunicadosF) {
-            // Layout de cada comunicado
+        for (int i = 0; i < comunicadosF.size(); i++) {
+            Comunicado comunicado = comunicadosF.get(i);
+
             LinearLayout comunicadoLayout = new LinearLayout(this);
             comunicadoLayout.setOrientation(LinearLayout.VERTICAL);
             comunicadoLayout.setPadding(10, 10, 10, 10);
@@ -123,7 +129,8 @@ public class VerComunicadosActivity extends AppCompatActivity {
             // Título
             TextView titulo = new TextView(this);
             titulo.setText(comunicado.getTitulo());
-            titulo.setTextSize(18);
+            titulo.setTextSize(25);
+            titulo.setTextColor(Color.BLACK);
             titulo.setPadding(0, 0, 0, 8);
             titulo.setGravity(Gravity.CENTER);
 
@@ -137,29 +144,43 @@ public class VerComunicadosActivity extends AppCompatActivity {
             // Descripción
             TextView descripcion = new TextView(this);
             descripcion.setText(comunicado.getDescripcion());
-            descripcion.setTextSize(14);
+            descripcion.setTextSize(25);
+            descripcion.setTextColor(Color.BLACK);
 
             comunicadoLayout.addView(titulo);
             comunicadoLayout.addView(imagen);
             comunicadoLayout.addView(descripcion);
 
-            //Si es un evento, mostrar la fecha
+            // Si es un evento, mostrar la fecha
             if (comunicado instanceof Evento) {
                 Evento evento = (Evento) comunicado;
 
                 TextView fecha = new TextView(this);
                 fecha.setText("Fecha: " + evento.getFecha());
-                fecha.setTextSize(12);
+                fecha.setTextSize(20);
+                fecha.setTextColor(Color.BLACK);
                 fecha.setPadding(0, 8, 0, 0);
 
                 comunicadoLayout.addView(fecha);
             }
 
-            // Agregar al contenedor principal
+            // Agregar el comunicado al contenedor
             contenedorCom.addView(comunicadoLayout);
 
+
+            if (i < comunicadosF.size() - 1) {
+                View divider = new View(this);
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT, 2);
+                params.setMargins(0, 16, 0, 16);
+                divider.setLayoutParams(params);
+                divider.setBackgroundColor(Color.GRAY);
+
+                contenedorCom.addView(divider);
+            }
         }
     }
+
 
     private Uri obtenerImagenUri(String nombreArchivo) {
         File file = new File(getFilesDir(), nombreArchivo);
