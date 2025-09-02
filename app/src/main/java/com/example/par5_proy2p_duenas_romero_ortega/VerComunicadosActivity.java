@@ -29,6 +29,7 @@ import Models.Comunicado;
 import Models.Evento;
 import Models.Usuario;
 import Persistencia.ComunicadoRepositorio;
+import Utils.ImageUtils;
 
 public class VerComunicadosActivity extends AppCompatActivity {
     private Button btn_selFecha;
@@ -137,7 +138,7 @@ public class VerComunicadosActivity extends AppCompatActivity {
             // Imagen
             ImageView imagen = new ImageView(this);
             imagen.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            Uri uriImagen = obtenerImagenUri(comunicado.getNombreArchivoImagen());
+            Uri uriImagen = ImageUtils.obtenerImagenUri(this,comunicado.getNombreArchivoImagen());
             imagen.setImageURI(uriImagen);
             imagen.setAdjustViewBounds(true);
 
@@ -182,10 +183,6 @@ public class VerComunicadosActivity extends AppCompatActivity {
     }
 
 
-    private Uri obtenerImagenUri(String nombreArchivo) {
-        File file = new File(getFilesDir(), nombreArchivo);
-        return Uri.fromFile(file);
-    }
 
     private boolean hayComunicadosEnFecha(String fecha, List<Comunicado> comunicados) {
         for (Comunicado comunicado : comunicados) {

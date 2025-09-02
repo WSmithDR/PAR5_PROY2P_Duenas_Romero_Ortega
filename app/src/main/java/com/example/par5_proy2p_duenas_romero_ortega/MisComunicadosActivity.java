@@ -249,8 +249,16 @@ public class MisComunicadosActivity extends AppCompatActivity {
 
 
             contentTableLayout.addView(row);
+
+            row.setOnClickListener(v -> {
+                Intent intent = new Intent(MisComunicadosActivity.this, ComunicadoDetailActivity.class);
+                intent.putExtra("comunicadoID", comunicado.getId());
+                startActivity(intent);
+            });
         }
     }
+
+
 
     private void guardarListaComunicados() {
         try {

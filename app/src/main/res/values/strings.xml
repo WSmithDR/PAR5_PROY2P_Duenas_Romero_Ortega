@@ -65,12 +65,15 @@
         <item>Cultural</item>
         <item>General</item>
     </string-array>
-    
+
     <string name="lista_guardada">Lista de comunicados guardada exitosamente</string>
     <string name="error_guardar_lista">Error al guardar la lista de comunicados</string>
     <string name="ascendente" translatable="false"> ↑</string>
     <string name="descendente" translatable="false"> ↓</string>
-    
+
     <string name="usuario_no_encontrado">Usuario no encontrado</string>
     <string name="contrasena_incorrecta">Contraseña incorrecta</string>
+    <string name="imagen_del_comunicado">Imagen del comunicado</string>
+    <string name="lugar_evento">Lugar del evento</string>
+    <string name="nivel_de_urgencia">Nivel de Urgencia</string>
 </resources>

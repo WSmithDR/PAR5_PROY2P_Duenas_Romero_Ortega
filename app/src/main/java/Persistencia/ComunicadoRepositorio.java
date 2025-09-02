@@ -142,6 +142,15 @@ public final class ComunicadoRepositorio {
                 .collect(Collectors.toList());
     }
 
+    public static Comunicado getComunicadoByID(int id) {
+        for (Comunicado comunicado : comunicados) {
+            if (comunicado.getId() == id) {
+                return comunicado;
+            }
+        }
+        return null;
+    }
+
     public static void guardarComunicado(Context context, Comunicado nuevoComunicado) {
         comunicados.add(nuevoComunicado);
         String csvLinea = nuevoComunicado.toFileFormat(SEPARADOR);
