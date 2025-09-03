@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="#FFFFFF" />
+    <solid android:color="@color/edit_text_background" />
     <stroke android:width="2dp" android:color="@color/edittext_border_focused" />
     <corners android:radius="4dp" />
 </shape>
-
-

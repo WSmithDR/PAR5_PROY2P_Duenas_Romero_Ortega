@@ -12,9 +12,12 @@
     <color name="color_icono_principal">#FFFFFF</color>
 
     <color name="edittext_border_normal">#00204E</color>
-    <color name="edittext_border_focused">#4D6F9D</color>
+    <color name="edittext_border_focused">#04046B</color>
 
     <color name="button_color">#020F28</color>
     <color name="linea_divisora_color">#B6BDCC</color>
+
+    <color name="edit_text_background">#305699</color>
+
 
 </resources>
