@@ -29,7 +29,7 @@ public final class Evento extends Comunicado {
                 area,
                 titulo,
                 audiencia,
-                decripcion,
+                descripcion,
                 nombreArchivoImagen,
                 fecha
         );

@@ -48,7 +48,7 @@ public abstract class Comunicado implements Serializable, Comparable<Comunicado>
     this.area = area;
     this.titulo = titulo;
     this.audiencia = audiencia;
-    this.descripcion = decripcion;
+    this.descripcion = descripcion;
     this.nombreArchivoImagen = nombreArchivoImagen;
     this.fecha = fecha;
 
