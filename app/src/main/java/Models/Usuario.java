@@ -10,6 +10,7 @@ public class Usuario {
     private String user;
     private String contrasenia;
 
+    /** ID del usuario que ha iniciado sesión actualmente */
     public static String logged_user_id;
 
     public Usuario(String id, String user, String contrasenia) {
@@ -51,6 +52,15 @@ public class Usuario {
     }
 
 
+    /**
+     * Autentica a un usuario con su nombre de usuario y contraseña.
+     * 
+     * @param context Contexto de la aplicación Android
+     * @param username Nombre de usuario
+     * @param pass Contraseña sin encriptar
+     * @return Usuario autenticado
+     * @throws CredecialesInvalidasException Si las credenciales son incorrectas
+     */
     public static Usuario autenticar(Context context, String username, String pass) throws CredecialesInvalidasException {
         Usuario u = UsuarioRepositorio.buscarUsuarioPorUsername(username);
         if (u == null) {

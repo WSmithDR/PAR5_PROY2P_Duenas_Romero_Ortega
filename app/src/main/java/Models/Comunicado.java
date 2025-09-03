@@ -18,7 +18,10 @@ import Enums.TipoComunicado;
 
 public abstract class Comunicado implements Serializable, Comparable<Comunicado> {
 
+    /** Identificador único del comunicado */
     private int id;
+    
+    /** ID del usuario que creó el comunicado */
     private String userId;
     private TipoComunicado tipo;
     private AreaComunicado area;
@@ -35,17 +38,17 @@ public abstract class Comunicado implements Serializable, Comparable<Comunicado>
         AreaComunicado area,
         String titulo,
         List<TipoAudiencia> audiencia,
-        String decripcion,
+        String descripcion,
         String nombreArchivoImagen,
         String fecha
-) {
+    ) {
     this.id = id;
     this.userId = userId;
     this.tipo = tipo;
     this.area = area;
     this.titulo = titulo;
     this.audiencia = audiencia;
-    this.descripcion = decripcion;
+    this.descripcion = descripcion;
     this.nombreArchivoImagen = nombreArchivoImagen;
     this.fecha = fecha;
 
@@ -131,23 +134,47 @@ public abstract class Comunicado implements Serializable, Comparable<Comunicado>
     }
 
 
+    /**
+     * Compara este comunicado con otro basado en el título (orden alfabético).
+     * 
+     * @param otro El otro comunicado con el que comparar
+     * @return Entero negativo, cero o positivo si este comunicado es menor, igual o mayor que el otro
+     */
     @Override
     public int compareTo(Comunicado otro) {
         return this.getTitulo().compareToIgnoreCase(otro.getTitulo());
     }
 
+    /**
+     * Compara este comunicado con otro según múltiples criterios de ordenamiento.
+     * 
+     * @param otro El otro comunicado con el que comparar
+     * @param primaryCriteria Criterio principal de ordenamiento (FECHA o TITULO)
+     * @param primaryAscending Orden ascendente (true) o descendente (false) para el criterio principal
+     * @param secondaryCriteria Criterio secundario de ordenamiento (puede ser null)
+     * @param secondaryAscending Orden ascendente (true) o descendente (false) para el criterio secundario
+     * @return Entero que indica el resultado de la comparación
+     */
     public int compareTo(Comunicado otro, OrdComunicado primaryCriteria, boolean primaryAscending, 
                         OrdComunicado secondaryCriteria, boolean secondaryAscending) {
-        int primaryResult = compareByCriteria(otro, primaryCriteria, primaryAscending);
+        int primaryResult = compararPorCriterio(otro, primaryCriteria, primaryAscending);
 
         if (primaryResult == 0 && secondaryCriteria != null) {
-            return compareByCriteria(otro, secondaryCriteria, secondaryAscending);
+            return compararPorCriterio(otro, secondaryCriteria, secondaryAscending);
         }
         
         return primaryResult;
     }
     
-    private int compareByCriteria(Comunicado otro, OrdComunicado criteria, boolean ascending) {
+    /**
+     * Método auxiliar para comparar comunicados según un criterio específico.
+     * 
+     * @param otro El otro comunicado con el que comparar
+     * @param criteria Criterio de comparación (FECHA o TITULO)
+     * @param ascending Orden ascendente (true) o descendente (false)
+     * @return Resultado de la comparación según el criterio especificado
+     */
+    private int compararPorCriterio(Comunicado otro, OrdComunicado criteria, boolean ascending) {
         int result = 0;
         
         switch (criteria) {
@@ -162,6 +189,12 @@ public abstract class Comunicado implements Serializable, Comparable<Comunicado>
         return ascending ? result : -result;
     }
     
+    /**
+     * Compara este comunicado con otro basado en la fecha de creación.
+     * 
+     * @param otro El otro comunicado con el que comparar
+     * @return Entero negativo, cero o positivo si la fecha de este comunicado es anterior, igual o posterior
+     */
     private int compararPorFecha(Comunicado otro) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         Date fecha1 = null;
@@ -186,7 +219,12 @@ public abstract class Comunicado implements Serializable, Comparable<Comunicado>
 
 
 
-    // Using the same separator as in ComunicadoRepositorio for consistency
+    /**
+     * Convierte el comunicado a un formato de cadena para ser guardado en archivo.
+     * 
+     * @param separator Separador a utilizar entre campos
+     * @return Cadena formateada con los datos del comunicado
+     */
     public String toFileFormat(String separator) {
         String audienciaStr;
         if (this.audiencia != null && !this.audiencia.isEmpty()) {

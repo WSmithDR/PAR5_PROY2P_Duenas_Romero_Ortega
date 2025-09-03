@@ -97,7 +97,11 @@ public class VerComunicadosActivity extends AppCompatActivity implements VerComu
         });
     }
 
-    //Acceder al archivo de comunicados
+    /**
+     * Filtra los comunicados según la fecha seleccionada.
+     * Si no hay fecha seleccionada, devuelve todos los comunicados.
+     * @return Lista de comunicados filtrados
+     */
     private List<Comunicado> comunicadosFiltrados(){
         comunicados = ComunicadoRepositorio.cargarComunicados(this, Usuario.logged_user_id);
         String fechaSel = selFecha.getText().toString();
@@ -117,7 +121,11 @@ public class VerComunicadosActivity extends AppCompatActivity implements VerComu
         return listaFiltrada;
     }
 
-    //Mostrar comunicados filtrados
+    /**
+     * Muestra los comunicados filtrados en la interfaz de usuario.
+     * Crea dinámicamente las vistas para cada comunicado incluyendo título, imagen y descripción.
+     * @param comunicadosF Lista de comunicados a mostrar
+     */
     private void mostrarComunicadosFiltrados(List<Comunicado> comunicadosF) {
         LinearLayout contenedorCom = findViewById(R.id.layout_Com);
         contenedorCom.removeAllViews();
@@ -195,6 +203,12 @@ public class VerComunicadosActivity extends AppCompatActivity implements VerComu
 
 
 
+    /**
+     * Verifica si hay eventos programados para una fecha específica.
+     * @param fecha Fecha a verificar en formato dd/MM/yyyy
+     * @param comunicados Lista de comunicados a verificar
+     * @return true si hay al menos un evento en la fecha especificada, false en caso contrario
+     */
     private boolean hayComunicadosEnFecha(String fecha, List<Comunicado> comunicados) {
         for (Comunicado comunicado : comunicados) {
             if (comunicado instanceof Evento) {

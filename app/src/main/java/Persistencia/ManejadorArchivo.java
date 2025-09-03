@@ -13,9 +13,25 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Clase de utilidad para operaciones de lectura/escritura de archivos en Android.
+ * Proporciona métodos estáticos para manejar archivos de texto y binarios,
+ * tanto en el almacenamiento interno como en la carpeta de assets.
+ */
+
 public final class ManejadorArchivo {
+    /**
+     * Constructor privado para evitar la instanciación de la clase.
+     */
     private ManejadorArchivo(){}
     
+    /**
+     * Lee un archivo de texto desde la carpeta de assets de la aplicación.
+     * 
+     * @param context Contexto de la aplicación Android
+     * @param nombreArchivo Nombre del archivo a leer (incluyendo la ruta relativa en assets)
+     * @return Lista de cadenas, donde cada elemento es una línea del archivo
+     */
     public static List<String> leerArchivoDeAssets(Context context, String nombreArchivo) {
         List<String> lineas = new ArrayList<>();
         try (
@@ -34,6 +50,13 @@ public final class ManejadorArchivo {
         return lineas;
     }
 
+    /**
+     * Lee un archivo de texto del almacenamiento interno de la aplicación.
+     * 
+     * @param context Contexto de la aplicación Android
+     * @param nombreArchivo Nombre del archivo a leer (sin ruta, se asume en el directorio de la app)
+     * @return Lista de cadenas, donde cada elemento es una línea del archivo
+     */
     public static List<String> leerArchivo(Context context, String nombreArchivo) {
         List<String> lineas = new ArrayList<>();
         try (
@@ -55,6 +78,14 @@ public final class ManejadorArchivo {
         return lineas;
     }
 
+    /**
+     * Escribe una cadena de texto en un archivo del almacenamiento interno.
+     * Si el archivo ya existe, añade el contenido al final del mismo.
+     * 
+     * @param context Contexto de la aplicación Android
+     * @param nombre Nombre del archivo donde se escribirá el contenido
+     * @param contenido Contenido de texto a escribir en el archivo
+     */
     public static void escribirArchivo(Context context, String nombre, String contenido) {
         String contenidoConSaltoDeLinea = contenido + "\n";
         try (FileOutputStream fos = context.openFileOutput(nombre, Context.MODE_APPEND)) {
@@ -66,6 +97,14 @@ public final class ManejadorArchivo {
         }
     }
 
+    /**
+     * Escribe datos binarios en un archivo del almacenamiento interno.
+     * Si el archivo ya existe, será sobrescrito.
+     * 
+     * @param context Contexto de la aplicación Android
+     * @param nombre Nombre del archivo donde se escribirán los datos
+     * @param bytes Arreglo de bytes con los datos a escribir
+     */
     public static void escribirBinario(Context context, String nombre, byte[] bytes) {
         try (FileOutputStream fos = context.openFileOutput(nombre, Context.MODE_PRIVATE)) {
             fos.write(bytes);
@@ -75,6 +114,13 @@ public final class ManejadorArchivo {
             System.err.println("Error al escribir el archivo binario [Exception]: " + e.getMessage());
         }
     }
+        /**
+         * Lee todos los bytes disponibles de un flujo de entrada (InputStream).
+         * 
+         * @param is Flujo de entrada del cual leer los datos
+         * @return Arreglo de bytes leídos del flujo de entrada
+         * @throws IOException Si ocurre un error al leer del flujo de entrada
+         */
         public static byte[] readBytesFromInputStream(InputStream is) throws IOException {
             ByteArrayOutputStream buffer = new ByteArrayOutputStream();
             int nRead;

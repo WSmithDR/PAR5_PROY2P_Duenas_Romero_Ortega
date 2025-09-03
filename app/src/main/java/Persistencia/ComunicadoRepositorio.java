@@ -17,14 +17,38 @@ import Models.Anuncio;
 import Models.Comunicado;
 import Models.Evento;
 
+/**
+ * Repositorio para la gestión de comunicados (Anuncios y Eventos) en el sistema.
+ * Proporciona métodos para cargar, guardar y consultar comunicados desde/hacia almacenamiento persistente.
+ * Implementa el patrón Singleton para asegurar una única instancia en toda la aplicación.
+ */
+
 public final class ComunicadoRepositorio {
+    /** Lista en memoria de todos los comunicados cargados */
     private static final List<Comunicado> comunicados = new ArrayList<>();
+    
+    /** Nombre del archivo donde se almacenan los comunicados */
     private static final String comunicadostxt = "comunicados.txt";
+    
+    /** Separador de campos en el archivo de almacenamiento 
+     * Se uso este separador para evitar problemas con los caracteres especiales
+     * que pueden aparecer en los campos de los comunicados 
+     * especialmente el campo Descripción
+    */
     private static final String SEPARADOR = "\u001F";
 
+    /**
+     * Constructor privado evitar la creación de instancias de esta clase.
+     */
     private ComunicadoRepositorio() {
     }
 
+    /**
+     * Carga todos los comunicados desde el archivo de almacenamiento.
+     * 
+     * @param context Contexto de la aplicación Android
+     * @return Lista de todos los comunicados cargados
+     */
     public static List<Comunicado> cargarComunicados(Context context) {
         comunicados.clear();
         List<String> lineas = ManejadorArchivo.leerArchivo(context, comunicadostxt);
@@ -135,6 +159,13 @@ public final class ComunicadoRepositorio {
         return new ArrayList<>(comunicados);
     }
 
+    /**
+     * Carga los comunicados de un usuario específico.
+     * 
+     * @param context Contexto de la aplicación Android
+     * @param userId ID del usuario cuyos comunicados se desean cargar
+     * @return Lista de comunicados del usuario especificado
+     */
     public static List<Comunicado> cargarComunicados(Context context, String userId) {
         if (comunicados.isEmpty())
             cargarComunicados(context);
@@ -144,6 +175,12 @@ public final class ComunicadoRepositorio {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Busca un comunicado por su ID.
+     * 
+     * @param id ID del comunicado a buscar
+     * @return El comunicado encontrado o null si no existe
+     */
     public static Comunicado getComunicadoByID(int id) {
         for (Comunicado comunicado : comunicados) {
             if (comunicado.getId() == id) {
@@ -153,12 +190,24 @@ public final class ComunicadoRepositorio {
         return null;
     }
 
+    /**
+     * Guarda un nuevo comunicado en el almacenamiento.
+     * 
+     * @param context Contexto de la aplicación Android
+     * @param nuevoComunicado Comunicado a guardar
+     */
     public static void guardarComunicado(Context context, Comunicado nuevoComunicado) {
         comunicados.add(nuevoComunicado);
         String csvLinea = nuevoComunicado.toFileFormat(SEPARADOR);
         ManejadorArchivo.escribirArchivo(context, comunicadostxt, csvLinea);
     }
 
+    /**
+     * Genera un nuevo ID para un comunicado basado en el ID más alto existente.
+     * 
+     * @param context Contexto de la aplicación Android
+     * @return Nuevo ID único para un comunicado
+     */
     public static int generarNuevoId(Context context) {
         int max = 0;
         if (comunicados.isEmpty())

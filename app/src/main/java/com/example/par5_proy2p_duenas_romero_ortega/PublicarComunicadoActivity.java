@@ -157,6 +157,12 @@ public class PublicarComunicadoActivity extends AppCompatActivity {
         btnCancelar.setOnClickListener(v -> finish());
     }
 
+    /**
+     * Maneja el resultado de la selección de una imagen de la galería.
+     * @param requestCode Código de solicitud que identifica de dónde proviene el resultado
+     * @param resultCode Código de resultado que indica si la operación fue exitosa
+     * @param data Datos que contienen la URI de la imagen seleccionada
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -169,6 +175,11 @@ public class PublicarComunicadoActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Obtiene el nombre de un archivo a partir de su URI.
+     * @param uri URI del archivo
+     * @return Nombre del archivo o un nombre generado si no se puede obtener
+     */
     private String obtenerNombreArchivo(Uri uri) {
         String result = "";
         try (Cursor cursor = getContentResolver().query(uri, null, null, null, null)) {
@@ -185,6 +196,11 @@ public class PublicarComunicadoActivity extends AppCompatActivity {
         return result;
     }
 
+    /**
+     * Valida y publica un nuevo comunicado (anuncio o evento) con los datos ingresados por el usuario.
+     * @throws DatosIncompletosException Si faltan campos obligatorios
+     * @throws SecurityException Si el usuario no ha iniciado sesión
+     */
     private void publicar() throws DatosIncompletosException, SecurityException {
         // Verificar que el usuario esté autenticado
         if (Usuario.logged_user_id == null || Usuario.logged_user_id.isEmpty()) {
@@ -257,7 +273,10 @@ public class PublicarComunicadoActivity extends AppCompatActivity {
         limpiarCampos();
     }
 
-    //Limpia todo lo rellenado anteriormente
+    
+    /**
+     * Limpia todos los campos del formulario y restablece los controles a su estado inicial.
+     */
     private void limpiarCampos() {
         rgTipo.check(R.id.rbAnuncio);
         spArea.setSelection(0);

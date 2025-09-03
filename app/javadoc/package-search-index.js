@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.example.par5_proy2p_duenas_romero_ortega"},{"l":"Enums"},{"l":"Exceptions"},{"l":"Interfaces"},{"l":"Models"},{"l":"Persistencia"},{"l":"Utils"}];updateSearchResults();

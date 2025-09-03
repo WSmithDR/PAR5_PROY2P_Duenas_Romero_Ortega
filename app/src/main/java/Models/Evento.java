@@ -8,6 +8,7 @@ import Enums.TipoAudiencia;
 import Enums.TipoComunicado;
 
 public final class Evento extends Comunicado {
+    /** Lugar donde se llevará a cabo el evento */
     private String lugar;
 
     public Evento(
@@ -16,7 +17,7 @@ public final class Evento extends Comunicado {
             AreaComunicado area,
             String titulo,
             List<TipoAudiencia> audiencia,
-            String decripcion,
+            String descripcion,
             String nombreArchivoImagen,
             String fecha,
             String lugar
@@ -28,7 +29,7 @@ public final class Evento extends Comunicado {
                 area,
                 titulo,
                 audiencia,
-                decripcion,
+                descripcion,
                 nombreArchivoImagen,
                 fecha
         );
@@ -43,8 +44,15 @@ public final class Evento extends Comunicado {
         this.lugar = lugar;
     }
 
+    /**
+     * Convierte el evento a un formato de cadena para ser guardado en archivo.
+     * Incluye la información del comunicado base más el lugar del evento.
+     * 
+     * @param separator Separador a utilizar entre campos
+     * @return Cadena formateada con los datos del evento
+     */
     @Override
-    public String toFileFormat(String separator){
+    public String toFileFormat(String separator) {
         return String.format(
                 Locale.US,
                 "%s" + separator + "%s",
