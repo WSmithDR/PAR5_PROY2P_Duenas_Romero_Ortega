@@ -11,6 +11,7 @@ import Enums.TipoAudiencia;
 import Enums.TipoComunicado;
 
 public final class Anuncio extends Comunicado {
+    /** Nivel de urgencia del anuncio */
     private NivelUrgencia nivelUrgencia;
 
 
@@ -23,7 +24,6 @@ public final class Anuncio extends Comunicado {
             String descripcion,
             String nombreArchivoImagen,
             NivelUrgencia nivelUrgencia
-
     ) {
         super(
                 id,
@@ -47,6 +47,13 @@ public final class Anuncio extends Comunicado {
         this.nivelUrgencia = nivelUrgencia;
     }
 
+    /**
+     * Convierte el anuncio a un formato de cadena para ser guardado en archivo.
+     * Incluye la información del comunicado base más el nivel de urgencia.
+     * 
+     * @param separator Separador a utilizar entre campos
+     * @return Cadena formateada con los datos del anuncio
+     */
     @Override
     public String toFileFormat(String separator) {
         return String.format(

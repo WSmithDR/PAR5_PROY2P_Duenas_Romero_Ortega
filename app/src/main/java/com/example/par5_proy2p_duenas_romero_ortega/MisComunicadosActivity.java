@@ -54,11 +54,6 @@ public class MisComunicadosActivity extends AppCompatActivity implements VerComu
     private static final String DATE_FORMAT_PATTERN = "dd/MM/yyyy";
     private static final SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT_PATTERN, Locale.getDefault());
 
-    /**
-     * Método llamado cuando se crea la actividad. Inicializa la interfaz de usuario,
-     * carga los comunicados del usuario y configura los listeners.
-     * @param savedInstanceState Estado guardado de la actividad
-     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

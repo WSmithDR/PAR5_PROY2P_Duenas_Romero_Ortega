@@ -22,10 +22,6 @@ public class LoginActivity extends AppCompatActivity {
     private Button btnlogin;
 
 
-    /**
-     * Método llamado cuando se crea la actividad. Inicializa las vistas y configura los listeners.
-     * @param savedInstanceState Estado guardado de la actividad
-     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
