@@ -13,6 +13,13 @@
     <color name="Layout">#FFA726</color>
 
 
+    <color name="edittext_border_normal">#FFFFFF</color>
+    <color name="edittext_border_focused">#FFA726</color>
+
+
+
+
+
 
 
 </resources>
