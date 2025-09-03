@@ -6,6 +6,7 @@
     <color name="login_button_background">#000000</color>
     <color name="login_button_text">#FFFFFF</color>
     <color name="textoGeneral">#FFFFFF</color>
+    <color name="button_text">#FFFFFF</color>
     <color name="texto">#000000</color>
     <color name="hintColor">#808080</color>
     <color name="iconColor">#000000</color>
@@ -17,6 +18,7 @@
     <color name="edittext_border_normal">#FFFFFF</color>
     <color name="edittext_border_focused">#FFA726</color>
 
+    <color name="button_color">#000000</color>
 
 
 

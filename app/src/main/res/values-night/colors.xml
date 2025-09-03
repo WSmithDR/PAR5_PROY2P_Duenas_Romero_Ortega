@@ -3,7 +3,8 @@
     <color name="login_button_background">#FF373737</color>
     <color name="login_button_text">#FFFFFFFF</color>
     <color name="textoGeneral">#FFFFFF</color>
-    <color name="texto">#000000</color>
+    <color name="texto">#FFFFFF</color>
+    <color name="button_text">#FFFFFF</color>
     <color name="hintColor">#808080</color>
     <color name="iconColor">#000000</color>
     <color name="Layout">#3B5998</color>
@@ -12,7 +13,7 @@
     <color name="edittext_border_normal">#00204E</color>
     <color name="edittext_border_focused">#4D6F9D</color>
 
-
+    <color name="button_color">#020F28</color>
 
 
 </resources>
