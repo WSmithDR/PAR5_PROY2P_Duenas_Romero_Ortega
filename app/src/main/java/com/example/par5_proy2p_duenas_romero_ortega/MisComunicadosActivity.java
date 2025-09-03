@@ -81,7 +81,7 @@ public class MisComunicadosActivity extends AppCompatActivity implements VerComu
 
         renderizarTabla();
 
-        btnGuardarLista.setOnClickListener(v -> guardarListaComunicados());
+        btnGuardarLista.setOnClickListener(v -> guardarListaComunicadosSerializados());
     }
     /**
      * Método llamado cuando la actividad se reanuda. Carga el estado de ordenamiento guardado.
@@ -297,7 +297,7 @@ public class MisComunicadosActivity extends AppCompatActivity implements VerComu
      * Guarda la lista de comunicados actual en un archivo.
      * Muestra un mensaje de éxito o error al finalizar.
      */
-    private void guardarListaComunicados() {
+    private void guardarListaComunicadosSerializados() {
         File file = new File(getFilesDir(), "comunicados_" + Usuario.logged_user_id + ".dat");
         try (FileOutputStream fos = new FileOutputStream(file);
              ObjectOutputStream oos = new ObjectOutputStream(fos)
