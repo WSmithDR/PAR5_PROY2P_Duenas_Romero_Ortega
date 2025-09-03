@@ -40,7 +40,7 @@ dependencies {
     implementation(fileTree(mapOf(
         "dir" to "C:\\Users\\PC\\AppData\\Local\\Android\\Sdk\\platforms\\android-36",
         "include" to listOf("*.aar", "*.jar"),
-        "exclude" to listOf()
+        "exclude" to listOf<String>()
     )))
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
