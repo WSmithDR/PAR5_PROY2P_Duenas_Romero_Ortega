@@ -22,6 +22,10 @@ public class LoginActivity extends AppCompatActivity {
     private Button btnlogin;
 
 
+    /**
+     * Método llamado cuando se crea la actividad. Inicializa las vistas y configura los listeners.
+     * @param savedInstanceState Estado guardado de la actividad
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +40,9 @@ public class LoginActivity extends AppCompatActivity {
         btnlogin.setOnClickListener(v -> iniciarSesion());
     }
 
+    /**
+     * Maneja el evento de inicio de sesión, validando campos vacíos.
+     */
     private void iniciarSesion() {
         String username = this.username.getText().toString().trim();
         String password = this.password.getText().toString().trim();
@@ -53,6 +60,11 @@ public class LoginActivity extends AppCompatActivity {
         validarCredenciales(username, password);
     }
 
+    /**
+     * Valida las credenciales del usuario e inicia la sesión si son correctas.
+     * @param username Nombre de usuario
+     * @param password Contraseña del usuario
+     */
     private void validarCredenciales(String username, String password) {
         try {
             Usuario usuario = Usuario.autenticar(this, username, password);
@@ -68,14 +80,3 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-

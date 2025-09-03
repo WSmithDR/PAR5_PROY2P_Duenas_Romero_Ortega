@@ -13,8 +13,11 @@ public final class UsuarioRepositorio {
     private UsuarioRepositorio() {
     }
 
-    // Carga usuarios desde el archivo assets/usuarios.txt y los guarda en memoria.
-
+    /**
+     * Carga los usuarios desde el archivo de assets y los guarda en memoria caché.
+     * @param context Contexto de la aplicación para acceder a los assets
+     * @return Lista de usuarios cargados
+     */
     public static List<Usuario> cargarUsuariosAssets(Context context) {
         List<String> lineas = ManejadorArchivo.leerArchivoDeAssets(context, USUARIOS_TXT);
         usuariosCache.clear();
@@ -30,8 +33,11 @@ public final class UsuarioRepositorio {
         return usuariosCache;
     }
 
-    // Busca un usuario por userName.
-
+    /**
+     * Busca un usuario por su nombre de usuario (case insensitive).
+     * @param username Nombre de usuario a buscar
+     * @return Usuario encontrado o null si no existe
+     */
     public static Usuario buscarUsuarioPorUsername(String username) {
         for (Usuario u : usuariosCache) {
             if (u.getUser().equalsIgnoreCase(username)) {
@@ -41,7 +47,11 @@ public final class UsuarioRepositorio {
         return null;
     }
 
-    // Buscar un usario por id
+    /**
+     * Busca un usuario por su ID único.
+     * @param userId ID del usuario a buscar
+     * @return Usuario encontrado o null si no existe
+     */
     public static Usuario buscarUsuarioPorId(String userId) {
         for (Usuario u : usuariosCache) {
             if (u.getId().equals(userId)) {
@@ -51,6 +61,11 @@ public final class UsuarioRepositorio {
         return null;
     }
 
+    /**
+     * Obtiene una lista de IDs de todos los usuarios, colocando primero el ID del usuario actual.
+     * @param currentUserId ID del usuario actual (se colocará primero en la lista)
+     * @return Lista de IDs de usuarios
+     */
     public static List<String> obtenerListaIdsUsuarios(String currentUserId) {
         List<String> ids = new ArrayList<>();
         List<String> otrosIds = new ArrayList<>();

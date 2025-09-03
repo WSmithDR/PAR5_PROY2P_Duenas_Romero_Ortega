@@ -54,6 +54,11 @@ public class MisComunicadosActivity extends AppCompatActivity implements VerComu
     private static final String DATE_FORMAT_PATTERN = "dd/MM/yyyy";
     private static final SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT_PATTERN, Locale.getDefault());
 
+    /**
+     * Método llamado cuando se crea la actividad. Inicializa la interfaz de usuario,
+     * carga los comunicados del usuario y configura los listeners.
+     * @param savedInstanceState Estado guardado de la actividad
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,18 +87,27 @@ public class MisComunicadosActivity extends AppCompatActivity implements VerComu
 
         btnGuardarLista.setOnClickListener(v -> guardarListaComunicados());
     }
+    /**
+     * Método llamado cuando la actividad se reanuda. Carga el estado de ordenamiento guardado.
+     */
     @Override
     protected void onResume() {
         super.onResume();
         cargarEstadoOrdenamiento();
     }
 
+    /**
+     * Método llamado cuando la actividad se pausa. Guarda el estado actual del ordenamiento.
+     */
     @Override
     protected void onPause() {
         super.onPause();
         guardarEstadoOrdenamiento();
     }
 
+    /**
+     * Guarda el estado actual del ordenamiento en las preferencias compartidas.
+     */
     private void guardarEstadoOrdenamiento() {
         if (ordenPrimario != null) {
             PersistenciaOrdenamiento.guardarPreferenciasOrdenamiento(
@@ -106,6 +120,10 @@ public class MisComunicadosActivity extends AppCompatActivity implements VerComu
         }
     }
 
+    /**
+     * Carga el estado de ordenamiento desde las preferencias compartidas
+     * y aplica el ordenamiento a la lista de comunicados.
+     */
     private void cargarEstadoOrdenamiento() {
         
         PersistenciaOrdenamiento.cargarPreferenciasOrdenamiento(this, Usuario.logged_user_id, this);
@@ -123,6 +141,13 @@ public class MisComunicadosActivity extends AppCompatActivity implements VerComu
         }
     }
 
+    /**
+     * Configura los criterios de ordenamiento primario y secundario.
+     * @param criterioPrimario Criterio de ordenamiento principal
+     * @param estadoPrimario Estado del ordenamiento principal (0: ninguno, 1: ascendente, 2: descendente)
+     * @param criterioSecundario Criterio de ordenamiento secundario (puede ser null)
+     * @param estadoSecundario Estado del ordenamiento secundario
+     */
     public void configurarOrdenamiento(OrdComunicado criterioPrimario, int estadoPrimario,
             OrdComunicado criterioSecundario, int estadoSecundario) {
         this.ordenPrimario = new Comunicado.EstadoOrdenamiento(criterioPrimario, estadoPrimario);
@@ -138,6 +163,10 @@ public class MisComunicadosActivity extends AppCompatActivity implements VerComu
         }
     }
 
+    /**
+     * Inicializa la fila de encabezado de la tabla y configura los listeners
+     * para ordenar al hacer clic en los encabezados.
+     */
     private void initHeader() {
         headerRow = findViewById(R.id.headerRow);
         headerTitulo = findViewById(R.id.headerTitulo);
@@ -147,6 +176,10 @@ public class MisComunicadosActivity extends AppCompatActivity implements VerComu
         headerFecha.setOnClickListener(v -> actualizarCriterioOrdenamiento(OrdComunicado.FECHA));
     }
 
+    /**
+     * Actualiza los criterios de ordenamiento cuando se hace clic en un encabezado.
+     * @param criterio Criterio de ordenamiento seleccionado
+     */
     private void actualizarCriterioOrdenamiento(OrdComunicado criterio) {
         if (criterioPrimario != null) {
             if (criterio == criterioPrimario) {
@@ -191,6 +224,9 @@ public class MisComunicadosActivity extends AppCompatActivity implements VerComu
         renderizarTabla();
     }
 
+    /**
+     * Actualiza el texto de los encabezados para mostrar el estado actual del ordenamiento.
+     */
     private void actualizarTextoEncabezado() {
         String textoEncabezadoTitulo = getString(R.string.titulo);
         String textoEncabezadoFecha = getString(R.string.fecha);
@@ -215,6 +251,10 @@ public class MisComunicadosActivity extends AppCompatActivity implements VerComu
         headerFecha.setText(textoEncabezadoFecha);
     }
 
+    /**
+     * Renderiza la tabla de comunicados con los datos actuales.
+     * Crea dinámicamente las filas de la tabla para cada comunicado.
+     */
     private void renderizarTabla() {
         contentTableLayout.removeAllViews();
 
@@ -257,6 +297,10 @@ public class MisComunicadosActivity extends AppCompatActivity implements VerComu
 
 
 
+    /**
+     * Guarda la lista de comunicados actual en un archivo.
+     * Muestra un mensaje de éxito o error al finalizar.
+     */
     private void guardarListaComunicados() {
         try {
             File file = new File(getFilesDir(), "comunicados_" + Usuario.logged_user_id + ".dat");
