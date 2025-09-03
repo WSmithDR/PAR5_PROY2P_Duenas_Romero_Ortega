@@ -10,6 +10,15 @@
     <color name="hintColor">#808080</color>
     <color name="iconColor">#000000</color>
     <color name="textoSpinner">#212121</color>
+    <color name="Layout">#FFA726</color>
+
+
+    <color name="edittext_border_normal">#FFFFFF</color>
+    <color name="edittext_border_focused">#FFA726</color>
+
+
+
+
 
 
 

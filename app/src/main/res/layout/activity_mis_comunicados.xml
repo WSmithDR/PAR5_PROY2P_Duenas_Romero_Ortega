@@ -45,7 +45,7 @@
         <TableRow
             android:id="@+id/headerRow"
             android:layout_height="86dp"
-            android:background="#FFA726"
+            android:background="@color/Layout"
             android:paddingVertical="8dp">
 
             <TextView
@@ -90,7 +90,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FFA726"
+        android:background="@color/Layout"
         android:elevation="8dp"
         android:orientation="vertical"
         android:padding="16dp">

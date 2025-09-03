@@ -26,17 +26,18 @@
             android:layout_height="42dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/back_button_content_description"
-            android:src="?attr/homeAsUpIndicator" />
+            android:src="?attr/homeAsUpIndicator"
+            app:tint="@color/iconColor"/>
 
         <TextView
             android:id="@+id/comunicado_detail_title"
             android:layout_width="339dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:textColor="?android:attr/textColorPrimary"
             android:textSize="20sp"
             android:textStyle="bold"
-            tools:text="Título del Comunicado" />
+            tools:text="Título del Comunicado"
+            android:textColor="@color/texto"/>
     </LinearLayout>
 
     <ScrollView
@@ -67,14 +68,16 @@
                     android:text="@string/label_area"
                     android:textStyle="bold"
                     android:textSize="16sp"
-                    android:layout_marginEnd="8dp"/>
+                    android:layout_marginEnd="8dp"
+                    android:textColor="@color/texto"/>
                 <TextView
                     android:id="@+id/detail_area"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textSize="16sp"
-                    tools:text="Administrativo"/>
+                    tools:text="Administrativo"
+                    android:textColor="@color/texto"/>
             </LinearLayout>
 
             <LinearLayout
@@ -88,14 +91,18 @@
                     android:text="@string/label_fecha"
                     android:textStyle="bold"
                     android:textSize="16sp"
-                    android:layout_marginEnd="8dp"/>
+                    android:layout_marginEnd="8dp"
+                    android:textColor="@color/texto"
+
+                    />
                 <TextView
                     android:id="@+id/detail_fecha"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textSize="16sp"
-                    tools:text="28/05/2024"/>
+                    tools:text="28/05/2024"
+                    android:textColor="@color/texto"/>
             </LinearLayout>
 
             <LinearLayout
@@ -109,14 +116,16 @@
                     android:text="@string/label_tipo"
                     android:textStyle="bold"
                     android:textSize="16sp"
-                    android:layout_marginEnd="8dp"/>
+                    android:layout_marginEnd="8dp"
+                    android:textColor="@color/texto"/>
                 <TextView
                     android:id="@+id/detail_tipo"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textSize="16sp"
-                    tools:text="Evento"/>
+                    tools:text="Evento"
+                    android:textColor="@color/texto"/>
             </LinearLayout>
 
             <LinearLayout
@@ -130,14 +139,16 @@
                     android:text="@string/label_audiencia"
                     android:textStyle="bold"
                     android:textSize="16sp"
-                    android:layout_marginEnd="8dp"/>
+                    android:layout_marginEnd="8dp"
+                    android:textColor="@color/texto"/>
                 <TextView
                     android:id="@+id/detail_audiencia"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textSize="16sp"
-                    tools:text="Estudiantes, Profesores"/>
+                    tools:text="Estudiantes, Profesores"
+                    android:textColor="@color/texto"/>
             </LinearLayout>
 
             <LinearLayout
@@ -155,14 +166,16 @@
                     android:text="@string/lugar_evento"
                     android:textStyle="bold"
                     android:textSize="16sp"
-                    android:layout_marginEnd="8dp"/>
+                    android:layout_marginEnd="8dp"
+                    android:textColor="@color/texto"/>
                 <TextView
                     android:id="@+id/detail_lugar"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textSize="16sp"
-                    tools:text="Babahoyo"/>
+                    tools:text="Babahoyo"
+                    android:textColor="@color/texto"/>
             </LinearLayout>
 
             <LinearLayout
@@ -180,14 +193,16 @@
                     android:text="@string/nivel_de_urgencia"
                     android:textStyle="bold"
                     android:textSize="16sp"
-                    android:layout_marginEnd="8dp"/>
+                    android:layout_marginEnd="8dp"
+                    android:textColor="@color/texto"/>
                 <TextView
                     android:id="@+id/detail_urgencia"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textSize="16sp"
-                    tools:text="ALTA"/>
+                    tools:text="ALTA"
+                    android:textColor="@color/texto"/>
             </LinearLayout>
 
             <ImageView
@@ -206,7 +221,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:textSize="16sp"
-                tools:text="Descripción detallada del comunicado... "/>
+                tools:text="Descripción detallada del comunicado... "
+                android:textColor="@color/texto"/>
 
         </LinearLayout>
     </ScrollView>
