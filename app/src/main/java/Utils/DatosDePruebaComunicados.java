@@ -1,4 +1,5 @@
 package Utils;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -13,16 +14,40 @@ import Models.Comunicado;
 import Models.Evento;
 import Persistencia.UsuarioRepositorio;
 
-public class DatosDePruebaComunicados {
+/**
+ * Clase de utilidad para generar datos de prueba de comunicados (anuncios y eventos).
+ * Proporciona métodos estáticos para crear listas de comunicados con diferentes características
+ * para propósitos de prueba y desarrollo.
+ */
 
+public final class DatosDePruebaComunicados {
+
+    /** Generador de números aleatorios para la creación de datos de prueba */
     private static final Random rd = new Random();
 
+    /**
+     * Genera una fecha aleatoria en formato "dd/MM/yyyy".
+     * 
+     * @return Cadena que representa una fecha aleatoria en 2025
+     */
     private static String generarFechaAleatoria() {
         int dia = 1 + rd.nextInt(28);
         int mes = 1 + rd.nextInt(12);
         return String.format("%02d/%02d/2025", dia, mes);
     }
 
+    /**
+     * Genera una lista de comunicados de prueba con diferentes características.
+     * La lista incluye:
+     * - Grupos de comunicados con títulos relacionados
+     * - Pares de comunicados (anuncio + evento) con títulos relacionados
+     * - Grupos de comunicados con la misma fecha
+     * - Comunicados individuales
+     *
+     * @param currentUserId ID del usuario actual (se usará para priorizar su ID en la lista)
+     * @return Lista de comunicados de prueba
+     * @throws IllegalStateException si no se encuentran usuarios en el sistema
+     */
     public static List<Comunicado> obtenerListaDePrueba(String currentUserId) {
         List<Comunicado> comunicadosDePrueba = new ArrayList<>();
         List<String> userIds = UsuarioRepositorio.obtenerListaIdsUsuarios(currentUserId);
