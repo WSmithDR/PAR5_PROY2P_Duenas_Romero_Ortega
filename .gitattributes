@@ -1,0 +1,26 @@
+# Mark Javadoc as documentation
+**/javadoc/** linguist-documentation
+**/docs/** linguist-documentation
+
+# Mark build outputs as generated
+**/build/ linguist-generated
+**/out/ linguist-generated
+**/target/ linguist-generated
+
+# Ignore IDE files
+**/.idea/ linguist-vendored
+**/*.iml linguist-vendored
+**/.gradle/ linguist-vendored
+
+# Ignore local properties
+local.properties linguist-generated
+
+# Mark HTML files as documentation
+*.html linguist-documentation
+
+# Mark JAR files as generated
+*.jar linguist-generated
+
+# Mark APK files as generated
+*.apk linguist-generated
+*.aab linguist-generated
