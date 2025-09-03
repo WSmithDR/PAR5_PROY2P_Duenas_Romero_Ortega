@@ -228,7 +228,7 @@ public class MisComunicadosActivity extends AppCompatActivity implements VerComu
         headerFecha.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
 
         if (ordenPrimario != null && ordenPrimario.estaActivo()) {
-            int iconRes = ordenPrimario.esAscendente() ? android.R.drawable.arrow_up_float : android.R.drawable.arrow_down_float;
+            int iconRes = ordenPrimario.esAscendente() ? R.drawable.outline_arrow_upward_alt_24 : R.drawable.outline_arrow_downward_alt_24;
             if (ordenPrimario.criterio == OrdComunicado.TITULO) {
                 headerTitulo.setCompoundDrawablesWithIntrinsicBounds(0, 0, iconRes, 0);
             } else if (ordenPrimario.criterio == OrdComunicado.FECHA) {
@@ -237,7 +237,7 @@ public class MisComunicadosActivity extends AppCompatActivity implements VerComu
         }
 
         if (ordenSecundario != null && ordenSecundario.estaActivo()) {
-            int iconSecRes = ordenSecundario.esAscendente() ? android.R.drawable.arrow_up_float : android.R.drawable.arrow_down_float;
+            int iconSecRes = ordenSecundario.esAscendente() ? R.drawable.outline_arrow_upward_alt_24 : R.drawable.outline_arrow_downward_alt_24;
             if (ordenSecundario.criterio == OrdComunicado.TITULO) {
                 tituloText = "*" + getString(R.string.titulo);
                 headerTitulo.setCompoundDrawablesWithIntrinsicBounds(0, 0, iconSecRes, 0);
