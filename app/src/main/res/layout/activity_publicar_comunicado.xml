@@ -9,7 +9,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <ImageButton
@@ -27,7 +27,7 @@
             android:layout_marginBottom="25dp"
             android:text="@string/nuevo_comunicado"
             android:textAlignment="center"
-            android:textColor="#040404"
+            android:textColor="@color/texto"
             android:textSize="28sp"
             android:textStyle="bold"
             android:visibility="visible" />
@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:text="@string/tipo"
             android:textStyle="bold"
-            android:textColor="#050505"
+            android:textColor="@color/texto"
             />
 
         <RadioGroup
@@ -71,7 +71,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/area"
-            android:textColor="#050505"
+            android:textColor="@color/texto"
             android:textStyle="bold" />
 
         <Spinner
@@ -86,7 +86,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/urgencia"
-            android:textColor="#050505"
+            android:textColor="@color/texto"
             android:textStyle="bold"
             android:visibility="visible" />
 
@@ -94,6 +94,7 @@
             android:id="@+id/spUrgencia"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/texto"
             />
 
 
@@ -102,7 +103,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/audiencia"
-            android:textColor="#040404"
+            android:textColor="@color/texto"
             android:textStyle="bold" />
 
         <LinearLayout
@@ -144,7 +145,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/titulo"
-            android:textColor="#050505"
+            android:textColor="@color/texto"
             android:textStyle="bold" />
 
         <EditText
@@ -162,7 +163,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/lugar"
-            android:textColor="#040404"
+            android:textColor="@color/texto"
             android:textStyle="bold" />
 
         <EditText
@@ -180,7 +181,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/fecha"
-            android:textColor="#020202"
+            android:textColor="@color/texto"
             android:textStyle="bold" />
 
         <Button
@@ -197,7 +198,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/descripcion"
-            android:textColor="#090909"
+            android:textColor="@color/texto"
             android:textStyle="bold" />
 
         <EditText
@@ -216,14 +217,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/arte_imagen"
-            android:textColor="#020202"
+            android:textColor="@color/texto"
             android:textStyle="bold" />
 
         <Button
             android:id="@+id/btnImagen"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#000000"
+            android:backgroundTint="@color/button_color"
             android:text="@string/adjuntar_imagen"
             android:textColor="@color/textoGeneral" />
 
@@ -246,7 +247,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="#000000"
+                android:backgroundTint="@color/button_color"
                 android:text="@string/publicar"
                 android:textColor="@color/textoGeneral"/>
 
@@ -256,7 +257,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:layout_weight="1"
-                android:backgroundTint="#000000"
+                android:backgroundTint="@color/button_color"
                 android:text="@string/cancelar"
                 android:textColor="@color/textoGeneral"/>
         </LinearLayout>

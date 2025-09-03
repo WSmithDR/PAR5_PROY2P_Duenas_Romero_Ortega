@@ -124,12 +124,12 @@ public class MisComunicadosActivity extends AppCompatActivity implements VerComu
         PersistenciaOrdenamiento.cargarPreferenciasOrdenamiento(this, Usuario.logged_user_id, this);
         
         if (ordenPrimario != null && !listaComunicados.isEmpty()) {
-            Collections.sort(listaComunicados, (c1, c2) -> c1.compareTo(
+            listaComunicados.sort((c1, c2) -> c1.compareTo(
                     c2,
                     ordenPrimario.criterio,
                     ordenPrimario.esAscendente(),
                     (ordenSecundario != null && ordenSecundario.estaActivo()) ? ordenSecundario.criterio : null,
-                    (ordenSecundario != null && ordenSecundario.estaActivo()) ? ordenSecundario.esAscendente() : true));
+                    ordenSecundario == null || !ordenSecundario.estaActivo() || ordenSecundario.esAscendente()));
             
             actualizarTextoEncabezado();
             renderizarTabla();
@@ -205,12 +205,12 @@ public class MisComunicadosActivity extends AppCompatActivity implements VerComu
         }
 
         if (ordenPrimario != null && ordenPrimario.estaActivo()) {
-            Collections.sort(listaComunicados, (c1, c2) -> c1.compareTo(
+            listaComunicados.sort((c1, c2) -> c1.compareTo(
                     c2,
                     ordenPrimario.criterio,
                     ordenPrimario.esAscendente(),
                     (ordenSecundario != null && ordenSecundario.estaActivo()) ? ordenSecundario.criterio : null,
-                    (ordenSecundario != null && ordenSecundario.estaActivo()) ? ordenSecundario.esAscendente() : true));
+                    ordenSecundario == null || !ordenSecundario.estaActivo() || ordenSecundario.esAscendente()));
         } else {
             listaComunicados = new ArrayList<>(originalListaComunicados);
         }
@@ -236,9 +236,9 @@ public class MisComunicadosActivity extends AppCompatActivity implements VerComu
 
         if (ordenSecundario != null && ordenSecundario.estaActivo()) {
             if (ordenSecundario.criterio == OrdComunicado.TITULO) {
-                textoEncabezadoTitulo = "*" + textoEncabezadoTitulo + (ordenSecundario.esAscendente() ? "↑" : "↓");
+                textoEncabezadoTitulo = "*" + textoEncabezadoTitulo + (ordenSecundario.esAscendente() ? getString(R.string.ascendente) : getString(R.string.descendente));
             } else if (ordenSecundario.criterio == OrdComunicado.FECHA) {
-                textoEncabezadoFecha = "*" + textoEncabezadoFecha + (ordenSecundario.esAscendente() ? "↑" : "↓");
+                textoEncabezadoFecha = "*" + textoEncabezadoFecha + (ordenSecundario.esAscendente() ? getString(R.string.ascendente) : getString(R.string.descendente));
             }
         }
 
@@ -266,10 +266,10 @@ public class MisComunicadosActivity extends AppCompatActivity implements VerComu
                     TableRow.LayoutParams.WRAP_CONTENT,
                     1f));
             tituloView.setPadding(16, 16, 16, 16);
-            tituloView.setText(comunicado.getTitulo() != null ? comunicado.getTitulo() : "Título N/A");
+            tituloView.setText(comunicado.getTitulo() != null ? comunicado.getTitulo() : "N/A");
             row.addView(tituloView);
             tituloView.setTextSize(20);
-            tituloView.setTextColor(Color.BLACK);
+            tituloView.setTextColor(getColor(R.color.texto));
 
 
             TextView fechaView = new TextView(this);
@@ -281,7 +281,7 @@ public class MisComunicadosActivity extends AppCompatActivity implements VerComu
             fechaView.setText(comunicado.getFecha() != null ? comunicado.getFecha() : "N/A");
             fechaView.setTextSize(20);
             row.addView(fechaView);
-            fechaView.setTextColor(Color.BLACK);
+            fechaView.setTextColor(getColor(R.color.texto));
 
 
             contentTableLayout.addView(row);
@@ -306,7 +306,6 @@ public class MisComunicadosActivity extends AppCompatActivity implements VerComu
             fos.close();
             Toast.makeText(this, R.string.lista_guardada, Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
-            e.printStackTrace();
             Toast.makeText(this, R.string.error_guardar_lista, Toast.LENGTH_SHORT).show();
         }
     }

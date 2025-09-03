@@ -3,6 +3,7 @@ package com.example.par5_proy2p_duenas_romero_ortega;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -141,7 +142,8 @@ public class VerComunicadosActivity extends AppCompatActivity implements VerComu
             TextView titulo = new TextView(this);
             titulo.setText(comunicado.getTitulo());
             titulo.setTextSize(25);
-            titulo.setTextColor(Color.BLACK);
+            titulo.setTextColor(getColor(R.color.texto));
+            titulo.setTypeface(null, Typeface.BOLD);
             titulo.setPadding(0, 0, 0, 8);
             titulo.setGravity(Gravity.CENTER);
 
@@ -162,7 +164,7 @@ public class VerComunicadosActivity extends AppCompatActivity implements VerComu
                 descripcion.setText(descOriginal);
             }
             descripcion.setTextSize(25);
-            descripcion.setTextColor(Color.BLACK);
+            descripcion.setTextColor(getColor(R.color.texto));
 
             comunicadoLayout.addView(titulo);
             comunicadoLayout.addView(imagen);
@@ -176,7 +178,7 @@ public class VerComunicadosActivity extends AppCompatActivity implements VerComu
                 String fomatedFecha = getString(R.string.fecha_label) + " " +evento.getFecha();
                 fecha.setText(fomatedFecha);
                 fecha.setTextSize(20);
-                fecha.setTextColor(Color.BLACK);
+                fecha.setTextColor(getColor(R.color.texto));
                 fecha.setPadding(0, 8, 0, 0);
 
                 comunicadoLayout.addView(fecha);
@@ -194,7 +196,7 @@ public class VerComunicadosActivity extends AppCompatActivity implements VerComu
                         LinearLayout.LayoutParams.MATCH_PARENT, 2);
                 params.setMargins(0, 16, 0, 16);
                 divider.setLayoutParams(params);
-                divider.setBackgroundColor(Color.GRAY);
+                divider.setBackgroundColor(getColor(R.color.linea_divisora_color));
 
                 contenedorCom.addView(divider);
             }

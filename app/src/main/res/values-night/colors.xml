@@ -5,8 +5,9 @@
     <color name="textoGeneral">#FFFFFF</color>
     <color name="texto">#FFFFFF</color>
     <color name="button_text">#FFFFFF</color>
-    <color name="hintColor">#808080</color>
+    <color name="hintColor">#DBD7D7</color>
     <color name="iconColor">#FFFFFF</color>
+    <color name="icon_stroke_color">#00000000</color>
     <color name="Layout">#3B5998</color>
     <color name="color_icono_principal">#FFFFFF</color>
 
@@ -14,6 +15,6 @@
     <color name="edittext_border_focused">#4D6F9D</color>
 
     <color name="button_color">#020F28</color>
-
+    <color name="linea_divisora_color">#B6BDCC</color>
 
 </resources>
