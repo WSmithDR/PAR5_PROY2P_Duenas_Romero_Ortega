@@ -46,7 +46,6 @@ public final class DatosDePruebaComunicados {
      *
      * @param currentUserId ID del usuario actual (se usará para priorizar su ID en la lista)
      * @return Lista de comunicados de prueba
-     * @throws IllegalStateException si no se encuentran usuarios en el sistema
      */
     public static List<Comunicado> obtenerListaDePrueba(String currentUserId) {
         List<Comunicado> comunicadosDePrueba = new ArrayList<>();
