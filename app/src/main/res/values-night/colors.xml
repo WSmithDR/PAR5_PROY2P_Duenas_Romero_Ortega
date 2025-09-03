@@ -7,9 +7,10 @@
     <color name="hintColor">#808080</color>
     <color name="iconColor">#000000</color>
     <color name="Layout">#3B5998</color>
+    <color name="color_icono_principal">#FFFFFF</color>
 
     <color name="edittext_border_normal">#00204E</color>
-    <color name="edittext_border_focused">#4F83CC</color>
+    <color name="edittext_border_focused">#4D6F9D</color>
 
 
 
