@@ -220,6 +220,9 @@ public class MisComunicadosActivity extends AppCompatActivity implements VerComu
         renderizarTabla();
     }
 
+    /**
+     * Actualiza el texto de los encabezados para mostrar el estado actual del ordenamiento.
+     */
     private void actualizarTextoEncabezado() {
         String tituloText = getString(R.string.titulo);
         String fechaText = getString(R.string.fecha);
