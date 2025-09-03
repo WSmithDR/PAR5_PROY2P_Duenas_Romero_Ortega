@@ -12,4 +12,12 @@
         <item name="colorOnSecondary">@color/black</item>
     </style>
 
-    </resources>
+    <style name="MyDatePickerDialogTheme" parent="ThemeOverlay.MaterialComponents.Dialog">
+        <item name="colorAccent">@color/edittext_border_focused</item>
+        <item name="android:textColorPrimary">@color/texto</item>
+        <item name="android:textColorSecondary">@color/hintColor</item>
+        <item name="android:windowBackground">@color/white</item>
+        <item name="android:background">@color/white</item>
+    </style>
+
+</resources>

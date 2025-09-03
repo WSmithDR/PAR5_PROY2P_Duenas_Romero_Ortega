@@ -129,6 +129,7 @@ public class PublicarComunicadoActivity extends AppCompatActivity {
             int day = c.get(Calendar.DAY_OF_MONTH);
 
             DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                    R.style.MyDatePickerDialogTheme,
                     (view, y, m, d) -> {
                         fechaSeleccionada = String.format("%02d/%02d/%04d", d, m+1, y);
                         btnFecha.setText(fechaSeleccionada);
