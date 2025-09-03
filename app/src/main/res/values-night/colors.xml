@@ -3,15 +3,21 @@
     <color name="login_button_background">#FF373737</color>
     <color name="login_button_text">#FFFFFFFF</color>
     <color name="textoGeneral">#FFFFFF</color>
-    <color name="texto">#000000</color>
-    <color name="hintColor">#808080</color>
-    <color name="iconColor">#000000</color>
+    <color name="texto">#FFFFFF</color>
+    <color name="button_text">#FFFFFF</color>
+    <color name="hintColor">#DBD7D7</color>
+    <color name="iconColor">#FFFFFF</color>
+    <color name="icon_stroke_color">#00000000</color>
     <color name="Layout">#3B5998</color>
+    <color name="color_icono_principal">#FFFFFF</color>
 
     <color name="edittext_border_normal">#00204E</color>
-    <color name="edittext_border_focused">#4F83CC</color>
+    <color name="edittext_border_focused">#04046B</color>
 
+    <color name="button_color">#020F28</color>
+    <color name="linea_divisora_color">#B6BDCC</color>
 
+    <color name="edit_text_background">#305699</color>
 
 
 </resources>

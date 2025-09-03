@@ -1,4 +1,12 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <style name="Base.Theme.PAR5_PROY2P_Duenas_Romero_Ortega" parent="Theme.Material3.DayNight.NoActionBar">
     </style>
+
+    <style name="MyDatePickerDialogTheme" parent="ThemeOverlay.MaterialComponents.Dialog">
+        <item name="colorAccent">@color/Layout</item>
+        <item name="android:textColorPrimary">@color/texto</item>
+        <item name="android:textColorSecondary">@color/hintColor</item>
+        <item name="android:windowBackground">@color/login_button_background</item>
+        <item name="android:background">@color/login_button_background</item>
+    </style>
 </resources>
