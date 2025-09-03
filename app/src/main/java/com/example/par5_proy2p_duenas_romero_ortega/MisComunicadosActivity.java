@@ -14,6 +14,7 @@ import android.widget.TextView;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -80,7 +81,7 @@ public class MisComunicadosActivity extends AppCompatActivity implements VerComu
 
         renderizarTabla();
 
-        btnGuardarLista.setOnClickListener(v -> guardarListaComunicados());
+        btnGuardarLista.setOnClickListener(v -> guardarListaComunicadosSerializados());
     }
     /**
      * Método llamado cuando la actividad se reanuda. Carga el estado de ordenamiento guardado.
@@ -296,16 +297,14 @@ public class MisComunicadosActivity extends AppCompatActivity implements VerComu
      * Guarda la lista de comunicados actual en un archivo.
      * Muestra un mensaje de éxito o error al finalizar.
      */
-    private void guardarListaComunicados() {
-        try {
-            File file = new File(getFilesDir(), "comunicados_" + Usuario.logged_user_id + ".dat");
-            FileOutputStream fos = new FileOutputStream(file);
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
+    private void guardarListaComunicadosSerializados() {
+        File file = new File(getFilesDir(), "comunicados_" + Usuario.logged_user_id + ".dat");
+        try (FileOutputStream fos = new FileOutputStream(file);
+             ObjectOutputStream oos = new ObjectOutputStream(fos)
+        ) {
             oos.writeObject(listaComunicados);
-            oos.close();
-            fos.close();
             Toast.makeText(this, R.string.lista_guardada, Toast.LENGTH_SHORT).show();
-        } catch (Exception e) {
+        } catch (IOException e) {
             Toast.makeText(this, R.string.error_guardar_lista, Toast.LENGTH_SHORT).show();
         }
     }
