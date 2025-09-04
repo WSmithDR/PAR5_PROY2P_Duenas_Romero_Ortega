@@ -224,27 +224,34 @@ public class MisComunicadosActivity extends AppCompatActivity implements VerComu
      * Actualiza el texto de los encabezados para mostrar el estado actual del ordenamiento.
      */
     private void actualizarTextoEncabezado() {
-        String textoEncabezadoTitulo = getString(R.string.titulo);
-        String textoEncabezadoFecha = getString(R.string.fecha);
+        String tituloText = getString(R.string.titulo);
+        String fechaText = getString(R.string.fecha);
+
+        headerTitulo.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+        headerFecha.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
 
         if (ordenPrimario != null && ordenPrimario.estaActivo()) {
+            int iconRes = ordenPrimario.esAscendente() ? R.drawable.outline_arrow_upward_alt_24 : R.drawable.outline_arrow_downward_alt_24;
             if (ordenPrimario.criterio == OrdComunicado.TITULO) {
-                textoEncabezadoTitulo += ordenPrimario.esAscendente() ? getString(R.string.ascendente) : getString(R.string.descendente);
+                headerTitulo.setCompoundDrawablesWithIntrinsicBounds(0, 0, iconRes, 0);
             } else if (ordenPrimario.criterio == OrdComunicado.FECHA) {
-                textoEncabezadoFecha += ordenPrimario.esAscendente() ? getString(R.string.ascendente) : getString(R.string.descendente);
+                headerFecha.setCompoundDrawablesWithIntrinsicBounds(0, 0, iconRes, 0);
             }
         }
 
         if (ordenSecundario != null && ordenSecundario.estaActivo()) {
+            int iconSecRes = ordenSecundario.esAscendente() ? R.drawable.outline_arrow_upward_alt_24 : R.drawable.outline_arrow_downward_alt_24;
             if (ordenSecundario.criterio == OrdComunicado.TITULO) {
-                textoEncabezadoTitulo = "*" + textoEncabezadoTitulo + (ordenSecundario.esAscendente() ? getString(R.string.ascendente) : getString(R.string.descendente));
+                tituloText = "*" + getString(R.string.titulo);
+                headerTitulo.setCompoundDrawablesWithIntrinsicBounds(0, 0, iconSecRes, 0);
             } else if (ordenSecundario.criterio == OrdComunicado.FECHA) {
-                textoEncabezadoFecha = "*" + textoEncabezadoFecha + (ordenSecundario.esAscendente() ? getString(R.string.ascendente) : getString(R.string.descendente));
+                fechaText = "*" + getString(R.string.fecha);
+                headerFecha.setCompoundDrawablesWithIntrinsicBounds(0, 0, iconSecRes, 0);
             }
         }
 
-        headerTitulo.setText(textoEncabezadoTitulo);
-        headerFecha.setText(textoEncabezadoFecha);
+        headerTitulo.setText(tituloText);
+        headerFecha.setText(fechaText);
     }
 
     /**
