@@ -104,7 +104,7 @@ public class VerComunicadosActivity extends AppCompatActivity implements VerComu
      * @return Lista de comunicados filtrados
      */
     private List<Comunicado> comunicadosFiltrados(){
-        comunicados = ComunicadoRepositorio.cargarComunicados(this, Usuario.logged_user_id);
+        comunicados = ComunicadoRepositorio.cargarComunicados(this);
         String fechaSel = selFecha.getText().toString();
         listaFiltrada = new ArrayList<>();
         if(fechaSel == null || fechaSel.isEmpty()){
